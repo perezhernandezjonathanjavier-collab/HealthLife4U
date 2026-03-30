@@ -36,18 +36,22 @@ body {
 }
 
 
-/* La barra blanca estilo cápsula */
+/* La barra blanca estilo cápsula (CORREGIDA) */
 .barra-flotante {
     background-color: white;
     width: 90%;
     max-width: 1200px;
-    height: 70px;
-    border-radius: 50px; /* Bordes muy redondeados */
+    /* CAMBIO CLAVE: quitamos height: 70px y usamos min-height */
+    min-height: 70px; 
+    height: auto; 
+    
+    border-radius: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 30px;
+    padding: 10px 30px; /* Ajustamos un poco el padding */
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin: 0 auto; /* Para que siempre esté centrada */
 }
 
 /* Estilo del Logo */
@@ -484,33 +488,49 @@ body {
 }
 
 /* --- ESTO ARREGLA TU IMAGEN --- */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  /* 1. Forzamos a la barra a crecer y ser el contenedor real */
   .navbar {
-    flex-direction: column; /* Apila Logo, Menú e Iconos verticalmente */
-    height: auto;           /* Permite que la barra crezca hacia abajo */
-    border-radius: 20px;    /* Redondeo más sutil para móvil */
-    padding: 15px 10px;
-    align-items: center;    /* Centra todo */
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 200px !important; /* Le damos espacio para que quepa todo */
+    padding: 20px !important;
+    position: relative !important; /* Para que sea el eje de todo */
+    gap: 20px !important;
+    border-radius: 30px !important;
   }
 
-  .menu-principal {
-    display: flex;
-    flex-direction: row;    /* Los mantenemos en fila pero con control */
-    flex-wrap: wrap;        /* Si no caben, bajan ordenadamente */
-    justify-content: center;
-    gap: 10px;
-    margin: 15px 0;
-    width: 100%;
-  }
-
+  /* 2. RESET TOTAL de los enlaces (Esto quita el amontonamiento) */
+  .menu-principal, 
+  .menu-principal li, 
   .menu-principal li a {
-    font-size: 13px;       /* Achicamos un poco la letra para que quepa */
-    white-space: nowrap;   /* Evita que "Acerca de" se parta en dos líneas */
+    position: static !important; /* ¡CLAVE! Esto anula cualquier 'absolute' que los mueva */
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    margin: 5px 0 !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
   }
 
+  /* 3. RESET de los iconos de la derecha */
   .iconos-derecha {
-    width: 100%;
-    justify-content: center;
-    gap: 15px;
+    position: static !important; /* También les quitamos el vuelo */
+    display: flex !important;
+    flex-direction: column !important; /* Uno abajo de otro para que no choquen */
+    align-items: center !important;
+    width: 100% !important;
+    gap: 10px !important;
+    border-top: 1px solid #ddd;
+    padding-top: 15px !important;
+  }
+
+  /* El botón de registrarse o Jonathan */
+  .iconos-derecha button, 
+  .iconos-derecha span {
+    position: static !important;
+    margin: 5px 0 !important;
   }
 }
