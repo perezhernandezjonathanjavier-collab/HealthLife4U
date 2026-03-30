@@ -1,0 +1,21 @@
+- main  # o la rama que uses
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: HL4U_build   # <- nombre simple, sin espacios ni caracteres raros
+          path: .           # <- toda la raíz del repositorio
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v6
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .   # <- carpeta que quieres publicar, aquí la raíz
