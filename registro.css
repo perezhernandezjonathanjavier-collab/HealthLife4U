@@ -1,0 +1,114 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+
+    background-image: url('images/Registerbg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Bordes oscuros */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle, rgba(0,0,0,0) 40%, rgba(0,0,0,0.6) 100%);
+}
+
+/* Header */
+.header {
+    background: rgba(0,0,0,0.85);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 25px;
+    position: relative;
+}
+
+.header h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Botón volver */
+.btn-header {
+    background: transparent;
+    border: 2px solid #4da6ff;
+    color: #4da6ff;
+    padding: 8px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Contenedor */
+.contenedor {
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+}
+
+/* Caja */
+.caja {
+    background: rgba(255,255,255,0.75);
+    padding: 40px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Error */
+.error {
+    color: red;
+    font-size: 0.8rem;
+    margin: 5px 0;
+}
+
+/* Botones */
+.botones {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn-crear {
+    background: #98FFD2;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-borrar {
+    background: red;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Fondo para método de pago */
+.pago-body {
+    background-image: url('images/Methodp.jpg');
+}
+
+/* Fondo para pago realizado */
+.confirmacion-body {
+    background-image: url('images/Comfirmation.jpg');
+}

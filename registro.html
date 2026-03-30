@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro - HL4U</title>
+    <link rel="stylesheet" href="registro.css">
+</head>
+<body>
+
+<header class="header">
+
+    <button class="btn-header btn-volver" onclick="volverInicio()">
+        ← Volver
+    </button>
+
+    <h1>Registro</h1>
+
+    <div></div>
+
+</header>
+
+<main class="contenedor">
+
+    <div class="caja">
+
+        <h2>Crear Usuario</h2>
+
+        <input type="text" id="usuario" placeholder="Nombre de usuario">
+
+        <input type="email" id="email" placeholder="Correo electrónico">
+        <p id="error-email" class="error"></p>
+
+        <input type="password" id="password" placeholder="Contraseña">
+
+        <div class="botones">
+            <button class="btn-crear" onclick="crearUsuario()">Crear Usuario</button>
+            <button class="btn-borrar" onclick="borrarDatos()">Borrar</button>
+        </div>
+
+    </div>
+
+</main>
+
+<script>
+function volverInicio() {
+    window.location.href = "index.html";
+}
+
+function crearUsuario() {
+    let usuario = document.getElementById("usuario").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let error = document.getElementById("error-email");
+
+    if (
+        !email.endsWith("@gmail.com") &&
+        !email.endsWith("@hotmail.com") &&
+        !email.endsWith("@outlook.com")
+    ) {
+        error.textContent = "Correo inválido (solo Gmail, Hotmail o Outlook)";
+        return;
+    }
+
+    error.textContent = "";
+
+    // 🔥 Guardar usuario
+    localStorage.setItem("usuario", usuario);
+
+    // 🔥 Redirigir al index
+    window.location.href = "index.html";
+}
+
+function borrarDatos() {
+    document.getElementById("usuario").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("error-email").textContent = "";
+}
+</script>
+
+</body>
+</html>
