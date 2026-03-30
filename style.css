@@ -479,27 +479,63 @@ body {
   }
 }
 
+/* 1. La cápsula blanca principal */
 .navbar {
   display: flex;
-  justify-content: space-between; /* separa elementos a los extremos */
-  align-items: center; /* centra verticalmente */
+  justify-content: space-between; /* Separa logo, menú e iconos */
+  align-items: center;
+  background: white;
   padding: 10px 20px;
-  background-color: #333;
-  color: white;
+  border-radius: 50px;
+  margin: 10px auto;
+  width: 95%;
+  flex-wrap: wrap; /* CLAVE: permite que los elementos bajen si no caben */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-@media (max-width: 480px) {
+/* 2. Tu Menú (Acerca de, Servicios, etc.) */
+.menu-principal {
+  display: flex;
+  list-style: none;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-principal li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* 3. Tus Iconos (Teléfono, Email, Ubicación, Botón) */
+.iconos-derecha {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap; /* Por si los iconos son muchos, que bajen también */
+}
+
+/* --- AJUSTE AUTOMÁTICO PARA CELULARES --- */
+@media (max-width: 850px) {
   .navbar {
-    flex-direction: column; /* apila elementos verticalmente */
-    align-items: flex-start; /* opcional: alinea al inicio */
+    flex-direction: column; /* Apila todo: logo arriba, menú medio, iconos abajo */
+    border-radius: 20px;    /* Redondeo más discreto en móvil */
+    padding: 15px;
+    gap: 15px;             /* Espacio entre los bloques apilados */
   }
 
-  .navbar a {
-    margin: 5px 0; /* separa los links */
+  .menu-principal {
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee; /* Una línea sutil para separar */
+  }
+
+  .iconos-derecha {
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
   }
 }
-
-.navbar {
-  width: 1200px;
-}
-
