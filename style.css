@@ -489,48 +489,33 @@ body {
 
 /* --- ESTO ARREGLA TU IMAGEN --- */
 @media (max-width: 768px) {
-  /* 1. Forzamos a la barra a crecer y ser el contenedor real */
-  .navbar {
-    display: flex !important;
+  /* 1. Mantenemos la cápsula blanca creciendo hacia abajo */
+  .barra-flotante {
     flex-direction: column !important;
     height: auto !important;
-    min-height: 200px !important; /* Le damos espacio para que quepa todo */
-    padding: 20px !important;
-    position: relative !important; /* Para que sea el eje de todo */
+    padding: 25px 10px !important;
     gap: 20px !important;
-    border-radius: 30px !important;
-  }
-
-  /* 2. RESET TOTAL de los enlaces (Esto quita el amontonamiento) */
-  .menu-principal, 
-  .menu-principal li, 
-  .menu-principal li a {
-    position: static !important; /* ¡CLAVE! Esto anula cualquier 'absolute' que los mueva */
-    display: block !important;
-    width: 100% !important;
-    text-align: center !important;
-    margin: 5px 0 !important;
-    top: auto !important;
-    left: auto !important;
-    transform: none !important;
-  }
-
-  /* 3. RESET de los iconos de la derecha */
-  .iconos-derecha {
-    position: static !important; /* También les quitamos el vuelo */
-    display: flex !important;
-    flex-direction: column !important; /* Uno abajo de otro para que no choquen */
     align-items: center !important;
+  }
+
+  /* 2. ¡AQUÍ ESTÁ EL CAMBIO! Iconos en horizontal */
+  .iconos-derecha {
+    display: flex !important;
+    flex-direction: row !important; /* Los ponemos en fila */
+    flex-wrap: wrap;               /* Si son muy largos, que bajen solitos */
+    justify-content: center !important; 
     width: 100% !important;
-    gap: 10px !important;
-    border-top: 1px solid #ddd;
+    gap: 15px !important;          /* Espacio entre cada icono+texto */
+    border-top: 1px solid #eee;
     padding-top: 15px !important;
   }
 
-  /* El botón de registrarse o Jonathan */
-  .iconos-derecha button, 
-  .iconos-derecha span {
-    position: static !important;
-    margin: 5px 0 !important;
+  /* 3. Aseguramos que cada par (icono+texto) no se separe */
+  .item-contacto {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 5px !important;
+    white-space: nowrap !important; /* Mantiene el icono pegado a su texto */
   }
 }
