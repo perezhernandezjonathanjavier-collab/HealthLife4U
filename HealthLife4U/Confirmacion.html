@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Pago realizado</title>
+<link rel="stylesheet" href="registro.css">
+</head>
+<body class="confirmacion-body">
+
+<header class="header">
+    <h1>Pago realizado</h1>
+</header>
+
+<main class="contenedor">
+<div class="caja">
+
+<h2>✅ Pago exitoso</h2>
+<p>Tu compra fue realizada correctamente</p>
+
+<button class="btn-crear" onclick="volverInicio()">Volver al inicio</button>
+
+</div>
+</main>
+
+<script>
+function volverInicio() {
+    localStorage.removeItem("carrito");
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>

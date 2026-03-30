@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Método de Pago</title>
+<link rel="stylesheet" href="registro.css">
+</head>
+<body class="pago-body">
+
+<header class="header">
+    <button class="btn-header btn-volver" onclick="volverCarrito()">← Volver</button>
+    <h1>Método de Pago</h1>
+    <div></div>
+</header>
+
+<main class="contenedor">
+<div class="caja">
+
+<h2>Agregar Tarjeta</h2>
+
+<input type="text" id="tarjeta" placeholder="Número de tarjeta" oninput="detectarTarjeta()">
+
+<img id="logo-tarjeta" style="width:80px; margin:10px auto; display:block;">
+
+<input type="text" placeholder="Fecha de vencimiento (MM/AA)">
+<input type="text" placeholder="Código de seguridad">
+<input type="text" placeholder="Titular">
+
+<div class="botones">
+    <button class="btn-crear" onclick="guardarTarjeta()">Guardar</button>
+    <button class="btn-borrar" onclick="limpiar()">Borrar</button>
+</div>
+
+</div>
+</main>
+
+<script>
+function volverCarrito() {
+    window.location.href = "carrito.html";
+}
+
+function detectarTarjeta() {
+    let num = document.getElementById("tarjeta").value;
+    let logo = document.getElementById("logo-tarjeta");
+
+    if (num.startsWith("4")) {
+        logo.src = "images/MP/V.png";
+    } else if (num.startsWith("5")) {
+        logo.src = "images/MP/MS.png";
+    } else {
+        logo.src = "";
+    }
+}
+
+function guardarTarjeta() {
+    let usuario = localStorage.getItem("usuario");
+
+    if (!usuario) {
+        alert("Por favor regístrate y vuelve a intentar");
+        return;
+    }
+
+    let num = document.getElementById("tarjeta").value;
+
+    if (num.length < 4) {
+        alert("Número inválido");
+        return;
+    }
+
+    let tipo = num.startsWith("4") ? "Visa" : num.startsWith("5") ? "Mastercard" : "Desconocida";
+    let ultimos = num.slice(-4);
+
+    localStorage.setItem("tarjeta", JSON.stringify({ tipo, ultimos }));
+
+    window.location.href = "carrito.html";
+}
+
+function limpiar() {
+    document.querySelectorAll("input").forEach(i => i.value = "");
+    document.getElementById("logo-tarjeta").src = "";
+}
+</script>
+
+</body>
+</html>

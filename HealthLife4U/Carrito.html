@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tu Carrito - HL4U</title>
+    <link rel="stylesheet" href="carrito.css">
+</head>
+<body>
+
+<header class="header">
+
+    <button class="btn-header btn-volver" onclick="volverInicio()">
+        ← Volver
+    </button>
+
+    <h1>🛒 Tu Carrito</h1>
+
+    <button class="btn-header btn-pago" onclick="irPago()">
+        + Método de pago
+    </button>
+
+</header>
+
+<main class="contenedor-carrito">
+
+    <div class="caja-carrito">
+
+        <div id="lista-carrito"></div>
+
+        <h2 id="total">Total: Q0.00</h2>
+
+        <p id="metodo-pago"></p>
+
+        <div class="botones">
+            <button class="btn-pagar" onclick="pagar()">Pagar</button>
+            <button class="btn-vaciar" onclick="vaciarCarrito()">Vaciar carrito</button>
+        </div>
+
+    </div>
+
+</main>
+
+<script>
+
+// 🔙 Volver
+function volverInicio() {
+    window.location.href = "index.html";
+}
+
+// 🛒 Obtener carrito
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+// 📦 Mostrar productos
+function mostrarCarrito() {
+    let contenedor = document.getElementById("lista-carrito");
+    let total = 0;
+
+    contenedor.innerHTML = "";
+
+    if (carrito.length === 0) {
+        contenedor.innerHTML = "<p>Tu carrito está vacío 🥲</p>";
+        document.getElementById("total").textContent = "Total: Q0.00";
+        return;
+    }
+
+    carrito.forEach((producto, index) => {
+        total += producto.precio * (producto.cantidad || 1);
+
+        let item = document.createElement("div");
+        item.classList.add("item-carrito");
+
+        item.innerHTML = `
+            <img src="${producto.imagen}" class="img-carrito">
+
+            <div class="info-producto">
+                <p class="nombre">${producto.nombre}</p>
+                <p class="descripcion">${producto.descripcion}</p>
+
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad(${index}, -1)">-</button>
+                    <span>${producto.cantidad || 1}</span>
+                    <button onclick="cambiarCantidad(${index}, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="lado-derecho">
+                <p class="precio">Q${(producto.precio * (producto.cantidad || 1)).toFixed(2)}</p>
+                <button onclick="eliminarProducto(${index})">❌</button>
+            </div>
+        `;
+
+        contenedor.appendChild(item);
+    });
+
+    document.getElementById("total").textContent = "Total: Q" + total.toFixed(2);
+}
+
+// 💳 Mostrar tarjeta
+function mostrarMetodoPago() {
+    let data = JSON.parse(localStorage.getItem("tarjeta"));
+
+    if (data) {
+        document.getElementById("metodo-pago").textContent =
+            data.tipo + " **** " + data.ultimos;
+    }
+}
+
+// ➕➖ Cantidad
+function cambiarCantidad(index, cambio) {
+    if (!carrito[index].cantidad) carrito[index].cantidad = 1;
+
+    carrito[index].cantidad += cambio;
+
+    if (carrito[index].cantidad <= 0) {
+        carrito.splice(index, 1);
+    }
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    mostrarCarrito();
+}
+
+// ❌ Eliminar
+function eliminarProducto(index) {
+    carrito.splice(index, 1);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    mostrarCarrito();
+}
+
+// 🧹 Vaciar
+function vaciarCarrito() {
+    carrito = [];
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    mostrarCarrito();
+}
+
+// ➡️ Ir a pago
+function irPago() {
+    let usuario = localStorage.getItem("usuario");
+
+    if (!usuario) {
+        alert("Por favor regístrate y vuelve a intentar");
+        return;
+    }
+
+    window.location.href = "pago.html";
+}
+
+// 💰 Pagar
+function pagar() {
+    let usuario = localStorage.getItem("usuario");
+    let tarjeta = localStorage.getItem("tarjeta");
+
+    if (!usuario || !tarjeta) {
+        alert("Por favor regístrate y añade un método de pago");
+        return;
+    }
+
+    window.location.href = "confirmacion.html";
+}
+
+// 🚀 Cargar TODO (IMPORTANTE)
+document.addEventListener("DOMContentLoaded", function () {
+    mostrarCarrito();
+    mostrarMetodoPago();
+});
+
+</script>
+
+</body>
+</html>
