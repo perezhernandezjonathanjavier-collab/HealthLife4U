@@ -3,6 +3,26 @@
     padding: 0;
     box-sizing: border-box;
 }
+body {
+  font-size: 16px;
+  background-color: white;
+}
+
+/* Solo cambia el fondo en móviles */
+@media (max-width: 480px) {
+  body {
+    background-color: #f0f0f0;
+  }
+}
+
+/* Estilo para pantallas pequeñas (móviles) */
+@media (max-width: 480px) {
+  body {
+    font-size: 12px;
+    background-color: #e0e0e0;
+  }
+
+}
 
 body, html {
     margin: 0;
@@ -444,3 +464,42 @@ body {
 #btn-top {
     box-shadow: 0 0 10px #98FFD2;
 }
+
+/* Desktop */
+.sidebar {
+  width: 250px;
+  float: left;
+}
+
+/* Móvil */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    float: none;
+  }
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between; /* separa elementos a los extremos */
+  align-items: center; /* centra verticalmente */
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column; /* apila elementos verticalmente */
+    align-items: flex-start; /* opcional: alinea al inicio */
+  }
+
+  .navbar a {
+    margin: 5px 0; /* separa los links */
+  }
+}
+
+.navbar {
+  width: 1200px;
+}
+
