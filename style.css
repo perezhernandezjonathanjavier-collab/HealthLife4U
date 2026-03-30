@@ -3,26 +3,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-body {
-  font-size: 16px;
-  background-color: white;
-}
-
-/* Solo cambia el fondo en móviles */
-@media (max-width: 480px) {
-  body {
-    background-color: #f0f0f0;
-  }
-}
-
-/* Estilo para pantallas pequeñas (móviles) */
-@media (max-width: 480px) {
-  body {
-    font-size: 12px;
-    background-color: #e0e0e0;
-  }
-
-}
 
 body, html {
     margin: 0;
@@ -465,20 +445,6 @@ body {
     box-shadow: 0 0 10px #98FFD2;
 }
 
-/* Desktop */
-.sidebar {
-  width: 250px;
-  float: left;
-}
-
-/* Móvil */
-@media (max-width: 480px) {
-  .sidebar {
-    width: 100%;
-    float: none;
-  }
-}
-
 /* 1. La cápsula blanca principal */
 .navbar {
   display: flex;
@@ -517,25 +483,34 @@ body {
   flex-wrap: wrap; /* Por si los iconos son muchos, que bajen también */
 }
 
-/* --- AJUSTE AUTOMÁTICO PARA CELULARES --- */
-@media (max-width: 850px) {
+/* --- ESTO ARREGLA TU IMAGEN --- */
+@media (max-width: 600px) {
   .navbar {
-    flex-direction: column; /* Apila todo: logo arriba, menú medio, iconos abajo */
-    border-radius: 20px;    /* Redondeo más discreto en móvil */
-    padding: 15px;
-    gap: 15px;             /* Espacio entre los bloques apilados */
+    flex-direction: column; /* Apila Logo, Menú e Iconos verticalmente */
+    height: auto;           /* Permite que la barra crezca hacia abajo */
+    border-radius: 20px;    /* Redondeo más sutil para móvil */
+    padding: 15px 10px;
+    align-items: center;    /* Centra todo */
   }
 
   .menu-principal {
+    display: flex;
+    flex-direction: row;    /* Los mantenemos en fila pero con control */
+    flex-wrap: wrap;        /* Si no caben, bajan ordenadamente */
     justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
     width: 100%;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee; /* Una línea sutil para separar */
+  }
+
+  .menu-principal li a {
+    font-size: 13px;       /* Achicamos un poco la letra para que quepa */
+    white-space: nowrap;   /* Evita que "Acerca de" se parta en dos líneas */
   }
 
   .iconos-derecha {
-    justify-content: center;
     width: 100%;
-    gap: 10px;
+    justify-content: center;
+    gap: 15px;
   }
 }
