@@ -2,9 +2,11 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Método de Pago</title>
 <link rel="stylesheet" href="registro.css">
 </head>
+
 <body class="pago-body">
 
 <header class="header">
@@ -27,7 +29,7 @@
 <input type="text" placeholder="Titular">
 
 <div class="botones">
-    <button class="btn-crear" onclick="guardarTarjeta()">Guardar</button>
+    <button class="btn-crear" onclick="guardarTarjeta()">Pagar</button>
     <button class="btn-borrar" onclick="limpiar()">Borrar</button>
 </div>
 
@@ -35,10 +37,13 @@
 </main>
 
 <script>
+
+/* 🔙 VOLVER */
 function volverCarrito() {
     window.location.href = "carrito.html";
 }
 
+/* 💳 DETECTAR TARJETA */
 function detectarTarjeta() {
     let num = document.getElementById("tarjeta").value;
     let logo = document.getElementById("logo-tarjeta");
@@ -52,33 +57,55 @@ function detectarTarjeta() {
     }
 }
 
+/* 🔐 CREAR PEDIDO (SOLO SI NO EXISTE) */
+function crearPedido() {
+
+    let numero = Math.floor(10000000 + Math.random() * 90000000);
+    let codigo = "HL-" + numero;
+
+    localStorage.setItem("pedido", codigo);
+}
+
+/* 💳 GUARDAR PAGO */
 function guardarTarjeta() {
+
     let usuario = localStorage.getItem("usuario");
 
     if (!usuario) {
-        alert("Por favor regístrate y vuelve a intentar");
+        alert("Regístrate primero");
         return;
     }
 
     let num = document.getElementById("tarjeta").value;
 
-    if (num.length < 4) {
-        alert("Número inválido");
+    if (!num || num.length < 4) {
+        alert("Tarjeta inválida");
         return;
     }
 
-    let tipo = num.startsWith("4") ? "Visa" : num.startsWith("5") ? "Mastercard" : "Desconocida";
+    let tipo = num.startsWith("4") ? "Visa" :
+               num.startsWith("5") ? "Mastercard" : "Desconocida";
+
     let ultimos = num.slice(-4);
 
     localStorage.setItem("tarjeta", JSON.stringify({ tipo, ultimos }));
 
+    /* 🔥 CREAR PEDIDO */
+    crearPedido();
+
+    /* 🧾 SNAPSHOT DEL CARRITO (ESTO ES CLAVE) */
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    localStorage.setItem("ultimoPedidoDetalle", JSON.stringify(carrito));
+
     window.location.href = "carrito.html";
 }
 
+/* 🧹 LIMPIAR */
 function limpiar() {
     document.querySelectorAll("input").forEach(i => i.value = "");
     document.getElementById("logo-tarjeta").src = "";
 }
+
 </script>
 
 </body>

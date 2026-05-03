@@ -17,31 +17,48 @@ body::before {
     background: radial-gradient(circle, rgba(0,0,0,0) 40%, rgba(0,0,0,0.6) 100%);
 }
 
-/* Header */
 .header {
     background: rgba(0,0,0,0.85);
     color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 25px;
-    position: relative;
+    padding: 15px;
 }
 
 .header h1 {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    margin: 0;
+    font-size: 1.3rem;
+    flex: 1;
+    text-align: center;
 }
 
-/* Botón volver */
-.btn-header {
-    background: transparent;
+.header {
+    position: relative;
+    z-index: 10;
+}
+
+button {
+      background: transparent;
     border: 2px solid #4da6ff;
     color: #4da6ff;
-    padding: 8px 15px;
-    border-radius: 10px;
+    padding: 6px 12px;
+    border-radius: 8px;
     cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .header {
+        justify-content: space-between;
+    }
+
+    .header h1 {
+        font-size: 1rem;
+    }
+
+    .btn-header {
+        font-size: 0.9rem;
+    }
 }
 
 /* Contenedor */
@@ -87,6 +104,7 @@ input {
 
 .btn-crear {
     background: #98FFD2;
+    color: black; 
     border: none;
     padding: 12px;
     border-radius: 10px;
@@ -111,4 +129,35 @@ input {
 /* Fondo para pago realizado */
 .confirmacion-body {
     background-image: url('images/Comfirmation.jpg');
+}
+.factura {
+    margin-top: 15px;
+}
+
+.factura h3 {
+    color: #000000;
+    letter-spacing: 2px;
+    font-size: 1.4rem;
+}
+
+.factura {
+    font-family: monospace;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px dashed #000;
+}
+
+#lista-productos div {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    border-bottom: 1px dotted #ccc;
+}
+.item-factura {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px dashed #ccc;
+    font-size: 0.95rem;
 }

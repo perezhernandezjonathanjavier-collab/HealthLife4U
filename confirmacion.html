@@ -2,9 +2,11 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pago realizado</title>
 <link rel="stylesheet" href="registro.css">
 </head>
+
 <body class="confirmacion-body">
 
 <header class="header">
@@ -12,21 +14,97 @@
 </header>
 
 <main class="contenedor">
-<div class="caja">
+    <div class="caja">
 
-<h2>✅ Pago exitoso</h2>
-<p>Tu compra fue realizada correctamente</p>
+        <h2>✅ Pago exitoso</h2>
+        <p>Tu compra fue realizada correctamente</p>
 
-<button class="btn-crear" onclick="volverInicio()">Volver al inicio</button>
+        <div class="factura">
 
-</div>
+            <hr>
+            <h3>🧾 Detalle de compra</h3>
+
+            <div id="lista-productos"></div>
+
+            <hr>
+
+            <p><strong>Total pagado:</strong> Q<span id="total-pago"></span></p>
+
+            <hr>
+
+            <p><strong>Código de pedido:</strong></p>
+            <h3 id="codigo-pedido"></h3>
+
+            <hr>
+
+            <p>Gracias por comprar en <strong>HL4U</strong> 🛒</p>
+
+        </div>
+
+        <button class="btn-crear" onclick="volverInicio()">Volver al inicio</button>
+
+    </div>
 </main>
 
 <script>
-function volverInicio() {
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* 🧾 USAR SNAPSHOT (NO CARRITO DIRECTO) */
+    let carrito = JSON.parse(localStorage.getItem("ultimoPedidoDetalle")) || [];
+
+    let contenedor = document.getElementById("lista-productos");
+
+    let total = 0;
+    contenedor.innerHTML = "";
+
+    carrito.forEach(item => {
+
+        let cantidad = item.cantidad || 1;
+        let subtotal = Number(item.precio) * cantidad;
+
+        total += subtotal;
+
+        contenedor.innerHTML += `
+            <div class="item-factura">
+                <span>${item.nombre} x${cantidad}</span>
+                <span>Q ${subtotal.toFixed(2)}</span>
+            </div>
+        `;
+    });
+
+    document.getElementById("total-pago").textContent = total.toFixed(2);
+
+    /* 🔐 PEDIDO FIJO */
+    let codigo = localStorage.getItem("pedido");
+    document.getElementById("codigo-pedido").textContent = codigo || "SIN CODIGO";
+
+    /* 📦 HISTORIAL (SIN DUPLICAR EN REFRESH) */
+    let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+    /* 🔥 EVITA DUPLICADOS EN REFRESH */
+    let yaExiste = pedidos.some(p => p.codigo === codigo);
+
+    if (!yaExiste) {
+        pedidos.push({
+            codigo: codigo,
+            total: total.toFixed(2),
+            fecha: new Date().toLocaleString()
+        });
+
+        localStorage.setItem("pedidos", JSON.stringify(pedidos));
+    }
+
+    /* 🧹 SOLO LIMPIAR CARRITO (NO PEDIDO) */
     localStorage.removeItem("carrito");
+
+});
+
+/* 🔙 VOLVER */
+function volverInicio() {
     window.location.href = "index.html";
 }
+
 </script>
 
 </body>

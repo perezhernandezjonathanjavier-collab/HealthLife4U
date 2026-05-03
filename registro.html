@@ -2,23 +2,23 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - HL4U</title>
     <link rel="stylesheet" href="registro.css">
 </head>
+
 <body>
 
 <header class="header">
 
-    <button class="btn-header btn-volver" onclick="volverInicio()">
-        ← Volver
-    </button>
+<button style="position:relative;z-index:9999"
+        onclick="window.location.href='index.html'">
+    ← Volver
+</button>
 
     <h1>Registro</h1>
 
-    <div></div>
-
 </header>
-
 <main class="contenedor">
 
     <div class="caja">
@@ -63,10 +63,8 @@ function crearUsuario() {
 
     error.textContent = "";
 
-    // 🔥 Guardar usuario
     localStorage.setItem("usuario", usuario);
 
-    // 🔥 Redirigir al index
     window.location.href = "index.html";
 }
 
