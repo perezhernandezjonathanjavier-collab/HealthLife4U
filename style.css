@@ -2223,3 +2223,48 @@ body.tema-oscuro #inputUser::placeholder {
     color:
         #c2d6df;
 }
+
+/* =========================
+   NAVBAR DARK MODE
+========================= */
+
+body.tema-oscuro .barra-flotante a {
+
+    color:
+        white;
+}
+
+body.tema-oscuro .barra-flotante a:hover {
+
+    color:
+        #66ffd1;
+}
+
+body.tema-oscuro .barra-flotante {
+
+    background:
+        rgba(15,20,28,0.95);
+
+    backdrop-filter:
+        blur(12px);
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.08);
+}
+
+body.tema-oscuro .logo a {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+body.tema-oscuro .logo  {
+    background:
+        rgba(255, 255, 255, 0.95);
+
+    backdrop-filter:
+        blur(12px);
+
+    border-bottom:
+        1px solid rgba(136, 136, 136, 0.726);
+}
