@@ -2231,7 +2231,7 @@ body.tema-oscuro #inputUser::placeholder {
 body.tema-oscuro .barra-flotante a {
 
     color:
-        white;
+       color: #ffffff;
 }
 
 body.tema-oscuro .barra-flotante a:hover {
