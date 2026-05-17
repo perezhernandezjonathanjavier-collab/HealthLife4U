@@ -1,0 +1,238 @@
+body.pago-body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('images/Methodp.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* overlay */
+body.pago-body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+}
+
+/* HEADER */
+.header {
+    background: rgba(0,0,0,0.90);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    position: relative;
+}
+
+/* Título perfectamente centrado */
+.header h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 1.3rem;
+    color: white;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Botón volver limpio */
+.btn-header {
+    background: transparent;
+    border: 2px solid #98FFD2;
+    color: #98FFD2;
+    padding: 8px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 2;
+}
+
+.btn-header:hover {
+    background: #98FFD2;
+    color: black;
+}
+
+/* CONTENEDOR */
+.contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding-top: 20px; /* 👈 espacio desde el header */
+}
+
+/* CAJA (MEJOR ORGANIZADA) */
+.caja {
+    background: rgba(255,255,255,0.90);
+    padding: 45px;
+    width: 520px;
+    border-radius: 25px;
+    backdrop-filter: blur(12px);
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* 🔥 clave: separa TODO bonito */
+       margin-top: 30px;
+}
+
+.caja h2 {
+    font-size: 1.7rem;
+    margin-bottom: 10px;
+}
+
+/* INPUTS */
+.caja input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.caja input:focus {
+    border: 2px solid #00a86b;
+    box-shadow: 0 0 0 3px rgba(0,168,107,0.2);
+    outline: none;
+}
+
+/* LOGO TARJETA (IMPORTANTE PARA QUE NO SE VEA RARO) */
+#logo-tarjeta {
+    margin: 5px auto;
+    height: 40px;
+}
+
+/* BOTONES */
+.botones {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-crear {
+    flex: 1;
+    background: linear-gradient(135deg, #00c896, #00a86b);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-crear:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,168,107,0.3);
+}
+
+.btn-borrar {
+    flex: 1;
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-borrar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255,0,0,0.2);
+}
+
+/* BOTÓN HEADER */
+.btn-header {
+    background: transparent;
+    border: 2px solid #98FFD2;
+    color: #98FFD2;
+    padding: 8px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-header:hover {
+    background: #98FFD2;
+    color: black;
+}
+/*=========================
+   TARJETA PREVIEW PRO
+========================= */
+.tarjeta-preview {
+    width: 100%;
+    max-width: 380px;
+    height: 220px;
+    border-radius: 20px;
+    padding: 20px;
+    color: rgba(255, 255, 255, 0.986);
+    position: relative;
+    margin: 0 auto 20px;
+    transition: 0.4s ease;
+    transform-style: preserve-3d;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    overflow: hidden;
+    background: linear-gradient(135deg, #111, #222);
+}
+
+/* animación suave al cambiar datos */
+.tarjeta-preview.activa {
+    transform: scale(1.02);
+}
+
+/* efecto brillo dinámico */
+.tarjeta-preview::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 22px;
+    padding: 2px;
+    background: linear-gradient(120deg, transparent, rgba(0, 0, 0, 0.3), transparent);
+    animation: brillo 3s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes brillo {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* VISA STYLE */
+.tarjeta-preview.visa {
+    background: linear-gradient(135deg, #1a1f71, #2b6eff);
+    box-shadow: 0 20px 40px rgba(43,110,255,0.3);
+}
+
+/* MASTERCARD STYLE */
+.tarjeta-preview.mastercard {
+    background: linear-gradient(135deg, #ff5f00, #eb001b);
+    box-shadow: 0 20px 40px rgba(235,0,27,0.25);
+}
+
+/* elementos internos */
+.numero {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-top: 30px;
+}
+
+.fila {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    font-size: 0.8rem;
+}
+
+.logo-tarjeta-preview {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 60px;
+}

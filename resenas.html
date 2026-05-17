@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Reseñas - HL4U</title>
+
+<link rel="stylesheet" href="resenas.css">
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+rel="stylesheet">
+
+<link
+rel="icon"
+href="images/favicon.png"
+type="image/png">
+
+</head>
+
+<body>
+
+<div class="fondo-resenas"></div>
+
+<div class="contenedor-resenas">
+
+    <header class="header-resenas">
+
+        <h1>
+            ⭐ Reseñas HL4U
+        </h1>
+
+        <p>
+            Opiniones reales de nuestros clientes
+        </p>
+
+    </header>
+
+    <!-- STATS -->
+
+    <section class="stats-resenas">
+
+        <div class="stat-card">
+
+            <h2 id="promedio-rating">
+                5.0
+            </h2>
+
+            <span>
+                Rating promedio
+            </span>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h2 id="cantidad-resenas">
+                0
+            </h2>
+
+            <span>
+                Reseñas totales
+            </span>
+
+        </div>
+
+    </section>
+
+    <!-- CREAR RESEÑA -->
+
+    <section class="crear-resena">
+
+        <h2>
+            ✍️ Escribe una reseña
+        </h2>
+
+        <div class="estrellas-input">
+
+            <span onclick="seleccionarEstrella(1)">⭐</span>
+            <span onclick="seleccionarEstrella(2)">⭐</span>
+            <span onclick="seleccionarEstrella(3)">⭐</span>
+            <span onclick="seleccionarEstrella(4)">⭐</span>
+            <span onclick="seleccionarEstrella(5)">⭐</span>
+
+        </div>
+
+        <textarea
+        id="comentario"
+        placeholder="Comparte tu experiencia..."></textarea>
+
+        <button onclick="agregarResena()">
+            Publicar reseña
+        </button>
+
+    </section>
+
+    <!-- LISTA -->
+
+    <section
+    class="lista-resenas"
+    id="lista-resenas">
+
+    </section>
+
+    <button
+    class="btn-volver"
+    onclick="window.location.href='index.html'">
+
+        ⬅ Volver al inicio
+
+    </button>
+
+</div>
+
+<script src="resenas.js"></script>
+
+</body>
+</html>
+

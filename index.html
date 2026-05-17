@@ -7,462 +7,724 @@
     <script src="Botones.js"></script>
     <title>HEALTHLIFE4U</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+rel="stylesheet">
 </head>
 <body>
-
+<!-- BOTÓN SUBIR (fuera del nav) -->
+<button id="btn-top">↑</button>
     <!-- Encabezado Principal -->
     <header class="hero-section">
     <!-- El contenedor blanco redondeado -->
 <nav class="barra-flotante">
+   
 
     <div class="logo">HL4U</div>
 
-    <ul class="menu-principal">
-        <li><a href="#">Principal</a></li>
-        <li><a href="#sobre-nosotros">Acerca de</a></li>
-        <li><a href="#">Servicios</a></li>
-        <li><a href="#">Contacto</a></li>
-    </ul>
-
     <div class="buscador-navbar">
     <span class="icono-busqueda">🔍</span>
-    <input type="text" id="buscador" oninput="buscarProductos()">
+     <input
+    type="text"
+    id="buscador"
+    placeholder="Buscar productos..."
+    oninput="buscarProductos()"
+    autocomplete="off"
+>
+
+    <div id="resultados-busqueda"></div>
 </div>
-<div id="resultados-busqueda"></div>
-    <!-- DERECHA -->
-    <div class="iconos-derecha">
 
-        <span class="item-contacto">
-            <span class="icono">📞</span> 5268-0000
-        </span>
-        
-        <span class="item-contacto">
-            <span class="icono">✉️</span> HL4U@GMAIL.COM
-        </span>
+  
 
-        <a href="#nuestras-ubicaciones" style="text-decoration: none; color: inherit;">
-            <span class="item-contacto">
-                <span class="icono">📍</span> Ubicaciones
-            </span>
-        </a>
+   <div class="iconos-derecha">
 
-        <!-- 🛒 CARRITO -->
-        <div class="carrito-icono" onclick="irCarrito()">
-            🛒 <span id="contador-carrito">0</span>
-        </div>
+    <a href="#sobre-nosotros" class="nav-item">Acerca de</a>
+    <a href="#nuestras-ubicaciones" class="nav-item">Ubicaciones</a>
+    <a href="#contacto" class="nav-item">Contacto</a>
 
-     <button class="boton-signup" id="btn-usuario" onclick="accionUsuario()">
-    Registrarse
-</button>
-
+    <div class="carrito-icono" onclick="irCarrito()">
+        🛒 <span id="contador-carrito">0</span>
     </div>
 
-</nav>
+    <button class="boton-signup" id="btn-usuario">
+        Registrarse
+        
+    </button>
 
-<!-- BOTÓN SUBIR (fuera del nav) -->
-<button id="btn-top">↑</button>
+    <div class="menu-usuario" id="menu-usuario">
+
+    <div onclick="window.location.href='ajustes.html'">
+        ⚙️ Ajustes
+    </div>
+
+    <div onclick="window.location.href='historial.html'">
+        📦 Historial de compras
+    </div>
+
+    <div onclick="cerrarSesion()">
+        🚪 Cerrar sesión
+    </div>
+
+</div>
+
+</div>
+
+</nav>
 
 </header>
     <main class="contenedor">
 
-    <script>
-
-        document.addEventListener("DOMContentLoaded", () => {
-
-    let usuario = localStorage.getItem("usuario");
-    let btn = document.getElementById("btn-usuario");
-
-    if (usuario) {
-        btn.textContent = usuario;
-    } else {
-        btn.textContent = "Registrarse";
-    }
-});
-
-function accionUsuario() {
-
-    let usuario = localStorage.getItem("usuario");
-
-    if (!usuario) {
-        window.location.href = "registro.html";
-    } else {
-        cerrarSesion();
-    }
-}
-
-function cerrarSesion() {
-
-    localStorage.removeItem("usuario");
-    localStorage.removeItem("carrito");
-    localStorage.removeItem("pedido");
-    localStorage.removeItem("tarjeta");
-
-    window.location.href = "index.html";
-}
-
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-
-function agregarAlCarrito(nombre, precio, imagen, descripcion) {
-    carrito.push({ nombre, precio, imagen, descripcion });
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-
-    actualizarContador();
-}
-
-function actualizarContador() {
-    let contador = document.getElementById("contador-carrito");
-
-    if (contador !== null) {
-        contador.textContent = carrito.length;
-    }
-}
-
-function irCarrito() {
-    window.location.href = "carrito.html";
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    actualizarContador();
-});
-
-function irRegistro() {
-    window.location.href = "registro.html";
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    let usuario = localStorage.getItem("usuario");
-
-    if (usuario) {
-        let boton = document.getElementById("btn-usuario");
-        boton.textContent = usuario;
-        boton.onclick = null; // ya no redirige
-    }
-});
-
-function irRegistro() {
-    window.location.href = "registro.html";
-}
-
-function cerrarSesion() {
-    localStorage.removeItem("usuario");
-    localStorage.removeItem("tarjeta"); // 🔥 BORRA TARJETA
-    location.reload();
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    let usuario = localStorage.getItem("usuario");
-
-    if (usuario) {
-        let boton = document.getElementById("btn-usuario");
-        boton.textContent = usuario;
-
-        // 🔥 CAMBIO AQUÍ
-        boton.onclick = cerrarSesion;
-    }
-});
-
-function irRegistro() {
-    window.location.href = "registro.html";
-}
-
-const btnTop = document.getElementById("btn-top");
-
-// Mostrar cuando bajas
-window.onscroll = function () {
-    if (document.documentElement.scrollTop > 200) {
-        btnTop.style.display = "block";
-    } else {
-        btnTop.style.display = "none";
-    }
-};
-
-// Subir suave
-btnTop.addEventListener("click", function () {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-});
-
-</script>
 
     <!-- SECCIÓN 1: MEDICAMENTOS (OTC) -->
     <section class="seccion-horizontal">
         <h2 class="titulo-seccion">Medicamentos </h2>
         <div class="contenedor-productos">
             <!-- Repite este bloque para cada producto -->
-            <article class="tarjeta-producto">
-    <img src="images/medicamentos/paracetamol.png" class="foto-producto">
+           <article class="tarjeta-producto">
 
-    <p class="nombre-producto">Paracetamol</p>
+<div class="producto-click"
+onclick="verProducto(
+'Paracetamol',
+20,
+'images/medicamentos/paracetamol.png',
+'Tableta de paracetamol de 500 miligramos, Alivia el dolor y reduce la fiebre'
+)">
 
-    <p class="descripcion-producto">
-        Alivia el dolor y reduce la fiebre.
-    </p>
+<img src="images/medicamentos/paracetamol.png"
+class="foto-producto">
 
-    <p class="precio-producto">Q20.00</p>
+<p class="nombre-producto">Paracetamol</p>
 
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-    'Paracetamol',
-    20,
-    'images/medicamentos/paracetamol.png',
-    'Alivia el dolor y reduce la fiebre'
-)">🛒</button>
-    </div>
-</article>
-            <article class="tarjeta-producto">
-                <img src="images/medicamentos/ibuprofeno.jfif" class="foto-producto">
-                <p class="nombre-producto">Ibuprofeno</p>
-                <p class="descripcion-producto">
-                    Alivia el dolor y reduce la inflamación.
-                </p>
-                <p class="precio-producto">Q28.00</p>
-                <div class="botones-producto">
+<p class="descripcion-producto">
+Alivia el dolor y reduce la fiebre.
+</p>
 
-    <button class="boton-carrito" onclick="agregarAlCarrito(
-    'Ibuprofeno',
-    28,
-    'images/medicamentos/ibuprofeno.jfif',
-    'Alivia el dolor y reduce la inflamación.'
-)">🛒</button>
+<p class="precio-producto">Q20.00</p>
+
 </div>
-            </article>
-            <article class="tarjeta-producto">
-                <img src="images/medicamentos/aspirina.jfif" class="foto-producto">
-                <p class="nombre-producto">Aspirina</p>
-                  <p class="descripcion-producto">
-                    Alivia el dolor y reduce la inflamación.
-                </p>
-                <p class="precio-producto">Q22.00</p>
-                <div class="botones-producto">
-    <button class="boton-carrito" onclick="agregarAlCarrito(
-    'Aspirina',
-    22,
-    'images/medicamentos/aspirina.jfif',
-    'Alivia el dolor y reduce la inflamación.'
-)">🛒</button>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Paracetamol',
+20,
+'images/medicamentos/paracetamol.png',
+'Alivia el dolor y quita la fiebre.'
+)">
+🛒
+</button>
+
 </div>
-            </article>
-            <article class="tarjeta-producto">
-                <img src="images/medicamentos/loratadina.jpg" class="foto-producto">
-                <p class="nombre-producto">Loratadina</p>
-                <p class="descripcion-producto">
-                    Alivia los síntomas de alergia.
-                </p>
-                <p class="precio-producto">Q35.00</p>
-                <div class="botones-producto">
 
-                    <button class="boton-carrito" onclick="agregarAlCarrito(
-    'Loratadina',
-    35,
-    'images/medicamentos/loratadina.jpg',
-    'Alivia los síntomas de alergia.'
-)">🛒</button>
-                </div>
-            </article>
-            <article class="tarjeta-producto">
-                <img src="images/medicamentos/omeprazol.jpg" class="foto-producto">
-                <p class="nombre-producto">Omeprazol</p>
-                <p class="descripcion-producto">
-                    Reduce la acidez estomacal.
-                </p>
-                <p class="precio-producto">Q40.00</p>
-                <div class="botones-producto">
+</article>
+           <!-- IBUPROFENO -->
+<article class="tarjeta-producto">
 
-                    <button class="boton-carrito" onclick="agregarAlCarrito(
-    'Omeprazol',
-    40,
-    'images/medicamentos/omeprazol.jpg',
-    'Reduce la acidez estomacal.'
-)">🛒</button>
-                </div>
-            </article>
-            <article class="tarjeta-producto">
-                <img src="images/medicamentos/salbutamol.jfif" class="foto-producto">
-                <p class="nombre-producto">Salbutamol</p>
-                <p class="descripcion-producto">
-                    Alivia los síntomas del asma.
-                </p>
-                <p class="precio-producto">Q55.00</p>
-                <div class="botones-producto">
+<div class="producto-click"
+onclick="verProducto(
+'Ibuprofeno',
+28,
+'images/medicamentos/ibuprofeno.png',
+'Alivia dolor e inflamación'
+)">
 
-                    <button class="boton-carrito" onclick="agregarAlCarrito(
-    'Salbutamol',
-    55,
-    'images/medicamentos/salbutamol.jfif',
-    'Alivia los síntomas del asma.'
-)">🛒</button>
-                </div>
-            </article>
-            <article class="tarjeta-producto">
-                <img src="images/medicamentos/diclofenaco.jfif" class="foto-producto">
-                <p class="nombre-producto">Diclofenaco</p>
-                <p class="descripcion-producto">
-                    Alivia el dolor y reduce la inflamación.
-                </p>
-                <p class="precio-producto">Q30.00</p>
-                <div class="botones-producto">
+<img src="images/medicamentos/ibuprofeno.png"
+class="foto-producto">
 
-                    <button class="boton-carrito" onclick="agregarAlCarrito(
-    'Diclofenaco',
-    30,
-    'images/medicamentos/diclofenaco.jfif',
-    'Alivia el dolor y reduce la inflamación.'
-)">🛒</button>
-                </div>
-            </article>
-            <article class="tarjeta-producto">
-                <img src="images/medicamentos/amoxicilina.jpg" class="foto-producto">
-                <p class="nombre-producto">Amoxicilina</p>
-                <p class="descripcion-producto">
-                    Antibiótico utilizado para tratar infecciones.
-                </p>
-                <p class="precio-producto">Q45.00</p>
-                <div class="botones-producto">
+<p class="nombre-producto">Ibuprofeno</p>
 
-                    <button class="boton-carrito" onclick="agregarAlCarrito(
-    'Amoxicilina',
-    45,
-    'images/medicamentos/amoxicilina.jpg',
-    'Antibiótico utilizado para tratar infecciones.'
-)">🛒</button>
-                </div>
-            </article>
-            <article class="tarjeta-producto">
-    <img src="images/medicamentos/naproxeno.jfif" class="foto-producto">
-    <p class="nombre-producto">Naproxeno</p>
-    <p class="descripcion-producto">
-        Alivia el dolor, inflamación y fiebre.
-    </p>
-    <p class="precio-producto">Q35.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-            'Naproxeno',
-            35,
-            'images/medicamentos/naproxeno.jfif',
-            'Alivia el dolor, inflamación y fiebre.'
-        )">🛒</button>
-    </div>
+<p class="descripcion-producto">
+Alivia dolor e inflamación.
+</p>
+
+<p class="precio-producto">Q28.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Ibuprofeno',
+28,
+'images/medicamentos/ibuprofeno.png',
+'Alivia dolor e inflamación'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- ASPIRINA -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Aspirina',
+22,
+'images/medicamentos/aspirina.png',
+'Alivia dolores leves y fiebre'
+)">
+
+<img src="images/medicamentos/aspirina.png"
+class="foto-producto">
+
+<p class="nombre-producto">Aspirina</p>
+
+<p class="descripcion-producto">
+Alivia dolores leves y fiebre.
+</p>
+
+<p class="precio-producto">Q22.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Aspirina',
+22,
+'images/medicamentos/aspirina.png',
+'Alivia dolores leves y fiebre'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- LORATADINA -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Loratadina',
+35,
+'images/medicamentos/loratadina.png',
+'Alivia síntomas de alergia'
+)">
+
+<img src="images/medicamentos/loratadina.png"
+class="foto-producto">
+
+<p class="nombre-producto">Loratadina</p>
+
+<p class="descripcion-producto">
+Alivia síntomas de alergia.
+</p>
+
+<p class="precio-producto">Q35.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Loratadina',
+35,
+'images/medicamentos/loratadina.png',
+'Alivia síntomas de alergia'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- OMEPRAZOL -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Omeprazol',
+40,
+'images/medicamentos/omeprazol.png',
+'Protege el estómago y reduce acidez'
+)">
+
+<img src="images/medicamentos/omeprazol.png"
+class="foto-producto">
+
+<p class="nombre-producto">Omeprazol</p>
+
+<p class="descripcion-producto">
+Protege el estómago y reduce acidez.
+</p>
+
+<p class="precio-producto">Q40.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Omeprazol',
+40,
+'images/medicamentos/omeprazol.png',
+'Protege el estómago y reduce acidez'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- DICLOFENACO -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Diclofenaco',
+30,
+'images/medicamentos/diclofenaco.png',
+'Alivia dolor muscular y articular'
+)">
+
+<img src="images/medicamentos/diclofenaco.png"
+class="foto-producto">
+
+<p class="nombre-producto">Diclofenaco</p>
+
+<p class="descripcion-producto">
+Alivia dolor muscular y articular.
+</p>
+
+<p class="precio-producto">Q30.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Diclofenaco',
+30,
+'images/medicamentos/diclofenaco.png',
+'Alivia dolor muscular y articular'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- Clorfenamina -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Clorfenamina',
+32,
+'images/medicamentos/clorfenamina.png',
+'Alivia síntomas de alergia'
+)">
+
+<img src="images/medicamentos/clorfenamina.png"
+class="foto-producto">
+
+<p class="nombre-producto">Clorfenamina</p>
+
+<p class="descripcion-producto">
+Alivia síntomas de alergia.
+</p>
+
+<p class="precio-producto">Q32.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Clorfenamina',
+32,
+'images/medicamentos/clorfenamina.png',
+'Alivia síntomas de alergia'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- AMOXICILINA -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Amoxicilina',
+55,
+'images/medicamentos/amoxicilina.png',
+'Antibiótico de amplio espectro'
+)">
+
+<img src="images/medicamentos/amoxicilina.png"
+class="foto-producto">
+
+<p class="nombre-producto">Amoxicilina</p>
+
+<p class="descripcion-producto">
+Antibiótico de amplio espectro.
+</p>
+
+<p class="precio-producto">Q55.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Amoxicilina',
+55,
+'images/medicamentos/amoxicilina.png',
+'Antibiótico de amplio espectro'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+
+<!-- SALBUTAMOL -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Salbutamol',
+60,
+'images/medicamentos/salbutamol.png',
+'Alivia problemas respiratorios'
+)">
+
+<img src="images/medicamentos/salbutamol.png"
+class="foto-producto">
+
+<p class="nombre-producto">Salbutamol</p>
+
+<p class="descripcion-producto">
+Alivia problemas respiratorios.
+</p>
+
+<p class="precio-producto">Q60.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Salbutamol',
+60,
+'images/medicamentos/salbutamol.png',
+'Alivia problemas respiratorios'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- NAPROXENO -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Naproxeno',
+34,
+'images/medicamentos/naproxeno.png',
+'Reduce inflamación y dolor'
+)">
+
+<img src="images/medicamentos/naproxeno.png"
+class="foto-producto">
+
+<p class="nombre-producto">Naproxeno</p>
+
+<p class="descripcion-producto">
+Reduce inflamación y dolor.
+</p>
+
+<p class="precio-producto">Q34.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Naproxeno',
+34,
+'images/medicamentos/naproxeno.png',
+'Reduce inflamación y dolor'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+
+
+<!-- Dexametasona -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Dexametasona',
+75,
+'images/medicamentos/Dexametasona.png',
+'Corticoide antiinflamatorio potente.'
+)">
+
+<img src="images/medicamentos/Dexametasona.png"
+class="foto-producto">
+
+<p class="nombre-producto">Dexametasona</p>
+
+<p class="descripcion-producto">
+Corticoide antiinflamatorio potente..
+</p>
+
+<p class="precio-producto">Q75.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Dexametasona',
+75,
+'images/medicamentos/Dexametasona.png',
+'Corticoide antiinflamatorio potente.'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- CETIRIZINA -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Cetirizina',
+29,
+'images/medicamentos/cetirizina.png',
+'Controla alergias y picazón'
+)">
+
+<img src="images/medicamentos/cetirizina.png"
+class="foto-producto">
+
+<p class="nombre-producto">Cetirizina</p>
+
+<p class="descripcion-producto">
+Controla alergias y picazón.
+</p>
+
+<p class="precio-producto">Q29.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Cetirizina',
+29,
+'images/medicamentos/cetirizina.png',
+'Controla alergias y picazón'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- LOSARTÁN -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Losartán',
+48,
+'images/medicamentos/losartan.png',
+'Ayuda a controlar la presión arterial'
+)">
+
+<img src="images/medicamentos/losartan.png"
+class="foto-producto">
+
+<p class="nombre-producto">Losartán</p>
+
+<p class="descripcion-producto">
+Ayuda a controlar la presión arterial.
+</p>
+
+<p class="precio-producto">Q48.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Losartán',
+48,
+'images/medicamentos/losartan.png',
+'Ayuda a controlar la presión arterial'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- METFORMINA -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Metformina',
+52,
+'images/medicamentos/metformina.png',
+'Ayuda al control de glucosa'
+)">
+
+<img src="images/medicamentos/metformina.png"
+class="foto-producto">
+
+<p class="nombre-producto">Metformina</p>
+
+<p class="descripcion-producto">
+Ayuda al control de glucosa.
+</p>
+
+<p class="precio-producto">Q52.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Metformina',
+52,
+'images/medicamentos/metformina.png',
+'Ayuda al control de glucosa'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+
+<!-- Hidrocortisona -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Hidrocortisona',
+38,
+'images/medicamentos/Hidrocortisona.png',
+'Reduce inflamación y alergias en la piel'
+)">
+
+<img src="images/medicamentos/Hidrocortisona.png"
+class="foto-producto">
+
+<p class="nombre-producto">Hidrocortisona</p>
+
+<p class="descripcion-producto">
+Reduce inflamación y alergias en la piel.
+</p>
+
+<p class="precio-producto">Q38.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Hidrocortisona',
+38,
+'images/medicamentos/Hidrocortisona.png',
+'Reduce inflamación y alergias en la piel.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
 <article class="tarjeta-producto">
-    <img src="images/medicamentos/cetirizina.jfif" class="foto-producto">
-    <p class="nombre-producto">Cetirizina</p>
-    <p class="descripcion-producto">
-        Antihistamínico para alergias.
-    </p>
-    <p class="precio-producto">Q30.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-            'Cetirizina',
-            30,
-            'images/medicamentos/cetirizina.jfif',
-            'Antihistamínico para alergias.'
-        )">🛒</button>
-    </div>
-</article>
 
-<article class="tarjeta-producto">
-    <img src="images/medicamentos/metformina.jfif" class="foto-producto">
-    <p class="nombre-producto">Metformina</p>
-    <p class="descripcion-producto">
-        Controla niveles de azúcar en sangre.
-    </p>
-    <p class="precio-producto">Q45.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-            'Metformina',
-            45,
-            'images/medicamentos/metformina.jfif',
-            'Controla niveles de azúcar en sangre.'
-        )">🛒</button>
-    </div>
-</article>
+<div class="producto-click"
+onclick="verProducto(
+'Azitromicina',
+68,
+'images/medicamentos/azitromicina.png',
+'Tratamiento para infecciones bacterianas'
+)">
 
-<article class="tarjeta-producto">
-    <img src="images/medicamentos/losartan.jfif" class="foto-producto">
-    <p class="nombre-producto">Losartán</p>
-    <p class="descripcion-producto">
-        Ayuda a controlar la presión arterial.
-    </p>
-    <p class="precio-producto">Q40.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-            'Losartán',
-            40,
-            'images/medicamentos/losartan.jfif',
-            'Ayuda a controlar la presión arterial.'
-        )">🛒</button>
-    </div>
-</article>
+<img src="images/medicamentos/azitromicina.png"
+class="foto-producto">
 
-<article class="tarjeta-producto">
-    <img src="images/medicamentos/azitromicina.jfif" class="foto-producto">
-    <p class="nombre-producto">Azitromicina</p>
-    <p class="descripcion-producto">
-        Antibiótico para infecciones bacterianas.
-    </p>
-    <p class="precio-producto">Q60.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-            'Azitromicina',
-            60,
-            'images/medicamentos/azitromicina.jfif',
-            'Antibiótico para infecciones bacterianas.'
-        )">🛒</button>
-    </div>
-</article>
+<p class="nombre-producto">Azitromicina</p>
 
-<article class="tarjeta-producto">
-    <img src="images/medicamentos/dexametasona.jpg" class="foto-producto">
-    <p class="nombre-producto">Dexametasona</p>
-    <p class="descripcion-producto">
-        Corticoide antiinflamatorio potente.
-    </p>
-    <p class="precio-producto">Q50.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-            'Dexametasona',
-            50,
-            'images/medicamentos/dexametasona.jpg',
-            'Corticoide antiinflamatorio potente.'
-        )">🛒</button>
-    </div>
-</article>
+<p class="descripcion-producto">
+Tratamiento para infecciones bacterianas.
+</p>
 
-<article class="tarjeta-producto">
-    <img src="images/medicamentos/clorfenamina.png" class="foto-producto">
-    <p class="nombre-producto">Clorfenamina</p>
-    <p class="descripcion-producto">
-        Alivia síntomas de alergia.
-    </p>
-    <p class="precio-producto">Q25.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-            'Clorfenamina',
-            25,
-            'images/medicamentos/clorfenamina.png',
-            'Alivia síntomas de alergia.'
-        )">🛒</button>
-    </div>
-</article>
+<p class="precio-producto">Q68.00</p>
 
-<article class="tarjeta-producto">
-    <img src="images/medicamentos/hidrocortisona.jfif" class="foto-producto">
-    <p class="nombre-producto">Hidrocortisona</p>
-    <p class="descripcion-producto">
-        Reduce inflamación y alergias en la piel.
-    </p>
-    <p class="precio-producto">Q38.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-            'Hidrocortisona',
-            38,
-            'images/medicamentos/hidrocortisona.jfif',
-            'Reduce inflamación y alergias en la piel.'
-        )">🛒</button>
-    </div>
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Azitromicina',
+68,
+'images/medicamentos/azitromicina.png',
+'Tratamiento para infecciones bacterianas'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
         </div>
         
@@ -473,221 +735,667 @@ btnTop.addEventListener("click", function () {
     <section class="seccion-horizontal">
         <h2 class="titulo-seccion">Cuidado De La Piel | Skincare </h2>
         <div class="contenedor-productos">
-            <article class="tarjeta-producto">
-    <img src="images/Skincare/CeraVe.jpg" alt="CeraVe" class="foto-producto">
-    <p class="nombre-producto">CeraVe Limpiador</p>
-    <p class="descripcion-producto">Limpia e hidrata la piel sin resecar.</p>
-    <p class="precio-producto">Q85.00</p>
-     <div class="botones-producto">    
-     <button class="boton-carrito" onclick="agregarAlCarrito(
-    'CeraVe',
-    85,
-    'images/Skincare/CeraVe.jpg',
-    'Limpia e hidrata la piel sin resecar.'
-)">🛒</button>
-        </div>
+           <!-- CERAVE -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'CeraVe Limpiador',
+85,
+'images/Skincare/CeraVe.png',
+'Limpia e hidrata la piel sin resecar.'
+)">
+
+<img src="images/Skincare/CeraVe.png"
+class="foto-producto">
+
+<p class="nombre-producto">CeraVe Limpiador</p>
+
+<p class="descripcion-producto">
+Limpia e hidrata la piel sin resecar.
+</p>
+
+<p class="precio-producto">Q85.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'CeraVe Limpiador',
+85,
+'images/Skincare/CeraVe.png',
+'Limpia e hidrata la piel sin resecar.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- NEUTROGENA -->
 <article class="tarjeta-producto">
-    <img src="images/Skincare/Neutrogena Hydro Boost.jfif" alt="Neutrogena" class="foto-producto">
-    <p class="nombre-producto">Neutrogena Hydro Boost</p>
-    <p class="descripcion-producto">Hidratante en gel con ácido hialurónico.</p>
-    <p class="precio-producto">Q95.00</p>
-    <div class="botones-producto">
 
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-    'Neutrogena Hydro Boost',
-    95,
-    'images/Skincare/Neutrogena Hydro Boost.jfif',
-    'Hidratante en gel con ácido hialurónico.'
-)">🛒</button>
-    </div>
+<div class="producto-click"
+onclick="verProducto(
+'Neutrogena Hydro Boost',
+95,
+'images/Skincare/Neutrogena Hydro Boost.png',
+'Hidratante en gel con ácido hialurónico.'
+)">
+
+<img src="images/Skincare/Neutrogena Hydro Boost.png"
+class="foto-producto">
+
+<p class="nombre-producto">Neutrogena Hydro Boost</p>
+
+<p class="descripcion-producto">
+Hidratante en gel con ácido hialurónico.
+</p>
+
+<p class="precio-producto">Q95.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Neutrogena Hydro Boost',
+95,
+'images/Skincare/Neutrogena Hydro Boost.png',
+'Hidratante en gel con ácido hialurónico.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- EFFACLAR -->
 <article class="tarjeta-producto">
-    <img src="images/Skincare/Effaclar Gel.jfif" alt="La Roche-Posay" class="foto-producto">
-    <p class="nombre-producto">Effaclar Gel</p>
-    <p class="descripcion-producto">Gel limpiador facial para piel grasa.</p>
-    <p class="precio-producto">Q120.00</p>
-    <div class="botones-producto">
 
-        <button class="boton-carrito" onclick="agregarAlCarrito('Effaclar Gel', 120, 'images/Skincare/Effaclar Gel.jfif', 'Gel limpiador facial para piel grasa.')">🛒</button>
-    </div>
+<div class="producto-click"
+onclick="verProducto(
+'Effaclar Gel',
+120,
+'images/Skincare/Effaclar Gel.png',
+'Gel limpiador facial para piel grasa.'
+)">
+
+<img src="images/Skincare/Effaclar Gel.png"
+class="foto-producto">
+
+<p class="nombre-producto">Effaclar Gel</p>
+
+<p class="descripcion-producto">
+Gel limpiador facial para piel grasa.
+</p>
+
+<p class="precio-producto">Q120.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Effaclar Gel',
+120,
+'images/Skincare/Effaclar Gel.png',
+'Gel limpiador facial para piel grasa.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- NIVEA -->
 <article class="tarjeta-producto">
-    <img src="images/Skincare/Nivea Hidratante.jfif" alt="Nivea" class="foto-producto">
-    <p class="nombre-producto">Nivea Hidratante</p>
-    <p class="descripcion-producto">Crema hidratante para piel seca.</p>
-    <p class="precio-producto">Q35.00</p>
-    <div class="botones-producto">
 
-        <button class="boton-carrito" onclick="agregarAlCarrito('Nivea Hidratante', 35, 'images/Skincare/Nivea Hidratante.jfif', 'Crema hidratante para piel seca.')">🛒</button>
-    </div>
+<div class="producto-click"
+onclick="verProducto(
+'Nivea Hidratante',
+35,
+'images/Skincare/Nivea Hidratante.png',
+'Crema hidratante para piel seca.'
+)">
+
+<img src="images/Skincare/Nivea Hidratante.png"
+class="foto-producto">
+
+<p class="nombre-producto">Nivea Hidratante</p>
+
+<p class="descripcion-producto">
+Crema hidratante para piel seca.
+</p>
+
+<p class="precio-producto">Q35.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Nivea Hidratante',
+35,
+'images/Skincare/Nivea Hidratante.png',
+'Crema hidratante para piel seca.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- EUCERIN -->
 <article class="tarjeta-producto">
-    <img src="images/Skincare/Eucerin SPF50.jpg" alt="Eucerin" class="foto-producto">
-    <p class="nombre-producto">Eucerin SPF50</p>
-    <p class="descripcion-producto">Protector solar de amplio espectro.</p>
-    <p class="precio-producto">Q140.00</p>
-    <div class="botones-producto">
 
-        <button class="boton-carrito" onclick="agregarAlCarrito('Eucerin SPF50', 140, 'images/Skincare/Eucerin SPF50.jpg', 'Protector solar de amplio espectro.')">🛒</button>
-    </div>
+<div class="producto-click"
+onclick="verProducto(
+'Eucerin SPF50',
+140,
+'images/Skincare/Eucerin SPF50.png',
+'Protector solar de amplio espectro.'
+)">
+
+<img src="images/Skincare/Eucerin SPF50.png"
+class="foto-producto">
+
+<p class="nombre-producto">Eucerin SPF50</p>
+
+<p class="descripcion-producto">
+Protector solar de amplio espectro.
+</p>
+
+<p class="precio-producto">Q140.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Eucerin SPF50',
+140,
+'images/Skincare/Eucerin SPF50.png',
+'Protector solar de amplio espectro.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- NIACINAMIDE -->
 <article class="tarjeta-producto">
-    <img src="images/Skincare/Niacinamide Serum.jpg" alt="The Ordinary" class="foto-producto">
-    <p class="nombre-producto">Niacinamide Serum</p>
-    <p class="descripcion-producto">Suero con niacinamida para mejorar la textura de la piel.</p>
-    <p class="precio-producto">Q110.00</p>
-    <div class="botones-producto">
 
-        <button class="boton-carrito" onclick="agregarAlCarrito('Niacinamide Serum', 110, 'images/Skincare/Niacinamide Serum.jpg', 'Suero con niacinamida para mejorar la textura de la piel.')">🛒</button>
-    </div>
+<div class="producto-click"
+onclick="verProducto(
+'Niacinamide Serum',
+110,
+'images/Skincare/Niacinamide Serum.png',
+'Suero con niacinamida para mejorar la textura de la piel.'
+)">
+
+<img src="images/Skincare/Niacinamide Serum.png"
+class="foto-producto">
+
+<p class="nombre-producto">Niacinamide Serum</p>
+
+<p class="descripcion-producto">
+Suero con niacinamida para mejorar la textura de la piel.
+</p>
+
+<p class="precio-producto">Q110.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Niacinamide Serum',
+110,
+'images/Skincare/Niacinamide Serum.png',
+'Suero con niacinamida para mejorar la textura de la piel.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- VICHY -->
 <article class="tarjeta-producto">
-    <img src="images/Skincare/Vichy Agua Termal.jfif" alt="Vichy" class="foto-producto">
-    <p class="nombre-producto">Vichy Agua Termal</p>
-    <p class="descripcion-producto">Agua termal para calmar y refrescar la piel.</p>
-    <p class="precio-producto">Q130.00</p>
-    <div class="botones-producto">
 
-        <button class="boton-carrito" onclick="agregarAlCarrito('Vichy Agua Termal', 130, 'images/Skincare/Vichy Agua Termal.jfif', 'Agua termal para calmar y refrescar la piel.')">🛒</button>
-    </div>
+<div class="producto-click"
+onclick="verProducto(
+'Vichy Agua Termal',
+130,
+'images/Skincare/Vichy Agua Termal.png',
+'Agua termal para calmar y refrescar la piel.'
+)">
+
+<img src="images/Skincare/Vichy Agua Termal.png"
+class="foto-producto">
+
+<p class="nombre-producto">Vichy Agua Termal</p>
+
+<p class="descripcion-producto">
+Agua termal para calmar y refrescar la piel.
+</p>
+
+<p class="precio-producto">Q130.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Vichy Agua Termal',
+130,
+'images/Skincare/Vichy Agua Termal.png',
+'Agua termal para calmar y refrescar la piel.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- GARNIER -->
 <article class="tarjeta-producto">
-    <img src="images/Skincare/Garnier Agua Micelar.jpg" alt="Garnier" class="foto-producto">
-    <p class="nombre-producto">Garnier Agua Micelar</p>
-    <p class="descripcion-producto">Desmaquillante suave para todo tipo de piel.</p>
-    <p class="precio-producto">Q45.00</p>
-    <div class="botones-producto">
 
-        <button class="boton-carrito" onclick="agregarAlCarrito('Garnier Agua Micelar', 45, 'images/Skincare/Garnier Agua Micelar.jpg', 'Desmaquillante suave para todo tipo de piel.')">🛒</button>
-    </div>
+<div class="producto-click"
+onclick="verProducto(
+'Garnier Agua Micelar',
+45,
+'images/Skincare/Garnier Agua Micelar.png',
+'Desmaquillante suave para todo tipo de piel.'
+)">
+
+<img src="images/Skincare/Garnier Agua Micelar.png"
+class="foto-producto">
+
+<p class="nombre-producto">Garnier Agua Micelar</p>
+
+<p class="descripcion-producto">
+Desmaquillante suave para todo tipo de piel.
+</p>
+
+<p class="precio-producto">Q45.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Garnier Agua Micelar',
+45,
+'images/Skincare/Garnier Agua Micelar.png',
+'Desmaquillante suave para todo tipo de piel.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- ORDINARY RETINOL -->
 <article class="tarjeta-producto">
-    <img src="images/Skincare/ordinary-retinol.jpg" class="foto-producto">
-    <p class="nombre-producto">The Ordinary Retinol</p>
-    <p class="descripcion-producto">Mejora textura y reduce líneas de expresión.</p>
-    <p class="precio-producto">Q115.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-        'The Ordinary Retinol',
-        115,
-        'images/Skincare/ordinary-retinol.jpg',
-        'Mejora textura y reduce líneas de expresión.'
-        )">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'The Ordinary Retinol',
+115,
+'images/Skincare/ordinary-retinol.png',
+'Mejora textura y reduce líneas de expresión.'
+)">
+
+<img src="images/Skincare/ordinary-retinol.png"
+class="foto-producto">
+
+<p class="nombre-producto">The Ordinary Retinol</p>
+
+<p class="descripcion-producto">
+Mejora textura y reduce líneas de expresión.
+</p>
+
+<p class="precio-producto">Q115.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'The Ordinary Retinol',
+115,
+'images/Skincare/ordinary-retinol.png',
+'Mejora textura y reduce líneas de expresión.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- HYALURONIC -->
 <article class="tarjeta-producto">
-    <img src="images/Skincare/ordinary-hyaluronic-acid.jfif" class="foto-producto">
-    <p class="nombre-producto">The Ordinary Hyaluronic Acid</p>
-    <p class="descripcion-producto">Hidratación profunda para la piel.</p>
-    <p class="precio-producto">Q110.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-        'The Ordinary Hyaluronic Acid',
-        110,
-        'images/Skincare/ordinary-hyaluronic-acid.jfif',
-        'Hidratación profunda para la piel.'
-        )">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'The Ordinary Hyaluronic Acid',
+110,
+'images/Skincare/ordinary-hyaluronic-acid.png',
+'Hidratación profunda para la piel.'
+)">
+
+<img src="images/Skincare/ordinary-hyaluronic-acid.png"
+class="foto-producto">
+
+<p class="nombre-producto">The Ordinary Hyaluronic Acid</p>
+
+<p class="descripcion-producto">
+Hidratación profunda para la piel.
+</p>
+
+<p class="precio-producto">Q110.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'The Ordinary Hyaluronic Acid',
+110,
+'images/Skincare/ordinary-hyaluronic-acid.png',
+'Hidratación profunda para la piel.'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+<!-- LA ROCHE POSAY -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'La Roche-Posay Anthelios',
+140,
+'images/Skincare/laroche-anthelios.png',
+'Protección solar de alta gama.'
+)">
+
+<img src="images/Skincare/laroche-anthelios.png"
+class="foto-producto">
+
+<p class="nombre-producto">
+La Roche-Posay Anthelios
+</p>
+
+<p class="descripcion-producto">
+Protección solar de alta gama.
+</p>
+
+<p class="precio-producto">
+Q140.00
+</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'La Roche-Posay Anthelios',
+140,
+'images/Skincare/laroche-anthelios.png',
+'Protección solar de alta gama.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- CETAPHIL -->
 <article class="tarjeta-producto">
-    <img src="images/Skincare/laroche-anthelios.jpg" class="foto-producto">
-    <p class="nombre-producto">La Roche-Posay Anthelios</p>
-    <p class="descripcion-producto">Protección solar de alta gama.</p>
-    <p class="precio-producto">Q140.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-        'La Roche-Posay Anthelios',
-        140,
-        'images/Skincare/laroche-anthelios.jpg',
-        'Protección solar de alta gama.'
-        )">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Cetaphil Gentle Cleanser',
+90,
+'images/Skincare/cetaphil-cleanser.png',
+'Limpieza suave para piel sensible.'
+)">
+
+<img src="images/Skincare/cetaphil-cleanser.png"
+class="foto-producto">
+
+<p class="nombre-producto">
+Cetaphil Gentle Cleanser
+</p>
+
+<p class="descripcion-producto">
+Limpieza suave para piel sensible.
+</p>
+
+<p class="precio-producto">
+Q90.00
+</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Cetaphil Gentle Cleanser',
+90,
+'images/Skincare/cetaphil-cleanser.png',
+'Limpieza suave para piel sensible.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- BIODERMA -->
 <article class="tarjeta-producto">
-    <img src="images/Skincare/cetaphil-cleanser.jpg" class="foto-producto">
-    <p class="nombre-producto">Cetaphil Gentle Cleanser</p>
-    <p class="descripcion-producto">Limpieza suave para piel sensible.</p>
-    <p class="precio-producto">Q90.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-        'Cetaphil Gentle Cleanser',
-        90,
-        'images/Skincare/cetaphil-cleanser.jpg',
-        'Limpieza suave para piel sensible.'
-        )">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Bioderma Sensibio',
+100,
+'images/Skincare/bioderma-sensibio.png',
+'Desmaquillante para piel sensible.'
+)">
+
+<img src="images/Skincare/bioderma-sensibio.png"
+class="foto-producto">
+
+<p class="nombre-producto">
+Bioderma Sensibio
+</p>
+
+<p class="descripcion-producto">
+Desmaquillante para piel sensible.
+</p>
+
+<p class="precio-producto">
+Q100.00
+</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Bioderma Sensibio',
+100,
+'images/Skincare/bioderma-sensibio.png',
+'Desmaquillante para piel sensible.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- AVEENO -->
 <article class="tarjeta-producto">
-    <img src="images/Skincare/bioderma-sensibio.jpg" class="foto-producto">
-    <p class="nombre-producto">Bioderma Sensibio</p>
-    <p class="descripcion-producto">Desmaquillante para piel sensible.</p>
-    <p class="precio-producto">Q100.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-        'Bioderma Sensibio',
-        100,
-        'images/Skincare/bioderma-sensibio.jpg',
-        'Desmaquillante para piel sensible.'
-        )">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Aveeno Daily Moisturizer',
+95,
+'images/Skincare/aveeno-moisturizer.png',
+'Hidratación diaria calmante.'
+)">
+
+<img src="images/Skincare/aveeno-moisturizer.png"
+class="foto-producto">
+
+<p class="nombre-producto">
+Aveeno Daily Moisturizer
+</p>
+
+<p class="descripcion-producto">
+Hidratación diaria calmante.
+</p>
+
+<p class="precio-producto">
+Q95.00
+</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Aveeno Daily Moisturizer',
+95,
+'images/Skincare/aveeno-moisturizer.png',
+'Hidratación diaria calmante.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- CLINIQUE -->
 <article class="tarjeta-producto">
-    <img src="images/Skincare/aveeno-moisturizer.jpg" class="foto-producto">
-    <p class="nombre-producto">Aveeno Daily Moisturizer</p>
-    <p class="descripcion-producto">Hidratación diaria calmante.</p>
-    <p class="precio-producto">Q95.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-        'Aveeno Daily Moisturizer',
-        95,
-        'images/Skincare/aveeno-moisturizer.jpg',
-        'Hidratación diaria calmante.'
-        )">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Clinique Moisture Surge',
+150,
+'images/Skincare/clinique-moisture.png',
+'Hidratación intensa tipo gel.'
+)">
+
+<img src="images/Skincare/clinique-moisture.png"
+class="foto-producto">
+
+<p class="nombre-producto">
+Clinique Moisture Surge
+</p>
+
+<p class="descripcion-producto">
+Hidratación intensa tipo gel.
+</p>
+
+<p class="precio-producto">
+Q150.00
+</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Clinique Moisture Surge',
+150,
+'images/Skincare/clinique-moisture.png',
+'Hidratación intensa tipo gel.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- PAULA'S CHOICE -->
 <article class="tarjeta-producto">
-    <img src="images/Skincare/clinique-moisture.jpg" class="foto-producto">
-    <p class="nombre-producto">Clinique Moisture Surge</p>
-    <p class="descripcion-producto">Hidratación intensa tipo gel.</p>
-    <p class="precio-producto">Q150.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-        'Clinique Moisture Surge',
-        150,
-        'images/Skincare/clinique-moisture.jpg',
-        'Hidratación intensa tipo gel.'
-        )">🛒</button>
-    </div>
-</article>
 
-<article class="tarjeta-producto">
-    <img src="images/Skincare/paulas-bha.jpg" class="foto-producto">
-    <p class="nombre-producto">Paula’s Choice BHA Liquid</p>
-    <p class="descripcion-producto">Exfoliante para poros y acné.</p>
-    <p class="precio-producto">Q160.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-        'Paula’s Choice BHA Liquid',
-        160,
-        'images/Skincare/paulas-bha.jpg',
-        'Exfoliante para poros y acné.'
-        )">🛒</button>
-    </div>
+<div class="producto-click"
+onclick="verProducto(
+'Paula’s Choice BHA Liquid',
+160,
+'images/Skincare/paulas-bha.png',
+'Exfoliante para poros y acné.'
+)">
+
+<img src="images/Skincare/paulas-bha.png"
+class="foto-producto">
+
+<p class="nombre-producto">
+Paula’s Choice BHA Liquid
+</p>
+
+<p class="descripcion-producto">
+Exfoliante para poros y acné.
+</p>
+
+<p class="precio-producto">
+Q160.00
+</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Paula’s Choice BHA Liquid',
+160,
+'images/Skincare/paulas-bha.png',
+'Exfoliante para poros y acné.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
         </div>
         
@@ -698,186 +1406,644 @@ btnTop.addEventListener("click", function () {
     <section class="seccion-horizontal">
         <h2 class="titulo-seccion">Vitaminas y Suplementos</h2>
         <div class="contenedor-productos">
-            <article class="tarjeta-producto">
-    <img src="images/VYS/Vitamina C.jpg" alt="Vitamina C" class="foto-producto">
-    <p class="nombre-producto">Vitamina C</p>
-    <p class="descripcion-producto">Refuerza el sistema inmunológico.</p>
-    <p class="precio-producto">Q45.00</p>
-    <div class="botones-producto">
+            <!-- VITAMINA C -->
+<article class="tarjeta-producto">
 
-        <button class="boton-carrito" onclick="agregarAlCarrito('Vitamina C', 45, 'images/VYS/Vitamina C.jpg', 'Refuerza el sistema inmunológico.')">🛒</button>
-    </div>
+<div class="producto-click"
+onclick="verProducto(
+'Vitamina C',
+45,
+'images/VYS/Vitamina C.png',
+'Refuerza el sistema inmunológico.'
+)">
+
+<img src="images/VYS/Vitamina C.png"
+class="foto-producto">
+
+<p class="nombre-producto">Vitamina C</p>
+
+<p class="descripcion-producto">
+Refuerza el sistema inmunológico.
+</p>
+
+<p class="precio-producto">Q45.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Vitamina C',
+45,
+'images/VYS/Vitamina C.png',
+'Refuerza el sistema inmunológico.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- VITAMINA D -->
 <article class="tarjeta-producto">
-    <img src="images/VYS/Vitamina D.jpg" alt="Vitamina D" class="foto-producto">
-    <p class="nombre-producto">Vitamina D</p>
-    <p class="descripcion-producto">Esencial para la salud ósea y el sistema inmunológico.</p>
-    <p class="precio-producto">Q50.00</p>
-    <div class="botones-producto">
 
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-    'Vitamina D',
-    50,
-    'images/VYS/Vitamina D.jpg',
-    'Esencial para la salud ósea y el sistema inmunológico.'
-)">🛒</button>
-    </div>
+<div class="producto-click"
+onclick="verProducto(
+'Vitamina D',
+50,
+'images/VYS/Vitamina D.png',
+'Esencial para la salud ósea y el sistema inmunológico.'
+)">
+
+<img src="images/VYS/Vitamina D.png"
+class="foto-producto">
+
+<p class="nombre-producto">Vitamina D</p>
+
+<p class="descripcion-producto">
+Esencial para la salud ósea y el sistema inmunológico.
+</p>
+
+<p class="precio-producto">Q50.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Vitamina D',
+50,
+'images/VYS/Vitamina D.png',
+'Esencial para la salud ósea y el sistema inmunológico.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- OMEGA 3 -->
 <article class="tarjeta-producto">
-    <img src="images/VYS/Omega 3.jpg" alt="Omega 3" class="foto-producto">
-    <p class="nombre-producto">Omega 3</p>
-    <p class="descripcion-producto">Ácidos grasos esenciales para la salud cardiovascular.</p>
-    <p class="precio-producto">Q85.00</p>
-    <div class="botones-producto">
 
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-    'Omega 3',
-    85,
-    'images/VYS/Omega 3.jpg',
-    'Ácidos grasos esenciales para la salud cardiovascular.'
-)">🛒</button>
-    </div>
+<div class="producto-click"
+onclick="verProducto(
+'Omega 3',
+85,
+'images/VYS/Omega 3.png',
+'Ácidos grasos esenciales para la salud cardiovascular.'
+)">
+
+<img src="images/VYS/Omega 3.png"
+class="foto-producto">
+
+<p class="nombre-producto">Omega 3</p>
+
+<p class="descripcion-producto">
+Ácidos grasos esenciales para la salud cardiovascular.
+</p>
+
+<p class="precio-producto">Q85.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Omega 3',
+85,
+'images/VYS/Omega 3.png',
+'Ácidos grasos esenciales para la salud cardiovascular.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- MULTIVITAMÍNICO -->
 <article class="tarjeta-producto">
-    <img src="images/VYS/Multivitamínico.jpg" alt="Multivitamínico" class="foto-producto">
-    <p class="nombre-producto">Multivitamínico</p>
-    <p class="descripcion-producto">Suplemento que aporta diversas vitaminas y minerales.</p>
-    <p class="precio-producto">Q90.00</p>
-    <div class="botones-producto">
 
-        <button class="boton-carrito" onclick="agregarAlCarrito(
-    'Multivitamínico',
-    90,
-    'images/VYS/Multivitamínico.jpg',
-    'Suplemento que aporta diversas vitaminas y minerales.'
-)">🛒</button>
-    </div>
+<div class="producto-click"
+onclick="verProducto(
+'Multivitamínico',
+90,
+'images/VYS/Multivitamínico.png',
+'Suplemento que aporta diversas vitaminas y minerales.'
+)">
+
+<img src="images/VYS/Multivitamínico.png"
+class="foto-producto">
+
+<p class="nombre-producto">Multivitamínico</p>
+
+<p class="descripcion-producto">
+Suplemento que aporta diversas vitaminas y minerales.
+</p>
+
+<p class="precio-producto">Q90.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Multivitamínico',
+90,
+'images/VYS/Multivitamínico.png',
+'Suplemento que aporta diversas vitaminas y minerales.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- MAGNESIO -->
 <article class="tarjeta-producto">
-    <img src="images/VYS/Magnesio.jpg" alt="Magnesio" class="foto-producto">
-    <p class="nombre-producto">Magnesio</p>
-    <p class="descripcion-producto">Mineral esencial para la función muscular y nerviosa.</p>
-    <p class="precio-producto">Q60.00</p>
-    <div class="botones-producto">
 
-        <button class="boton-carrito" onclick="agregarAlCarrito('Magnesio', 60, 'images/VYS/Magnesio.jpg', 'Mineral esencial para la función muscular y nerviosa.')">🛒</button>
-    </div>
+<div class="producto-click"
+onclick="verProducto(
+'Magnesio',
+60,
+'images/VYS/Magnesio.png',
+'Mineral esencial para la función muscular y nerviosa.'
+)">
+
+<img src="images/VYS/Magnesio.png"
+class="foto-producto">
+
+<p class="nombre-producto">Magnesio</p>
+
+<p class="descripcion-producto">
+Mineral esencial para la función muscular y nerviosa.
+</p>
+
+<p class="precio-producto">Q60.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Magnesio',
+60,
+'images/VYS/Magnesio.png',
+'Mineral esencial para la función muscular y nerviosa.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- ZINC -->
 <article class="tarjeta-producto">
-    <img src="images/VYS/Zinc.jfif" alt="Zinc" class="foto-producto">
-    <p class="nombre-producto">Zinc</p>
-    <p class="descripcion-producto">Mineral esencial para el sistema inmunológico.</p>
-    <p class="precio-producto">Q55.00</p>
-    <div class="botones-producto">
 
-        <button class="boton-carrito" onclick="agregarAlCarrito('Zinc', 55, 'images/VYS/Zinc.jfif', 'Mineral esencial para el sistema inmunológico.')">🛒</button>
-    </div>
+<div class="producto-click"
+onclick="verProducto(
+'Zinc',
+55,
+'images/VYS/Zinc.png',
+'Mineral esencial para el sistema inmunológico.'
+)">
+
+<img src="images/VYS/Zinc.png"
+class="foto-producto">
+
+<p class="nombre-producto">Zinc</p>
+
+<p class="descripcion-producto">
+Mineral esencial para el sistema inmunológico.
+</p>
+
+<p class="precio-producto">Q55.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Zinc',
+55,
+'images/VYS/Zinc.png',
+'Mineral esencial para el sistema inmunológico.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- COLÁGENO -->
 <article class="tarjeta-producto">
-    <img src="images/VYS/Colágeno.jpg" alt="Colágeno" class="foto-producto">
-    <p class="nombre-producto">Colágeno</p>
-    <p class="descripcion-producto">Suplemento para mejorar la salud de la piel y las articulaciones.</p>
-    <p class="precio-producto">Q95.00</p>
-    <div class="botones-producto">
 
-        <button class="boton-carrito" onclick="agregarAlCarrito('Colágeno', 95, 'images/VYS/Colágeno.jpg', 'Suplemento para mejorar la salud de la piel y las articulaciones.')">🛒</button>
-    </div>
+<div class="producto-click"
+onclick="verProducto(
+'Colágeno',
+95,
+'images/VYS/Colágeno.png',
+'Suplemento para mejorar la salud de la piel y las articulaciones.'
+)">
+
+<img src="images/VYS/Colágeno.png"
+class="foto-producto">
+
+<p class="nombre-producto">Colágeno</p>
+
+<p class="descripcion-producto">
+Suplemento para mejorar la salud de la piel y las articulaciones.
+</p>
+
+<p class="precio-producto">Q95.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Colágeno',
+95,
+'images/VYS/Colágeno.png',
+'Suplemento para mejorar la salud de la piel y las articulaciones.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- PROBIÓTICOS -->
 <article class="tarjeta-producto">
-    <img src="images/VYS/Probioticos.jpg" alt="Probióticos" class="foto-producto">
-    <p class="nombre-producto">Probióticos</p>
-    <p class="descripcion-producto">Suplemento para la salud digestiva.</p>
-    <p class="precio-producto">Q100.00</p>
-    <div class="botones-producto">
 
-        <button class="boton-carrito" onclick="agregarAlCarrito('Probióticos', 100, 'images/VYS/Probioticos.jpg', 'Suplemento para la salud digestiva.')">🛒</button>
-    </div>
-</article>
-<article class="tarjeta-producto">
-    <img src="images/VYS/vitamina-b12.jfif" class="foto-producto">
-    <p class="nombre-producto">Vitamina B12</p>
-    <p class="descripcion-producto">Ayuda a la energía y sistema nervioso.</p>
-    <p class="precio-producto">Q35.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Vitamina B12',35,'images/VYS/vitamina-b12.jfif','Ayuda a la energía y sistema nervioso.')">🛒</button>
-    </div>
-</article>
+<div class="producto-click"
+onclick="verProducto(
+'Probióticos',
+100,
+'images/VYS/Probioticos.png',
+'Suplemento para la salud digestiva.'
+)">
 
-<article class="tarjeta-producto">
-    <img src="images/VYS/vitamina-a.jpg" class="foto-producto">
-    <p class="nombre-producto">Vitamina A</p>
-    <p class="descripcion-producto">Apoya la visión y el sistema inmune.</p>
-    <p class="precio-producto">Q30.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Vitamina A',30,'images/VYS/vitamina-a.jpg','Apoya la visión y el sistema inmune.')">🛒</button>
-    </div>
-</article>
+<img src="images/VYS/Probioticos.png"
+class="foto-producto">
 
-<article class="tarjeta-producto">
-    <img src="images/VYS/hierro.jfif" class="foto-producto">
-    <p class="nombre-producto">Hierro</p>
-    <p class="descripcion-producto">Ayuda a prevenir la anemia.</p>
-    <p class="precio-producto">Q40.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Hierro',40,'images/VYS/hierro.jfif','Ayuda a prevenir la anemia.')">🛒</button>
-    </div>
-</article>
+<p class="nombre-producto">Probióticos</p>
 
-<article class="tarjeta-producto">
-    <img src="images/VYS/calcio.jpg" class="foto-producto">
-    <p class="nombre-producto">Calcio</p>
-    <p class="descripcion-producto">Fortalece huesos y dientes.</p>
-    <p class="precio-producto">Q30.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Calcio',30,'images/VYS/calcio.jpg','Fortalece huesos y dientes.')">🛒</button>
-    </div>
+<p class="descripcion-producto">
+Suplemento para la salud digestiva.
+</p>
+
+<p class="precio-producto">Q100.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Probióticos',
+100,
+'images/VYS/Probioticos.png',
+'Suplemento para la salud digestiva.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- VITAMINA B12 -->
 <article class="tarjeta-producto">
-    <img src="images/VYS/creatina.jpg" class="foto-producto">
-    <p class="nombre-producto">Creatina</p>
-    <p class="descripcion-producto">Mejora fuerza y rendimiento físico.</p>
-    <p class="precio-producto">Q120.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Creatina',120,'images/VYS/creatina.jpg','Mejora fuerza y rendimiento físico.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Vitamina B12',
+35,
+'images/VYS/vitamina-b12.png',
+'Ayuda a la energía y sistema nervioso.'
+)">
+
+<img src="images/VYS/vitamina-b12.png"
+class="foto-producto">
+
+<p class="nombre-producto">Vitamina B12</p>
+
+<p class="descripcion-producto">
+Ayuda a la energía y sistema nervioso.
+</p>
+
+<p class="precio-producto">Q35.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Vitamina B12',
+35,
+'images/VYS/vitamina-b12.png',
+'Ayuda a la energía y sistema nervioso.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- VITAMINA A -->
 <article class="tarjeta-producto">
-    <img src="images/VYS/l-glutamina.jpg" class="foto-producto">
-    <p class="nombre-producto">L-Glutamina</p>
-    <p class="descripcion-producto">Ayuda a la recuperación muscular.</p>
-    <p class="precio-producto">Q110.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('L-Glutamina',110,'images/VYS/l-glutamina.jpg','Ayuda a la recuperación muscular.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Vitamina A',
+30,
+'images/VYS/vitamina-a.png',
+'Apoya la visión y el sistema inmune.'
+)">
+
+<img src="images/VYS/vitamina-a.png"
+class="foto-producto">
+
+<p class="nombre-producto">Vitamina A</p>
+
+<p class="descripcion-producto">
+Apoya la visión y el sistema inmune.
+</p>
+
+<p class="precio-producto">Q30.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Vitamina A',
+30,
+'images/VYS/vitamina-a.png',
+'Apoya la visión y el sistema inmune.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- HIERRO -->
 <article class="tarjeta-producto">
-    <img src="images/VYS/ashwagandha.jpg" class="foto-producto">
-    <p class="nombre-producto">Ashwagandha</p>
-    <p class="descripcion-producto">Reduce el estrés y ansiedad.</p>
-    <p class="precio-producto">Q90.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Ashwagandha',90,'images/VYS/ashwagandha.jpg','Reduce el estrés y ansiedad.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Hierro',
+40,
+'images/VYS/hierro.png',
+'Ayuda a prevenir la anemia.'
+)">
+
+<img src="images/VYS/hierro.png"
+class="foto-producto">
+
+<p class="nombre-producto">Hierro</p>
+
+<p class="descripcion-producto">
+Ayuda a prevenir la anemia.
+</p>
+
+<p class="precio-producto">Q40.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Hierro',
+40,
+'images/VYS/hierro.png',
+'Ayuda a prevenir la anemia.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- CALCIO -->
 <article class="tarjeta-producto">
-    <img src="images/VYS/melatonina.jfif" class="foto-producto">
-    <p class="nombre-producto">Melatonina</p>
-    <p class="descripcion-producto">Mejora el sueño y descanso.</p>
-    <p class="precio-producto">Q70.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Melatonina',70,'images/VYS/melatonina.jfif','Mejora el sueño y descanso.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Calcio',
+30,
+'images/VYS/calcio.png',
+'Fortalece huesos y dientes.'
+)">
+
+<img src="images/VYS/calcio.png"
+class="foto-producto">
+
+<p class="nombre-producto">Calcio</p>
+
+<p class="descripcion-producto">
+Fortalece huesos y dientes.
+</p>
+
+<p class="precio-producto">Q30.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Calcio',
+30,
+'images/VYS/calcio.png',
+'Fortalece huesos y dientes.'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- CREATINA -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Biotina',
+85,
+'images/VYS/biotina.png',
+'Fortalece cabello, uñas y piel.'
+)">
+
+<img src="images/VYS/biotina.png"
+class="foto-producto">
+
+<p class="nombre-producto">Biotina</p>
+
+<p class="descripcion-producto">
+Fortalece cabello, uñas y piel.
+</p>
+
+<p class="precio-producto">Q85.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Biotina',
+85,
+'images/VYS/biotina.png',
+'Fortalece cabello, uñas y piel.'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- L-GLUTAMINA -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'L-Glutamina',
+110,
+'images/VYS/l-glutamina.png',
+'Ayuda a la recuperación muscular.'
+)">
+
+<img src="images/VYS/l-glutamina.png"
+class="foto-producto">
+
+<p class="nombre-producto">L-Glutamina</p>
+
+<p class="descripcion-producto">
+Ayuda a la recuperación muscular.
+</p>
+
+<p class="precio-producto">Q110.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'L-Glutamina',
+110,
+'images/VYS/l-glutamina.png',
+'Ayuda a la recuperación muscular.'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- ASHWAGANDHA -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Ashwagandha',
+90,
+'images/VYS/ashwagandha.png',
+'Reduce el estrés y ansiedad.'
+)">
+
+<img src="images/VYS/ashwagandha.png"
+class="foto-producto">
+
+<p class="nombre-producto">Ashwagandha</p>
+
+<p class="descripcion-producto">
+Reduce el estrés y ansiedad.
+</p>
+
+<p class="precio-producto">Q90.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Ashwagandha',
+90,
+'images/VYS/ashwagandha.png',
+'Reduce el estrés y ansiedad.'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- MELATONINA -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Melatonina',
+70,
+'images/VYS/melatonina.png',
+'Mejora el sueño y descanso.'
+)">
+
+<img src="images/VYS/melatonina.png"
+class="foto-producto">
+
+<p class="nombre-producto">Melatonina</p>
+
+<p class="descripcion-producto">
+Mejora el sueño y descanso.
+</p>
+
+<p class="precio-producto">Q70.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Melatonina',
+70,
+'images/VYS/melatonina.png',
+'Mejora el sueño y descanso.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
         </div>
     </section>
@@ -886,163 +2052,642 @@ btnTop.addEventListener("click", function () {
     <section class="seccion-horizontal">
         <h2 class="titulo-seccion">Cuidado Personal y Primeros Auxilios</h2>
         <div class="contenedor-productos">
-            <article class="tarjeta-producto">
-            <img src="images/CPPA/Alcohol Antiséptico.png" class="foto-producto">
-            <p class="nombre-producto">Alcohol Antiséptico</p>
-              <p class="descripcion-producto">Desinfecta heridas y superficies.</p>
-            <p class="precio-producto">Q15.00</p>
-            <div class="botones-producto">
-                <button class="boton-carrito" onclick="agregarAlCarrito('Alcohol Antiséptico', 15, 'images/CPPA/Alcohol Antiséptico.png', 'Desinfecta heridas y superficies.')">🛒</button>
-            </div>
-        </article>
+       <article class="tarjeta-producto">
 
-        <article class="tarjeta-producto">
-            <img src="images/CPPA/GEL.jfif" class="foto-producto">
-            <p class="nombre-producto">Gel Antibacterial</p>
-            <p class="descripcion-producto">Elimina el 99.9% de bacterias.</p>
-            <p class="precio-producto">Q18.00</p>
-            <div class="botones-producto">
-                <button class="boton-carrito" onclick="agregarAlCarrito('Gel Antibacterial', 18, 'images/CPPA/GEL.jfif', 'Elimina el 99.9% de bacterias.')">🛒</button>
-            </div>
-        </article>
+<div class="producto-click"
+onclick="verProducto(
+'Alcohol Antiséptico',
+15,
+'images/CPPA/Alcohol Antiséptico.png',
+'Desinfecta heridas y superficies.'
+)">
 
-        <article class="tarjeta-producto">
-            <img src="images/CPPA/Agua Oxigenada.png" class="foto-producto">
-            <p class="nombre-producto">Agua Oxigenada</p>
-            <p class="descripcion-producto">Desinfecta heridas y superficies.</p>
-            <p class="precio-producto">Q12.00</p>
-            <div class="botones-producto">
-                <button class="boton-carrito" onclick="agregarAlCarrito('Agua Oxigenada', 12, 'images/CPPA/Agua Oxigenada.png', 'Desinfecta heridas y superficies.')">🛒</button>
-            </div>
-        </article>
+<img src="images/CPPA/Alcohol Antiséptico.png"
+class="foto-producto">
 
-        <article class="tarjeta-producto">
-            <img src="images/CPPA/Vendas Adhesivas.png" class="foto-producto">
-            <p class="nombre-producto">Vendas Adhesivas</p>
-            <p class="descripcion-producto">Ideal para cubrir y proteger heridas.</p>
-            <p class="precio-producto">Q10.00</p>
-            <div class="botones-producto">
-                <button class="boton-carrito" onclick="agregarAlCarrito('Vendas Adhesivas', 10, 'images/CPPA/Vendas Adhesivas.png', 'Ideal para cubrir y proteger heridas.')">🛒</button>
-            </div>
-        </article>
+<p class="nombre-producto">Alcohol Antiséptico</p>
 
-        <article class="tarjeta-producto">
-            <img src="images/CPPA/Termómetro Digital.jpg" class="foto-producto">
-            <p class="nombre-producto">Termómetro Digital</p>
-            <p class="descripcion-producto">Mide la temperatura corporal de manera precisa.</p>
-            <p class="precio-producto">Q45.00</p>
-            <div class="botones-producto">
-                <button class="boton-carrito" onclick="agregarAlCarrito('Termómetro Digital', 45, 'images/CPPA/Termómetro Digital.jpg', 'Mide la temperatura corporal de manera precisa.')">🛒</button>
-            </div>
-        </article>
+<p class="descripcion-producto">
+Desinfecta heridas y superficies.
+</p>
 
-        <article class="tarjeta-producto">
-            <img src="images/CPPA/Mascarillas.png" class="foto-producto">
-            <p class="nombre-producto">Mascarillas</p>
-            <p class="descripcion-producto">Protección contra virus y bacterias.</p>
-            <p class="precio-producto">Q20.00</p>
-            <div class="botones-producto">
-                <button class="boton-carrito" onclick="agregarAlCarrito('Mascarillas', 20, 'images/CPPA/Mascarillas.png', 'Protección contra virus y bacterias.')">🛒</button>
-            </div>
-        </article>
+<p class="precio-producto">Q15.00</p>
 
-        <article class="tarjeta-producto">
-            <img src="images/CPPA/Gasas Estériles.jfif" class="foto-producto">
-            <p class="nombre-producto">Gasas Estériles</p>
-            <p class="descripcion-producto">Ideal para cubrir y proteger heridas.</p>
-            <p class="precio-producto">Q16.00</p>
-            <div class="botones-producto">
-                <button class="boton-carrito" onclick="agregarAlCarrito('Gasas Estériles', 16, 'images/CPPA/Gasas Estériles.jfif', 'Ideal para cubrir y proteger heridas.')">🛒</button>
-            </div>
-        </article>
+</div>
 
-        <article class="tarjeta-producto">
-            <img src="images/CPPA/Guantes de Látex.png" class="foto-producto">
-            <p class="nombre-producto">Guantes de Látex</p>
-            <p class="descripcion-producto">Protección para manos en procedimientos médicos.</p>
-            <p class="precio-producto">Q25.00</p>
-            <div class="botones-producto">
-                 <button class="boton-carrito" onclick="agregarAlCarrito('Guantes de Látex', 25, 'images/CPPA/Guantes de Látex.png', 'Protección para manos en procedimientos médicos.')">🛒</button>
-            </div>
-        </article>
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Alcohol Antiséptico',
+15,
+'images/CPPA/Alcohol Antiséptico.png',
+'Desinfecta heridas y superficies.'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- Gel Antibacterial -->
 <article class="tarjeta-producto">
-    <img src="images/CPPA/curitas.jfif" class="foto-producto">
-    <p class="nombre-producto">Curitas Adhesivas</p>
-    <p class="descripcion-producto">Protegen heridas pequeñas y cortes leves.</p>
-    <p class="precio-producto">Q10.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Curitas',10,'images/CPPA/curitas.jfif','Protegen heridas pequeñas y cortes leves.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Gel Antibacterial',
+18,
+'images/CPPA/GEL.png',
+'Elimina el 99.9% de bacterias.'
+)">
+
+<img src="images/CPPA/GEL.png"
+class="foto-producto">
+
+<p class="nombre-producto">Gel Antibacterial</p>
+
+<p class="descripcion-producto">
+Elimina el 99.9% de bacterias.
+</p>
+
+<p class="precio-producto">Q18.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Gel Antibacterial',
+18,
+'images/CPPA/GEL.png',
+'Elimina el 99.9% de bacterias.'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- Agua Oxigenada -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Agua Oxigenada',
+12,
+'images/CPPA/Agua Oxigenada.png',
+'Desinfecta heridas y superficies.'
+)">
+
+<img src="images/CPPA/Agua Oxigenada.png"
+class="foto-producto">
+
+<p class="nombre-producto">Agua Oxigenada</p>
+
+<p class="descripcion-producto">
+Desinfecta heridas y superficies.
+</p>
+
+<p class="precio-producto">Q12.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Agua Oxigenada',
+12,
+'images/CPPA/Agua Oxigenada.png',
+'Desinfecta heridas y superficies.'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- Vendas Adhesivas -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Vendas Adhesivas',
+10,
+'images/CPPA/Vendas Adhesivas.png',
+'Ideal para cubrir y proteger heridas.'
+)">
+
+<img src="images/CPPA/Vendas Adhesivas.png"
+class="foto-producto">
+
+<p class="nombre-producto">Vendas Adhesivas</p>
+
+<p class="descripcion-producto">
+Ideal para cubrir y proteger heridas.
+</p>
+
+<p class="precio-producto">Q10.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Vendas Adhesivas',
+10,
+'images/CPPA/Vendas Adhesivas.png',
+'Ideal para cubrir y proteger heridas.'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- Termómetro Digital -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Termómetro Digital',
+45,
+'images/CPPA/Termómetro Digital.png',
+'Mide la temperatura corporal de manera precisa.'
+)">
+
+<img src="images/CPPA/Termómetro Digital.png"
+class="foto-producto">
+
+<p class="nombre-producto">Termómetro Digital</p>
+
+<p class="descripcion-producto">
+Mide la temperatura corporal de manera precisa.
+</p>
+
+<p class="precio-producto">Q45.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Termómetro Digital',
+45,
+'images/CPPA/Termómetro Digital.png',
+'Mide la temperatura corporal de manera precisa.'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- Mascarillas -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Mascarillas',
+20,
+'images/CPPA/Mascarillas.png',
+'Protección contra virus y bacterias.'
+)">
+
+<img src="images/CPPA/Mascarillas.png"
+class="foto-producto">
+
+<p class="nombre-producto">Mascarillas</p>
+
+<p class="descripcion-producto">
+Protección contra virus y bacterias.
+</p>
+
+<p class="precio-producto">Q20.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Mascarillas',
+20,
+'images/CPPA/Mascarillas.png',
+'Protección contra virus y bacterias.'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- Gasas Estériles -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Gasas Estériles',
+16,
+'images/CPPA/Gasas Estériles.png',
+'Ideal para cubrir y proteger heridas.'
+)">
+
+<img src="images/CPPA/Gasas Estériles.png"
+class="foto-producto">
+
+<p class="nombre-producto">Gasas Estériles</p>
+
+<p class="descripcion-producto">
+Ideal para cubrir y proteger heridas.
+</p>
+
+<p class="precio-producto">Q16.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Gasas Estériles',
+16,
+'images/CPPA/Gasas Estériles.png',
+'Ideal para cubrir y proteger heridas.'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- Guantes de Látex -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Guantes de Látex',
+25,
+'images/CPPA/Guantes de Látex.png',
+'Protección para manos en procedimientos médicos.'
+)">
+
+<img src="images/CPPA/Guantes de Látex.png"
+class="foto-producto">
+
+<p class="nombre-producto">Guantes de Látex</p>
+
+<p class="descripcion-producto">
+Protección para manos en procedimientos médicos.
+</p>
+
+<p class="precio-producto">Q25.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Guantes de Látex',
+25,
+'images/CPPA/Guantes de Látex.png',
+'Protección para manos en procedimientos médicos.'
+)">
+🛒
+</button>
+
+</div>
+
+</article>
+
+<!-- Curitas Adhesivas -->
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Curitas Adhesivas',
+10,
+'images/CPPA/curitas.png',
+'Protegen heridas pequeñas y cortes leves.'
+)">
+
+<img src="images/CPPA/curitas.png"
+class="foto-producto">
+
+<p class="nombre-producto">Curitas Adhesivas</p>
+
+<p class="descripcion-producto">
+Protegen heridas pequeñas y cortes leves.
+</p>
+
+<p class="precio-producto">Q10.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Curitas Adhesivas',
+10,
+'images/CPPA/curitas.png',
+'Protegen heridas pequeñas y cortes leves.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
 <article class="tarjeta-producto">
-    <img src="images/CPPA/yodopovidona.jpg" class="foto-producto">
-    <p class="nombre-producto">Yodo povidona</p>
-    <p class="descripcion-producto">Desinfectante para heridas.</p>
-    <p class="precio-producto">Q25.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Yodo povidona',25,'images/CPPA/yodopovidona.jpg','Desinfectante para heridas.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Yodo povidona',
+25,
+'images/CPPA/yodopovidona.png',
+'Desinfectante para heridas.'
+)">
+
+<img src="images/CPPA/yodopovidona.png"
+class="foto-producto">
+
+<p class="nombre-producto">Yodo povidona</p>
+
+<p class="descripcion-producto">
+Desinfectante para heridas.
+</p>
+
+<p class="precio-producto">Q25.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Yodo povidona',
+25,
+'images/CPPA/yodopovidona.png',
+'Desinfectante para heridas.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Esparadrapo -->
 <article class="tarjeta-producto">
-    <img src="images/CPPA/esparadrapo.jpg" class="foto-producto">
-    <p class="nombre-producto">Esparadrapo</p>
-    <p class="descripcion-producto">Cinta médica para fijar vendas.</p>
-    <p class="precio-producto">Q15.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Esparadrapo',15,'images/CPPA/esparadrapo.jpg','Cinta médica para fijar vendas.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Esparadrapo',
+15,
+'images/CPPA/esparadrapo.png',
+'Cinta médica para fijar vendas.'
+)">
+
+<img src="images/CPPA/esparadrapo.png"
+class="foto-producto">
+
+<p class="nombre-producto">Esparadrapo</p>
+
+<p class="descripcion-producto">
+Cinta médica para fijar vendas.
+</p>
+
+<p class="precio-producto">Q15.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Esparadrapo',
+15,
+'images/CPPA/esparadrapo.png',
+'Cinta médica para fijar vendas.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Tijeras médicas -->
 <article class="tarjeta-producto">
-    <img src="images/CPPA/tijerasmedicas.jpg" class="foto-producto">
-    <p class="nombre-producto">Tijeras médicas</p>
-    <p class="descripcion-producto">Para cortar vendajes y gasas.</p>
-    <p class="precio-producto">Q35.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Tijeras médicas',35,'images/CPPA/tijerasmedicas.jpg','Para cortar vendajes y gasas.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Tijeras médicas',
+35,
+'images/CPPA/tijerasmedicas.png',
+'Para cortar vendajes y gasas.'
+)">
+
+<img src="images/CPPA/tijerasmedicas.png"
+class="foto-producto">
+
+<p class="nombre-producto">Tijeras médicas</p>
+
+<p class="descripcion-producto">
+Para cortar vendajes y gasas.
+</p>
+
+<p class="precio-producto">Q35.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Tijeras médicas',
+35,
+'images/CPPA/tijerasmedicas.png',
+'Para cortar vendajes y gasas.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Algodón -->
 <article class="tarjeta-producto">
-    <img src="images/CPPA/algodon.jfif" class="foto-producto">
-    <p class="nombre-producto">Algodón</p>
-    <p class="descripcion-producto">Limpieza y desinfección de heridas.</p>
-    <p class="precio-producto">Q12.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Algodón',12,'images/CPPA/algodon.jfif','Limpieza y desinfección de heridas.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Algodón',
+12,
+'images/CPPA/algodon.png',
+'Limpieza y desinfección de heridas.'
+)">
+
+<img src="images/CPPA/algodon.png"
+class="foto-producto">
+
+<p class="nombre-producto">Algodón</p>
+
+<p class="descripcion-producto">
+Limpieza y desinfección de heridas.
+</p>
+
+<p class="precio-producto">Q12.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Algodón',
+12,
+'images/CPPA/algodon.png',
+'Limpieza y desinfección de heridas.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Pomada antibiótica -->
 <article class="tarjeta-producto">
-    <img src="images/CPPA/pomadaantibiotica.jfif" class="foto-producto">
-    <p class="nombre-producto">Pomada antibiótica</p>
-    <p class="descripcion-producto">Previene infecciones en heridas.</p>
-    <p class="precio-producto">Q28.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Pomada antibiótica',28,'images/CPPA/pomada_antibiotica.jfif','Previene infecciones en heridas.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Pomada antibiótica',
+28,
+'images/CPPA/pomadaantibiotica.png',
+'Previene infecciones en heridas.'
+)">
+
+<img src="images/CPPA/pomadaantibiotica.png"
+class="foto-producto">
+
+<p class="nombre-producto">Pomada antibiótica</p>
+
+<p class="descripcion-producto">
+Previene infecciones en heridas.
+</p>
+
+<p class="precio-producto">Q28.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Pomada antibiótica',
+28,
+'images/CPPA/pomadaantibiotica.png',
+'Previene infecciones en heridas.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Venda elástica -->
 <article class="tarjeta-producto">
-    <img src="images/CPPA/vendaelasticas.jfif" class="foto-producto">
-    <p class="nombre-producto">Venda elástica</p>
-    <p class="descripcion-producto">Soporte para esguinces y lesiones.</p>
-    <p class="precio-producto">Q22.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Venda elástica',22,'images/CPPA/vendaelasticas.jfif','Soporte para esguinces y lesiones.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Venda elástica',
+22,
+'images/CPPA/vendaelasticas.png',
+'Soporte para esguinces y lesiones.'
+)">
+
+<img src="images/CPPA/vendaelasticas.png"
+class="foto-producto">
+
+<p class="nombre-producto">Venda elástica</p>
+
+<p class="descripcion-producto">
+Soporte para esguinces y lesiones.
+</p>
+
+<p class="precio-producto">Q22.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Venda elástica',
+22,
+'images/CPPA/vendaelasticas.png',
+'Soporte para esguinces y lesiones.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Kit de primeros auxilios -->
 <article class="tarjeta-producto">
-    <img src="images/CPPA/primerosau.jpg" class="foto-producto">
-    <p class="nombre-producto">Kit de primeros auxilios</p>
-    <p class="descripcion-producto">Incluye herramientas básicas de emergencia.</p>
-    <p class="precio-producto">Q120.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Kit de primeros auxilios',120,'images/CPPA/primerosau.jpg','Incluye herramientas básicas de emergencia.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Kit de primeros auxilios',
+120,
+'images/CPPA/primerosau.png',
+'Incluye herramientas básicas de emergencia.'
+)">
+
+<img src="images/CPPA/primerosau.png"
+class="foto-producto">
+
+<p class="nombre-producto">Kit de primeros auxilios</p>
+
+<p class="descripcion-producto">
+Incluye herramientas básicas de emergencia.
+</p>
+
+<p class="precio-producto">Q120.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Kit de primeros auxilios',
+120,
+'images/CPPA/primerosau.png',
+'Incluye herramientas básicas de emergencia.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
         </div>
     </section>
@@ -1051,164 +2696,644 @@ btnTop.addEventListener("click", function () {
         <h2 class="titulo-seccion">Salud Bucal</h2>
         <div class="contenedor-productos">
     <article class="tarjeta-producto">
-    <img src="images/saludbucal/pastadental.jpg" class="foto-producto">
-    <p class="nombre-producto">Pasta dental Colgate</p>
-    <p class="descripcion-producto">Limpieza diaria y protección contra caries.</p>
-    <p class="precio-producto">Q18.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Pasta dental Colgate',18,'images/saludbucal/pastadental.jpg','Limpieza diaria y protección contra caries.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Pasta dental Colgate',
+18,
+'images/saludbucal/pastadental.png',
+'Limpieza diaria y protección contra caries.'
+)">
+
+<img src="images/saludbucal/pastadental.png"
+class="foto-producto">
+
+<p class="nombre-producto">Pasta dental Colgate</p>
+
+<p class="descripcion-producto">
+Limpieza diaria y protección contra caries.
+</p>
+
+<p class="precio-producto">Q18.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Pasta dental Colgate',
+18,
+'images/saludbucal/pastadental.png',
+'Limpieza diaria y protección contra caries.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Pasta Sensodyne -->
 <article class="tarjeta-producto">
-    <img src="images/saludbucal/pastasensodyne.jpg" class="foto-producto">
-    <p class="nombre-producto">Pasta Sensodyne</p>
-    <p class="descripcion-producto">Alivio para dientes sensibles.</p>
-    <p class="precio-producto">Q25.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Pasta Sensodyne',25,'images/saludbucal/pastasensodyne.jpg','Alivio para dientes sensibles.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Pasta Sensodyne',
+25,
+'images/saludbucal/pastasensodyne.png',
+'Alivio para dientes sensibles.'
+)">
+
+<img src="images/saludbucal/pastasensodyne.png"
+class="foto-producto">
+
+<p class="nombre-producto">Pasta Sensodyne</p>
+
+<p class="descripcion-producto">
+Alivio para dientes sensibles.
+</p>
+
+<p class="precio-producto">Q25.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Pasta Sensodyne',
+25,
+'images/saludbucal/pastasensodyne.png',
+'Alivio para dientes sensibles.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Enjuague bucal Listerine -->
 <article class="tarjeta-producto">
-    <img src="images/saludbucal/enjuaguelisterin.jpg" class="foto-producto">
-    <p class="nombre-producto">Enjuague bucal Listerine</p>
-    <p class="descripcion-producto">Elimina bacterias y refresca el aliento.</p>
-    <p class="precio-producto">Q30.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Enjuague bucal Listerine',30,'images/saludbucal/enjuaguelisterinjpg','Elimina bacterias y refresca el aliento.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Enjuague bucal Listerine',
+30,
+'images/saludbucal/enjuaguelisterin.png',
+'Elimina bacterias y refresca el aliento.'
+)">
+
+<img src="images/saludbucal/enjuaguelisterin.png"
+class="foto-producto">
+
+<p class="nombre-producto">Enjuague bucal Listerine</p>
+
+<p class="descripcion-producto">
+Elimina bacterias y refresca el aliento.
+</p>
+
+<p class="precio-producto">Q30.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Enjuague bucal Listerine',
+30,
+'images/saludbucal/enjuaguelisterin.png',
+'Elimina bacterias y refresca el aliento.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Cepillo dental -->
 <article class="tarjeta-producto">
-    <img src="images/saludbucal/cepillodental.jpg" class="foto-producto">
-    <p class="nombre-producto">Cepillo dental</p>
-    <p class="descripcion-producto">Limpieza básica diaria.</p>
-    <p class="precio-producto">Q10.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Cepillo dental',10,'images/saludbucal/cepillodental.jpg','Limpieza básica diaria.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Cepillo dental',
+10,
+'images/saludbucal/cepillodental.png',
+'Limpieza básica diaria.'
+)">
+
+<img src="images/saludbucal/cepillodental.png"
+class="foto-producto">
+
+<p class="nombre-producto">Cepillo dental</p>
+
+<p class="descripcion-producto">
+Limpieza básica diaria.
+</p>
+
+<p class="precio-producto">Q10.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Cepillo dental',
+10,
+'images/saludbucal/cepillodental.png',
+'Limpieza básica diaria.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Cepillo eléctrico -->
 <article class="tarjeta-producto">
-    <img src="images/saludbucal/cepilloelectrico.jpg" class="foto-producto">
-    <p class="nombre-producto">Cepillo eléctrico</p>
-    <p class="descripcion-producto">Limpieza profunda avanzada.</p>
-    <p class="precio-producto">Q150.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Cepillo eléctrico',150,'images/saludbucal/cepilloelectrico.jpg','Limpieza profunda avanzada.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Cepillo eléctrico',
+150,
+'images/saludbucal/cepilloelectrico.png',
+'Limpieza profunda avanzada.'
+)">
+
+<img src="images/saludbucal/cepilloelectrico.png"
+class="foto-producto">
+
+<p class="nombre-producto">Cepillo eléctrico</p>
+
+<p class="descripcion-producto">
+Limpieza profunda avanzada.
+</p>
+
+<p class="precio-producto">Q150.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Cepillo eléctrico',
+150,
+'images/saludbucal/cepilloelectrico.png',
+'Limpieza profunda avanzada.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Hilo dental -->
 <article class="tarjeta-producto">
-    <img src="images/saludbucal/hilodental.jpg" class="foto-producto">
-    <p class="nombre-producto">Hilo dental</p>
-    <p class="descripcion-producto">Elimina restos entre los dientes.</p>
-    <p class="precio-producto">Q12.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Hilo dental',12,'images/saludbucal/hilodental.jpg','Elimina restos entre los dientes.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Hilo dental',
+12,
+'images/saludbucal/hilodental.png',
+'Elimina restos entre los dientes.'
+)">
+
+<img src="images/saludbucal/hilodental.png"
+class="foto-producto">
+
+<p class="nombre-producto">Hilo dental</p>
+
+<p class="descripcion-producto">
+Elimina restos entre los dientes.
+</p>
+
+<p class="precio-producto">Q12.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Hilo dental',
+12,
+'images/saludbucal/hilodental.png',
+'Elimina restos entre los dientes.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Blanqueador dental -->
 <article class="tarjeta-producto">
-    <img src="images/saludbucal/blanqueadordental.jfif" class="foto-producto">
-    <p class="nombre-producto">Blanqueador dental</p>
-    <p class="descripcion-producto">Ayuda a mejorar el color de los dientes.</p>
-    <p class="precio-producto">Q80.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Blanqueador dental',80,'images/saludbucal/blanqueadordental.jfif','Ayuda a mejorar el color de los dientes.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Blanqueador dental',
+80,
+'images/saludbucal/blanqueadordental.png',
+'Ayuda a mejorar el color de los dientes.'
+)">
+
+<img src="images/saludbucal/blanqueadordental.png"
+class="foto-producto">
+
+<p class="nombre-producto">Blanqueador dental</p>
+
+<p class="descripcion-producto">
+Ayuda a mejorar el color de los dientes.
+</p>
+
+<p class="precio-producto">Q80.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Blanqueador dental',
+80,
+'images/saludbucal/blanqueadordental.png',
+'Ayuda a mejorar el color de los dientes.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Gel para encías -->
 <article class="tarjeta-producto">
-    <img src="images/saludbucal/gelencias.jfif" class="foto-producto">
-    <p class="nombre-producto">Gel para encías</p>
-    <p class="descripcion-producto">Reduce inflamación de encías.</p>
-    <p class="precio-producto">Q35.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Gel para encías',35,'images/saludbucal/gelencias.jfif','Reduce inflamación de encías.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Gel para encías',
+35,
+'images/saludbucal/gelencias.png',
+'Reduce inflamación de encías.'
+)">
+
+<img src="images/saludbucal/gelencias.png"
+class="foto-producto">
+
+<p class="nombre-producto">Gel para encías</p>
+
+<p class="descripcion-producto">
+Reduce inflamación de encías.
+</p>
+
+<p class="precio-producto">Q35.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Gel para encías',
+35,
+'images/saludbucal/gelencias.png',
+'Reduce inflamación de encías.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Pasta carbón activado -->
 <article class="tarjeta-producto">
-    <img src="images/saludbucal/pastacarbon.jpg" class="foto-producto">
-    <p class="nombre-producto">Pasta carbón activado</p>
-    <p class="descripcion-producto">Ayuda a blanquear los dientes naturalmente.</p>
-    <p class="precio-producto">Q28.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Pasta carbón activado',28,'images/saludbucal/pastacarbon.jpg','Ayuda a blanquear los dientes naturalmente.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Pasta carbón activado',
+28,
+'images/saludbucal/pastacarbon.png',
+'Ayuda a blanquear los dientes naturalmente.'
+)">
+
+<img src="images/saludbucal/pastacarbon.png"
+class="foto-producto">
+
+<p class="nombre-producto">Pasta carbón activado</p>
+
+<p class="descripcion-producto">
+Ayuda a blanquear los dientes naturalmente.
+</p>
+
+<p class="precio-producto">Q28.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Pasta carbón activado',
+28,
+'images/saludbucal/pastacarbon.png',
+'Ayuda a blanquear los dientes naturalmente.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Cepillos interdentales -->
 <article class="tarjeta-producto">
-    <img src="images/saludbucal/interdentales.jfif" class="foto-producto">
-    <p class="nombre-producto">Cepillos interdentales</p>
-    <p class="descripcion-producto">Limpieza entre dientes más profunda.</p>
-    <p class="precio-producto">Q20.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Cepillos interdentales',20,'images/saludbucal/cepillos_interdentales.jfif','Limpieza entre dientes más profunda.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Cepillos interdentales',
+20,
+'images/saludbucal/interdentales.png',
+'Limpieza entre dientes más profunda.'
+)">
+
+<img src="images/saludbucal/interdentales.png"
+class="foto-producto">
+
+<p class="nombre-producto">Cepillos interdentales</p>
+
+<p class="descripcion-producto">
+Limpieza entre dientes más profunda.
+</p>
+
+<p class="precio-producto">Q20.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Cepillos interdentales',
+20,
+'images/saludbucal/interdentales.png',
+'Limpieza entre dientes más profunda.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Irrigador dental -->
 <article class="tarjeta-producto">
-    <img src="images/saludbucal/irrigador.jpg" class="foto-producto">
-    <p class="nombre-producto">Irrigador dental</p>
-    <p class="descripcion-producto">Limpieza con agua a presión.</p>
-    <p class="precio-producto">Q180.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Irrigador dental',180,'images/saludbucal/irrigador.jpg','Limpieza con agua a presión.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Irrigador dental',
+180,
+'images/saludbucal/irrigador.png',
+'Limpieza con agua a presión.'
+)">
+
+<img src="images/saludbucal/irrigador.png"
+class="foto-producto">
+
+<p class="nombre-producto">Irrigador dental</p>
+
+<p class="descripcion-producto">
+Limpieza con agua a presión.
+</p>
+
+<p class="precio-producto">Q180.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Irrigador dental',
+180,
+'images/saludbucal/irrigador.png',
+'Limpieza con agua a presión.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Spray bucal -->
 <article class="tarjeta-producto">
-    <img src="images/saludbucal/spray.jfif" class="foto-producto">
-    <p class="nombre-producto">Spray bucal</p>
-    <p class="descripcion-producto">Refresca el aliento al instante.</p>
-    <p class="precio-producto">Q15.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Spray bucal',15,'images/saludbucal/spray.jfif','Refresca el aliento al instante.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Spray bucal',
+15,
+'images/saludbucal/spray.png',
+'Refresca el aliento al instante.'
+)">
+
+<img src="images/saludbucal/spray.png"
+class="foto-producto">
+
+<p class="nombre-producto">Spray bucal</p>
+
+<p class="descripcion-producto">
+Refresca el aliento al instante.
+</p>
+
+<p class="precio-producto">Q15.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Spray bucal',
+15,
+'images/saludbucal/spray.png',
+'Refresca el aliento al instante.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Kit blanqueamiento -->
 <article class="tarjeta-producto">
-    <img src="images/saludbucal/kitblanca.png" class="foto-producto">
-    <p class="nombre-producto">Kit blanqueamiento</p>
-    <p class="descripcion-producto">Tratamiento completo de blanqueo dental.</p>
-    <p class="precio-producto">Q200.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Kit blanqueamiento',200,'images/saludbucal/kitblanca.png','Tratamiento completo de blanqueo dental.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Kit blanqueamiento',
+200,
+'images/saludbucal/kitblanca.png',
+'Tratamiento completo de blanqueo dental.'
+)">
+
+<img src="images/saludbucal/kitblanca.png"
+class="foto-producto">
+
+<p class="nombre-producto">Kit blanqueamiento</p>
+
+<p class="descripcion-producto">
+Tratamiento completo de blanqueo dental.
+</p>
+
+<p class="precio-producto">Q200.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Kit blanqueamiento',
+200,
+'images/saludbucal/kitblanca.png',
+'Tratamiento completo de blanqueo dental.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Limpiador de lengua -->
 <article class="tarjeta-producto">
-    <img src="images/saludbucal/lengua.jpg" class="foto-producto">
-    <p class="nombre-producto">Limpiador de lengua</p>
-    <p class="descripcion-producto">Elimina bacterias de la lengua.</p>
-    <p class="precio-producto">Q10.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Limpiador de lengua',10,'images/saludbucal/lengua.jpg','Elimina bacterias de la lengua.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Limpiador de lengua',
+10,
+'images/saludbucal/lengua.png',
+'Elimina bacterias de la lengua.'
+)">
+
+<img src="images/saludbucal/lengua.png"
+class="foto-producto">
+
+<p class="nombre-producto">Limpiador de lengua</p>
+
+<p class="descripcion-producto">
+Elimina bacterias de la lengua.
+</p>
+
+<p class="precio-producto">Q10.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Limpiador de lengua',
+10,
+'images/saludbucal/lengua.png',
+'Elimina bacterias de la lengua.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Pasta herbal -->
 <article class="tarjeta-producto">
-    <img src="images/saludbucal/herbal.jfif" class="foto-producto">
-    <p class="nombre-producto">Pasta herbal</p>
-    <p class="descripcion-producto">Ingredientes naturales para higiene dental.</p>
-    <p class="precio-producto">Q22.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Pasta herbal',22,'images/saludbucal/herbal.jfif','Ingredientes naturales para higiene dental.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Pasta herbal',
+22,
+'images/saludbucal/herbal.png',
+'Ingredientes naturales para higiene dental.'
+)">
+
+<img src="images/saludbucal/herbal.png"
+class="foto-producto">
+
+<p class="nombre-producto">Pasta herbal</p>
+
+<p class="descripcion-producto">
+Ingredientes naturales para higiene dental.
+</p>
+
+<p class="precio-producto">Q22.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Pasta herbal',
+22,
+'images/saludbucal/herbal.png',
+'Ingredientes naturales para higiene dental.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
 
+<!-- Enjuague sin alcohol -->
 <article class="tarjeta-producto">
-    <img src="images/saludbucal/enjuaguesinalcohol.jpg" class="foto-producto">
-    <p class="nombre-producto">Enjuague sin alcohol</p>
-    <p class="descripcion-producto">Cuidado suave para encías sensibles.</p>
-    <p class="precio-producto">Q30.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Enjuague sin alcohol',30,'images/saludbucal/enjuaguesinalcohol.jpg','Cuidado suave para encías sensibles.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Enjuague sin alcohol',
+30,
+'images/saludbucal/enjuaguesinalcohol.png',
+'Cuidado suave para encías sensibles.'
+)">
+
+<img src="images/saludbucal/enjuaguesinalcohol.png"
+class="foto-producto">
+
+<p class="nombre-producto">Enjuague sin alcohol</p>
+
+<p class="descripcion-producto">
+Cuidado suave para encías sensibles.
+</p>
+
+<p class="precio-producto">Q30.00</p>
+
+</div>
+
+<div class="botones-producto">
+
+<button class="boton-carrito"
+onclick="event.stopPropagation(); agregarAlCarrito(
+'Enjuague sin alcohol',
+30,
+'images/saludbucal/enjuaguesinalcohol.png',
+'Cuidado suave para encías sensibles.'
+)">
+🛒
+</button>
+
+</div>
+
 </article>
+
 </div>
     </section>
 
@@ -1216,163 +3341,578 @@ btnTop.addEventListener("click", function () {
         <h2 class="titulo-seccion">🧠 Bienestar | Relajacion</h2>
         <div class="contenedor-productos">
 <article class="tarjeta-producto">
-    <img src="images/bienestar/manzanilla.jpg" class="foto-producto">
-    <p class="nombre-producto">Té de manzanilla</p>
-    <p class="descripcion-producto">Relaja el cuerpo y ayuda al sueño.</p>
-    <p class="precio-producto">Q15.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Té de manzanilla',15,'images/bienestar/manzanilla.jpg','Relaja el cuerpo y ayuda al sueño.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Té de manzanilla',
+15,
+'images/bienestar/manzanilla.png',
+'Relaja el cuerpo y ayuda al sueño.'
+)">
+
+<img src="images/bienestar/manzanilla.png" class="foto-producto">
+
+<p class="nombre-producto">Té de manzanilla</p>
+
+</div>
+
+<p class="descripcion-producto">
+Relaja el cuerpo y ayuda al sueño.
+</p>
+
+<p class="precio-producto">Q15.00</p>
+
+<div class="botones-producto">
+<button class="boton-carrito"
+onclick="agregarAlCarrito(
+'Té de manzanilla',
+15,
+'images/bienestar/manzanilla.png',
+'Relaja el cuerpo y ayuda al sueño.'
+)">
+🛒
+</button>
+</div>
+
 </article>
 
 <article class="tarjeta-producto">
-    <img src="images/bienestar/verde.jpg" class="foto-producto">
-    <p class="nombre-producto">Té verde</p>
-    <p class="descripcion-producto">Antioxidante natural.</p>
-    <p class="precio-producto">Q18.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Té verde',18,'images/bienestar/verde.jpg','Antioxidante natural.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Té verde',
+18,
+'images/bienestar/verde.png',
+'Antioxidante natural.'
+)">
+
+<img src="images/bienestar/verde.png" class="foto-producto">
+
+<p class="nombre-producto">Té verde</p>
+
+</div>
+
+<p class="descripcion-producto">
+Antioxidante natural.
+</p>
+
+<p class="precio-producto">Q18.00</p>
+
+<div class="botones-producto">
+<button class="boton-carrito"
+onclick="agregarAlCarrito(
+'Té verde',
+18,
+'images/bienestar/verde.png',
+'Antioxidante natural.'
+)">
+🛒
+</button>
+</div>
+
 </article>
 
 <article class="tarjeta-producto">
-    <img src="images/bienestar/aromaterapia.jfif" class="foto-producto">
-    <p class="nombre-producto">Aromaterapia</p>
-    <p class="descripcion-producto">Mejora el estado de ánimo.</p>
-    <p class="precio-producto">Q40.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Aromaterapia',40,'images/bienestar/aromaterapia.jfif','Mejora el estado de ánimo.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Aromaterapia',
+40,
+'images/bienestar/aromaterapia.png',
+'Mejora el estado de ánimo.'
+)">
+
+<img src="images/bienestar/aromaterapia.png" class="foto-producto">
+
+<p class="nombre-producto">Aromaterapia</p>
+
+</div>
+
+<p class="descripcion-producto">
+Mejora el estado de ánimo.
+</p>
+
+<p class="precio-producto">Q40.00</p>
+
+<div class="botones-producto">
+<button class="boton-carrito"
+onclick="agregarAlCarrito(
+'Aromaterapia',
+40,
+'images/bienestar/aromaterapia.png',
+'Mejora el estado de ánimo.'
+)">
+🛒
+</button>
+</div>
+
 </article>
 
 <article class="tarjeta-producto">
-    <img src="images/bienestar/lavanda.jpg" class="foto-producto">
-    <p class="nombre-producto">Aceite de lavanda</p>
-    <p class="descripcion-producto">Reduce estrés y ansiedad.</p>
-    <p class="precio-producto">Q35.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Aceite de lavanda',35,'images/bienestar/lavanda.jpg','Reduce estrés y ansiedad.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Aceite de lavanda',
+35,
+'images/bienestar/lavanda.png',
+'Reduce estrés y ansiedad.'
+)">
+
+<img src="images/bienestar/lavanda.png" class="foto-producto">
+
+<p class="nombre-producto">Aceite de lavanda</p>
+
+</div>
+
+<p class="descripcion-producto">
+Reduce estrés y ansiedad.
+</p>
+
+<p class="precio-producto">Q35.00</p>
+
+<div class="botones-producto">
+<button class="boton-carrito"
+onclick="agregarAlCarrito(
+'Aceite de lavanda',
+35,
+'images/bienestar/lavanda.png',
+'Reduce estrés y ansiedad.'
+)">
+🛒
+</button>
+</div>
+
 </article>
 
 <article class="tarjeta-producto">
-    <img src="images/bienestar/sales.jpg" class="foto-producto">
-    <p class="nombre-producto">Sales de baño</p>
-    <p class="descripcion-producto">Relajan músculos y cuerpo.</p>
-    <p class="precio-producto">Q25.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Sales de baño',25,'images/bienestar/sales_bano.jpg','Relajan músculos y cuerpo.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Sales de baño',
+25,
+'images/bienestar/sales.png',
+'Relajan músculos y cuerpo.'
+)">
+
+<img src="images/bienestar/sales.png" class="foto-producto">
+
+<p class="nombre-producto">Sales de baño</p>
+
+</div>
+
+<p class="descripcion-producto">
+Relajan músculos y cuerpo.
+</p>
+
+<p class="precio-producto">Q25.00</p>
+
+<div class="botones-producto">
+<button class="boton-carrito"
+onclick="agregarAlCarrito(
+'Sales de baño',
+25,
+'images/bienestar/sales.png',
+'Relajan músculos y cuerpo.'
+)">
+🛒
+</button>
+</div>
+
 </article>
 
 <article class="tarjeta-producto">
-    <img src="images/bienestar/velas.jfif" class="foto-producto">
-    <p class="nombre-producto">Velas aromáticas</p>
-    <p class="descripcion-producto">Ambiente relajante en casa.</p>
-    <p class="precio-producto">Q30.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Velas aromáticas',30,'images/bienestar/velas.jfif','Ambiente relajante en casa.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Velas aromáticas',
+30,
+'images/bienestar/velas.png',
+'Ambiente relajante en casa.'
+)">
+
+<img src="images/bienestar/velas.png" class="foto-producto">
+
+<p class="nombre-producto">Velas aromáticas</p>
+
+</div>
+
+<p class="descripcion-producto">
+Ambiente relajante en casa.
+</p>
+
+<p class="precio-producto">Q30.00</p>
+
+<div class="botones-producto">
+<button class="boton-carrito"
+onclick="agregarAlCarrito(
+'Velas aromáticas',
+30,
+'images/bienestar/velas.png',
+'Ambiente relajante en casa.'
+)">
+🛒
+</button>
+</div>
+
 </article>
 
 <article class="tarjeta-producto">
-    <img src="images/bienestar/infusiones.jfif" class="foto-producto">
-    <p class="nombre-producto">Infusiones relajantes</p>
-    <p class="descripcion-producto">Ayudan a reducir el estrés.</p>
-    <p class="precio-producto">Q20.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Infusiones relajantes',20,'images/bienestar/infusiones.jfif','Ayudan a reducir el estrés.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Infusiones relajantes',
+20,
+'images/bienestar/infusiones.png',
+'Ayudan a reducir el estrés.'
+)">
+
+<img src="images/bienestar/infusiones.png" class="foto-producto">
+
+<p class="nombre-producto">Infusiones relajantes</p>
+
+</div>
+
+<p class="descripcion-producto">
+Ayudan a reducir el estrés.
+</p>
+
+<p class="precio-producto">Q20.00</p>
+
+<div class="botones-producto">
+<button class="boton-carrito"
+onclick="agregarAlCarrito(
+'Infusiones relajantes',
+20,
+'images/bienestar/infusiones.png',
+'Ayudan a reducir el estrés.'
+)">
+🛒
+</button>
+</div>
+
 </article>
 
 <article class="tarjeta-producto">
-    <img src="images/bienestar/magnecio.jpg" class="foto-producto">
-    <p class="nombre-producto">Magnesio relax</p>
-    <p class="descripcion-producto">Relajación muscular y mental.</p>
-    <p class="precio-producto">Q50.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Magnesio relax',50,'images/bienestar/magnecio.jpg','Relajación muscular y mental.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Magnesio relax',
+50,
+'images/bienestar/magnesio.png',
+'Relajación muscular y mental.'
+)">
+
+<img src="images/bienestar/magnesio.png" class="foto-producto">
+
+<p class="nombre-producto">Magnesio relax</p>
+
+</div>
+
+<p class="descripcion-producto">
+Relajación muscular y mental.
+</p>
+
+<p class="precio-producto">Q50.00</p>
+
+<div class="botones-producto">
+<button class="boton-carrito"
+onclick="agregarAlCarrito(
+'Magnesio relax',
+50,
+'images/bienestar/magnesio.png',
+'Relajación muscular y mental.'
+)">
+🛒
+</button>
+</div>
+
+</article>
+<article class="tarjeta-producto">
+
+<div class="producto-click"
+onclick="verProducto(
+'Ashwagandha extra',
+60,
+'images/bienestar/extra.png',
+'Relajación profunda y control del estrés.'
+)">
+
+<img src="images/bienestar/extra.png" class="foto-producto">
+
+<p class="nombre-producto">Ashwagandha extra</p>
+
+</div>
+
+<p class="descripcion-producto">
+Relajación profunda y control del estrés.
+</p>
+
+<p class="precio-producto">Q60.00</p>
+
+<div class="botones-producto">
+<button class="boton-carrito"
+onclick="agregarAlCarrito(
+'Ashwagandha extra',
+60,
+'images/bienestar/extra.png',
+'Relajación profunda y control del estrés.'
+)">
+🛒
+</button>
+</div>
+
 </article>
 
 <article class="tarjeta-producto">
-    <img src="images/bienestar/extra.jpeg" class="foto-producto">
-    <p class="nombre-producto">Ashwagandha extra</p>
-    <p class="descripcion-producto">Relajación profunda y control del estrés.</p>
-    <p class="precio-producto">Q60.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Ashwagandha extra',60,'images/bienestar/extra.jpeg','Relajación profunda y control del estrés.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'CBD oil',
+120,
+'images/bienestar/CBD.png',
+'Relajación y bienestar general.'
+)">
+
+<img src="images/bienestar/CBD.png" class="foto-producto">
+
+<p class="nombre-producto">CBD oil</p>
+
+</div>
+
+<p class="descripcion-producto">
+Relajación y bienestar general.
+</p>
+
+<p class="precio-producto">Q120.00</p>
+
+<div class="botones-producto">
+<button class="boton-carrito"
+onclick="agregarAlCarrito(
+'CBD oil',
+120,
+'images/bienestar/CBD.png',
+'Relajación y bienestar general.'
+)">
+🛒
+</button>
+</div>
+
 </article>
 
 <article class="tarjeta-producto">
-    <img src="images/bienestar/CBD.jfif" class="foto-producto">
-    <p class="nombre-producto">CBD oil</p>
-    <p class="descripcion-producto">Relajación y bienestar general (simulado).</p>
-    <p class="precio-producto">Q120.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('CBD oil',120,'images/bienestar/CBD.jfif','Relajación y bienestar general (simulado).')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Almohadilla térmica',
+80,
+'images/bienestar/termica.png',
+'Alivia dolores musculares.'
+)">
+
+<img src="images/bienestar/termica.png" class="foto-producto">
+
+<p class="nombre-producto">Almohadilla térmica</p>
+
+</div>
+
+<p class="descripcion-producto">
+Alivia dolores musculares.
+</p>
+
+<p class="precio-producto">Q80.00</p>
+
+<div class="botones-producto">
+<button class="boton-carrito"
+onclick="agregarAlCarrito(
+'Almohadilla térmica',
+80,
+'images/bienestar/termica.png',
+'Alivia dolores musculares.'
+)">
+🛒
+</button>
+</div>
+
 </article>
 
 <article class="tarjeta-producto">
-    <img src="images/bienestar/termica.jpg" class="foto-producto">
-    <p class="nombre-producto">Almohadilla térmica</p>
-    <p class="descripcion-producto">Alivia dolores musculares.</p>
-    <p class="precio-producto">Q80.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Almohadilla térmica',80,'images/bienestar/termica.jpg','Alivia dolores musculares.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Masajeador manual',
+70,
+'images/bienestar/manual.png',
+'Relaja músculos tensos.'
+)">
+
+<img src="images/bienestar/manual.png" class="foto-producto">
+
+<p class="nombre-producto">Masajeador manual</p>
+
+</div>
+
+<p class="descripcion-producto">
+Relaja músculos tensos.
+</p>
+
+<p class="precio-producto">Q70.00</p>
+
+<div class="botones-producto">
+<button class="boton-carrito"
+onclick="agregarAlCarrito(
+'Masajeador manual',
+70,
+'images/bienestar/manual.png',
+'Relaja músculos tensos.'
+)">
+🛒
+</button>
+</div>
+
 </article>
 
 <article class="tarjeta-producto">
-    <img src="images/bienestar/manual.jfif" class="foto-producto">
-    <p class="nombre-producto">Masajeador manual</p>
-    <p class="descripcion-producto">Relaja músculos tensos.</p>
-    <p class="precio-producto">Q70.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Masajeador manual',70,'images/bienestar/manual,jfif','Relaja músculos tensos.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Spray anti-estrés',
+25,
+'images/bienestar/antiestres.png',
+'Reduce ansiedad al instante.'
+)">
+
+<img src="images/bienestar/antiestres.png" class="foto-producto">
+
+<p class="nombre-producto">Spray anti-estrés</p>
+
+</div>
+
+<p class="descripcion-producto">
+Reduce ansiedad al instante.
+</p>
+
+<p class="precio-producto">Q25.00</p>
+
+<div class="botones-producto">
+<button class="boton-carrito"
+onclick="agregarAlCarrito(
+'Spray anti-estrés',
+25,
+'images/bienestar/antiestres.png',
+'Reduce ansiedad al instante.'
+)">
+🛒
+</button>
+</div>
+
 </article>
 
 <article class="tarjeta-producto">
-    <img src="images/bienestar/antiestres.jpg" class="foto-producto">
-    <p class="nombre-producto">Spray anti-estrés</p>
-    <p class="descripcion-producto">Reduce ansiedad al instante.</p>
-    <p class="precio-producto">Q25.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Spray anti-estrés',25,'images/bienestar/antiestres.jpg','Reduce ansiedad al instante.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Té valeriana',
+20,
+'images/bienestar/valeriana.png',
+'Ayuda a dormir mejor.'
+)">
+
+<img src="images/bienestar/valeriana.png" class="foto-producto">
+
+<p class="nombre-producto">Té valeriana</p>
+
+</div>
+
+<p class="descripcion-producto">
+Ayuda a dormir mejor.
+</p>
+
+<p class="precio-producto">Q20.00</p>
+
+<div class="botones-producto">
+<button class="boton-carrito"
+onclick="agregarAlCarrito(
+'Té valeriana',
+20,
+'images/bienestar/valeriana.png',
+'Ayuda a dormir mejor.'
+)">
+🛒
+</button>
+</div>
+
 </article>
 
 <article class="tarjeta-producto">
-    <img src="images/bienestar/valeriana.jfif" class="foto-producto">
-    <p class="nombre-producto">Té valeriana</p>
-    <p class="descripcion-producto">Ayuda a dormir mejor.</p>
-    <p class="precio-producto">Q20.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Té valeriana',20,'images/bienestar/valeriana.jfif','Ayuda a dormir mejor.')">🛒</button>
-    </div>
+
+<div class="producto-click"
+onclick="verProducto(
+'Difusor eléctrico',
+90,
+'images/bienestar/difusor.png',
+'Aromaterapia automática.'
+)">
+
+<img src="images/bienestar/difusor.png" class="foto-producto">
+
+<p class="nombre-producto">Difusor eléctrico</p>
+
+</div>
+
+<p class="descripcion-producto">
+Aromaterapia automática.
+</p>
+
+<p class="precio-producto">Q90.00</p>
+
+<div class="botones-producto">
+<button class="boton-carrito"
+onclick="agregarAlCarrito(
+'Difusor eléctrico',
+90,
+'images/bienestar/difusor.png',
+'Aromaterapia automática.'
+)">
+🛒
+</button>
+</div>
+
 </article>
 
 <article class="tarjeta-producto">
-    <img src="images/bienestar/difusor.jpg" class="foto-producto">
-    <p class="nombre-producto">Difusor eléctrico</p>
-    <p class="descripcion-producto">Aromaterapia automática.</p>
-    <p class="precio-producto">Q90.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Difusor eléctrico',90,'images/bienestar/difusor.jpg','Aromaterapia automática.')">🛒</button>
-    </div>
-</article>
 
-<article class="tarjeta-producto">
-    <img src="images/bienestar/bocina.jpg" class="foto-producto">
-    <p class="nombre-producto">Música relajante</p>
-    <p class="descripcion-producto">Producto digital para relajación.</p>
-    <p class="precio-producto">Q10.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Música relajante',10,'images/bienestar/bocina.jpg','Producto digital para relajación.')">🛒</button>
-    </div>
+<div class="producto-click"
+onclick="verProducto(
+'Música relajante',
+10,
+'images/bienestar/bocina.png',
+'Producto digital para relajación.'
+)">
+
+<img src="images/bienestar/bocina.png" class="foto-producto">
+
+<p class="nombre-producto">Música relajante</p>
+
+</div>
+
+<p class="descripcion-producto">
+Producto digital para relajación.
+</p>
+
+<p class="precio-producto">Q10.00</p>
+
+<div class="botones-producto">
+<button class="boton-carrito"
+onclick="agregarAlCarrito(
+'Música relajante',
+10,
+'images/bienestar/bocina.png',
+'Producto digital para relajación.'
+)">
+🛒
+</button>
+</div>
+
 </article>
  </div>
 </article>
@@ -1380,167 +3920,311 @@ btnTop.addEventListener("click", function () {
  <section class="seccion-horizontal">
         <h2 class="titulo-seccion">⚡ Fitness | GYM </h2>
         <div class="contenedor-productos">
-<article class="tarjeta-producto">
-    <img src="images/fitness/preworkout.jpg" class="foto-producto">
-    <p class="nombre-producto">Pre-workout</p>
-    <p class="descripcion-producto">Aumenta energía y rendimiento antes de entrenar.</p>
-    <p class="precio-producto">Q120.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Pre-workout',120,'images/fitness/preworkout.jpg','Aumenta energía y rendimiento antes de entrenar.')">🛒</button>
-    </div>
-</article>
+ <article class="tarjeta-producto">
+            <div class="producto-click"
+                onclick="verProducto('Pre-workout',120,'images/fitness/preworkout.png','Aumenta energía y rendimiento antes de entrenar.')">
 
-<article class="tarjeta-producto">
-    <img src="images/fitness/proteinawhey.jfif" class="foto-producto">
-    <p class="nombre-producto">Proteína whey</p>
-    <p class="descripcion-producto">Ayuda al crecimiento muscular.</p>
-    <p class="precio-producto">Q250.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Proteína whey',250,'images/fitness/proteinawhey.jfif','Ayuda al crecimiento muscular.')">🛒</button>
-    </div>
-</article>
+                <img src="images/fitness/preworkout.png" class="foto-producto">
+                <p class="nombre-producto">Pre-workout</p>
+            </div>
 
-<article class="tarjeta-producto">
-    <img src="images/fitness/creatina.jpg" class="foto-producto">
-    <p class="nombre-producto">Creatina</p>
-    <p class="descripcion-producto">Mejora fuerza y rendimiento.</p>
-    <p class="precio-producto">Q120.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Creatina',120,'images/fitness/creatina.jpg','Mejora fuerza y rendimiento.')">🛒</button>
-    </div>
-</article>
+            <p class="descripcion-producto">Aumenta energía y rendimiento antes de entrenar.</p>
+            <p class="precio-producto">Q120.00</p>
 
-<article class="tarjeta-producto">
-    <img src="images/fitness/bcaa.jfif" class="foto-producto">
-    <p class="nombre-producto">BCAA</p>
-    <p class="descripcion-producto">Recuperación muscular rápida.</p>
-    <p class="precio-producto">Q140.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('BCAA',140,'images/fitness/bcaa.jfif','Recuperación muscular rápida.')">🛒</button>
-    </div>
-</article>
+            <div class="botones-producto">
+                <button class="boton-carrito"
+                    onclick="agregarAlCarrito('Pre-workout',120,'images/fitness/preworkout.png','Aumenta energía y rendimiento antes de entrenar.')">
+                    🛒
+                </button>
+            </div>
+        </article>
 
-<article class="tarjeta-producto">
-    <img src="images/fitness/quemadorgrasa.jpg" class="foto-producto">
-    <p class="nombre-producto">Quemador de grasa</p>
-    <p class="descripcion-producto">Ayuda a reducir grasa corporal.</p>
-    <p class="precio-producto">Q160.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Quemador de grasa',160,'images/fitness/quemadorgrasa.jpg','Ayuda a reducir grasa corporal.')">🛒</button>
-    </div>
-</article>
+        <article class="tarjeta-producto">
+            <div class="producto-click"
+                onclick="verProducto('Proteína whey',250,'images/fitness/proteinawhey.png','Ayuda al crecimiento muscular.')">
 
-<article class="tarjeta-producto">
-    <img src="images/fitness/electrolitos.jpg" class="foto-producto">
-    <p class="nombre-producto">Electrolitos</p>
-    <p class="descripcion-producto">Hidratación y recuperación.</p>
-    <p class="precio-producto">Q40.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Electrolitos',40,'images/fitness/electrolitos.jpg','Hidratación y recuperación.')">🛒</button>
-    </div>
-</article>
+                <img src="images/fitness/proteinawhey.png" class="foto-producto">
+                <p class="nombre-producto">Proteína whey</p>
+            </div>
 
-<article class="tarjeta-producto">
-    <img src="images/fitness/barraproteica.jpg" class="foto-producto">
-    <p class="nombre-producto">Barra proteica</p>
-    <p class="descripcion-producto">Snack alto en proteína.</p>
-    <p class="precio-producto">Q15.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Barra proteica',15,'images/fitness/barraproteica.jpg','Snack alto en proteína.')">🛒</button>
-    </div>
-</article>
+            <p class="descripcion-producto">Ayuda al crecimiento muscular.</p>
+            <p class="precio-producto">Q250.00</p>
 
-<article class="tarjeta-producto">
-    <img src="images/fitness/raptor.jpg" class="foto-producto">
-    <p class="nombre-producto">Bebida energética</p>
-    <p class="descripcion-producto">Energía rápida inmediata.</p>
-    <p class="precio-producto">Q12.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Bebida energética',12,'images/fitness/raptor.jpg','Energía rápida inmediata.')">🛒</button>
-    </div>
-</article>
+            <div class="botones-producto">
+                <button class="boton-carrito"
+                    onclick="agregarAlCarrito('Proteína whey',250,'images/fitness/proteinawhey.png','Ayuda al crecimiento muscular.')">
+                    🛒
+                </button>
+            </div>
+        </article>
 
-<!-- NUEVOS -->
+        <article class="tarjeta-producto">
+            <div class="producto-click"
+                onclick="verProducto('Creatina',120,'images/fitness/creatina.png','Mejora fuerza y rendimiento.')">
 
-<article class="tarjeta-producto">
-    <img src="images/fitness/caseina.jfif" class="foto-producto">
-    <p class="nombre-producto">Caseína</p>
-    <p class="descripcion-producto">Proteína de absorción lenta.</p>
-    <p class="precio-producto">Q240.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Caseína',240,'images/fitness/caseina.jfif','Proteína de absorción lenta.')">🛒</button>
-    </div>
-</article>
+                <img src="images/fitness/creatina.png" class="foto-producto">
+                <p class="nombre-producto">Creatina</p>
+            </div>
 
-<article class="tarjeta-producto">
-    <img src="images/fitness/carnitina.jfif" class="foto-producto">
-    <p class="nombre-producto">L-carnitina</p>
-    <p class="descripcion-producto">Ayuda a quemar grasa.</p>
-    <p class="precio-producto">Q130.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('L-carnitina',130,'images/fitness/carnitina.jfif','Ayuda a quemar grasa.')">🛒</button>
-    </div>
-</article>
+            <p class="descripcion-producto">Mejora fuerza y rendimiento.</p>
+            <p class="precio-producto">Q120.00</p>
 
-<article class="tarjeta-producto">
-    <img src="images/fitness/shaker.jpg" class="foto-producto">
-    <p class="nombre-producto">Shaker</p>
-    <p class="descripcion-producto">Mezclador de suplementos.</p>
-    <p class="precio-producto">Q25.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Shaker',25,'images/fitness/shaker.jpg','Mezclador de suplementos.')">🛒</button>
-    </div>
-</article>
+            <div class="botones-producto">
+                <button class="boton-carrito"
+                    onclick="agregarAlCarrito('Creatina',120,'images/fitness/creatina.png','Mejora fuerza y rendimiento.')">
+                    🛒
+                </button>
+            </div>
+        </article>
 
-<article class="tarjeta-producto">
-    <img src="images/fitness/guantes.jpg" class="foto-producto">
-    <p class="nombre-producto">Guantes gym</p>
-    <p class="descripcion-producto">Protección para entrenamiento.</p>
-    <p class="precio-producto">Q35.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Guantes gym',35,'images/fitness/guantes.jpg','Protección para entrenamiento.')">🛒</button>
-    </div>
-</article>
+        <article class="tarjeta-producto">
+            <div class="producto-click"
+                onclick="verProducto('BCAA',140,'images/fitness/bcaa.png','Recuperación muscular rápida.')">
 
-<article class="tarjeta-producto">
-    <img src="images/fitness/banda.jpg" class="foto-producto">
-    <p class="nombre-producto">Banda elástica</p>
-    <p class="descripcion-producto">Ejercicio funcional.</p>
-    <p class="precio-producto">Q20.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Banda elástica',20,'images/fitness/banda.jpg','Ejercicio funcional.')">🛒</button>
-    </div>
-</article>
+                <img src="images/fitness/bcaa.png" class="foto-producto">
+                <p class="nombre-producto">BCAA</p>
+            </div>
 
-<article class="tarjeta-producto">
-    <img src="images/fitness/rodillo.jfif" class="foto-producto">
-    <p class="nombre-producto">Rodillo abdominal</p>
-    <p class="descripcion-producto">Fortalece el core.</p>
-    <p class="precio-producto">Q45.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Rodillo abdominal',45,'images/fitness/rodillo.jfif','Fortalece el core.')">🛒</button>
-    </div>
-</article>
+            <p class="descripcion-producto">Recuperación muscular rápida.</p>
+            <p class="precio-producto">Q140.00</p>
 
-<article class="tarjeta-producto">
-    <img src="images/fitness/vegana.jfif" class="foto-producto">
-    <p class="nombre-producto">Proteína vegana</p>
-    <p class="descripcion-producto">Alternativa vegetal a la whey.</p>
-    <p class="precio-producto">Q260.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Proteína vegana',260,'images/fitness/vegana.jfif','Alternativa vegetal a la whey.')">🛒</button>
-    </div>
-</article>
+            <div class="botones-producto">
+                <button class="boton-carrito"
+                    onclick="agregarAlCarrito('BCAA',140,'images/fitness/bcaa.png','Recuperación muscular rápida.')">
+                    🛒
+                </button>
+            </div>
+        </article>
 
-<article class="tarjeta-producto">
-    <img src="images/fitness/cafeina.jfif" class="foto-producto">
-    <p class="nombre-producto">Suplemento cafeína</p>
-    <p class="descripcion-producto">Aumenta energía y enfoque.</p>
-    <p class="precio-producto">Q50.00</p>
-    <div class="botones-producto">
-        <button class="boton-carrito" onclick="agregarAlCarrito('Suplemento cafeína',50,'images/fitness/cafeina.jfif','Aumenta energía y enfoque.')">🛒</button>
-    </div>
-</article>
+        <article class="tarjeta-producto">
+            <div class="producto-click"
+                onclick="verProducto('Quemador de grasa',160,'images/fitness/quemadorgrasa.png','Ayuda a reducir grasa corporal.')">
+
+                <img src="images/fitness/quemadorgrasa.png" class="foto-producto">
+                <p class="nombre-producto">Quemador de grasa</p>
+            </div>
+
+            <p class="descripcion-producto">Ayuda a reducir grasa corporal.</p>
+            <p class="precio-producto">Q160.00</p>
+
+            <div class="botones-producto">
+                <button class="boton-carrito"
+                    onclick="agregarAlCarrito('Quemador de grasa',160,'images/fitness/quemadorgrasa.png','Ayuda a reducir grasa corporal.')">
+                    🛒
+                </button>
+            </div>
+        </article>
+
+        <article class="tarjeta-producto">
+            <div class="producto-click"
+                onclick="verProducto('Electrolitos',40,'images/fitness/electrolitos.png','Hidratación y recuperación.')">
+
+                <img src="images/fitness/electrolitos.png" class="foto-producto">
+                <p class="nombre-producto">Electrolitos</p>
+            </div>
+
+            <p class="descripcion-producto">Hidratación y recuperación.</p>
+            <p class="precio-producto">Q40.00</p>
+
+            <div class="botones-producto">
+                <button class="boton-carrito"
+                    onclick="agregarAlCarrito('Electrolitos',40,'images/fitness/electrolitos.png','Hidratación y recuperación.')">
+                    🛒
+                </button>
+            </div>
+        </article>
+
+        <article class="tarjeta-producto">
+            <div class="producto-click"
+                onclick="verProducto('Barra proteica',15,'images/fitness/barraproteica.png','Snack alto en proteína.')">
+
+                <img src="images/fitness/barraproteica.png" class="foto-producto">
+                <p class="nombre-producto">Barra proteica</p>
+            </div>
+
+            <p class="descripcion-producto">Snack alto en proteína.</p>
+            <p class="precio-producto">Q15.00</p>
+
+            <div class="botones-producto">
+                <button class="boton-carrito"
+                    onclick="agregarAlCarrito('Barra proteica',15,'images/fitness/barraproteica.png','Snack alto en proteína.')">
+                    🛒
+                </button>
+            </div>
+        </article>
+
+        <article class="tarjeta-producto">
+            <div class="producto-click"
+                onclick="verProducto('Bebida energética',12,'images/fitness/raptor.png','Energía rápida inmediata.')">
+
+                <img src="images/fitness/raptor.png" class="foto-producto">
+                <p class="nombre-producto">Bebida energética</p>
+            </div>
+
+            <p class="descripcion-producto">Energía rápida inmediata.</p>
+            <p class="precio-producto">Q12.00</p>
+
+            <div class="botones-producto">
+                <button class="boton-carrito"
+                    onclick="agregarAlCarrito('Bebida energética',12,'images/fitness/raptor.png','Energía rápida inmediata.')">
+                    🛒
+                </button>
+            </div>
+        </article>
+
+        <!-- NUEVOS -->
+
+        <article class="tarjeta-producto">
+            <div class="producto-click"
+                onclick="verProducto('Caseína',240,'images/fitness/caseina.png','Proteína de absorción lenta.')">
+
+                <img src="images/fitness/caseina.png" class="foto-producto">
+                <p class="nombre-producto">Caseína</p>
+            </div>
+
+            <p class="descripcion-producto">Proteína de absorción lenta.</p>
+            <p class="precio-producto">Q240.00</p>
+
+            <div class="botones-producto">
+                <button class="boton-carrito"
+                    onclick="agregarAlCarrito('Caseína',240,'images/fitness/caseina.png','Proteína de absorción lenta.')">
+                    🛒
+                </button>
+            </div>
+        </article>
+
+        <article class="tarjeta-producto">
+            <div class="producto-click"
+                onclick="verProducto('L-carnitina',130,'images/fitness/carnitina.png','Ayuda a quemar grasa.')">
+
+                <img src="images/fitness/carnitina.png" class="foto-producto">
+                <p class="nombre-producto">L-carnitina</p>
+            </div>
+
+            <p class="descripcion-producto">Ayuda a quemar grasa.</p>
+            <p class="precio-producto">Q130.00</p>
+
+            <div class="botones-producto">
+                <button class="boton-carrito"
+                    onclick="agregarAlCarrito('L-carnitina',130,'images/fitness/carnitina.png','Ayuda a quemar grasa.')">
+                    🛒
+                </button>
+            </div>
+        </article>
+
+        <article class="tarjeta-producto">
+            <div class="producto-click"
+                onclick="verProducto('Shaker',25,'images/fitness/shaker.png','Mezclador de suplementos.')">
+
+                <img src="images/fitness/shaker.png" class="foto-producto">
+                <p class="nombre-producto">Shaker</p>
+            </div>
+
+            <p class="descripcion-producto">Mezclador de suplementos.</p>
+            <p class="precio-producto">Q25.00</p>
+
+            <div class="botones-producto">
+                <button class="boton-carrito"
+                    onclick="agregarAlCarrito('Shaker',25,'images/fitness/shaker.png','Mezclador de suplementos.')">
+                    🛒
+                </button>
+            </div>
+        </article>
+
+        <article class="tarjeta-producto">
+            <div class="producto-click"
+                onclick="verProducto('Guantes gym',35,'images/fitness/guantes.png','Protección para entrenamiento.')">
+
+                <img src="images/fitness/guantes.png" class="foto-producto">
+                <p class="nombre-producto">Guantes gym</p>
+            </div>
+
+            <p class="descripcion-producto">Protección para entrenamiento.</p>
+            <p class="precio-producto">Q35.00</p>
+
+            <div class="botones-producto">
+                <button class="boton-carrito"
+                    onclick="agregarAlCarrito('Guantes gym',35,'images/fitness/guantes.png','Protección para entrenamiento.')">
+                    🛒
+                </button>
+            </div>
+        </article>
+
+        <article class="tarjeta-producto">
+            <div class="producto-click"
+                onclick="verProducto('Banda elástica',20,'images/fitness/banda.png','Ejercicio funcional.')">
+
+                <img src="images/fitness/banda.png" class="foto-producto">
+                <p class="nombre-producto">Banda elástica</p>
+            </div>
+
+            <p class="descripcion-producto">Ejercicio funcional.</p>
+            <p class="precio-producto">Q20.00</p>
+
+            <div class="botones-producto">
+                <button class="boton-carrito"
+                    onclick="agregarAlCarrito('Banda elástica',20,'images/fitness/banda.png','Ejercicio funcional.')">
+                    🛒
+                </button>
+            </div>
+        </article>
+
+        <article class="tarjeta-producto">
+            <div class="producto-click"
+                onclick="verProducto('Rodillo abdominal',45,'images/fitness/rodillo.png','Fortalece el core.')">
+
+                <img src="images/fitness/rodillo.png" class="foto-producto">
+                <p class="nombre-producto">Rodillo abdominal</p>
+            </div>
+
+            <p class="descripcion-producto">Fortalece el core.</p>
+            <p class="precio-producto">Q45.00</p>
+
+            <div class="botones-producto">
+                <button class="boton-carrito"
+                    onclick="agregarAlCarrito('Rodillo abdominal',45,'images/fitness/rodillo.png','Fortalece el core.')">
+                    🛒
+                </button>
+            </div>
+        </article>
+
+        <article class="tarjeta-producto">
+            <div class="producto-click"
+                onclick="verProducto('Proteína vegana',260,'images/fitness/vegana.png','Alternativa vegetal a la whey.')">
+
+                <img src="images/fitness/vegana.png" class="foto-producto">
+                <p class="nombre-producto">Proteína vegana</p>
+            </div>
+
+            <p class="descripcion-producto">Alternativa vegetal a la whey.</p>
+            <p class="precio-producto">Q260.00</p>
+
+            <div class="botones-producto">
+                <button class="boton-carrito"
+                    onclick="agregarAlCarrito('Proteína vegana',260,'images/fitness/vegana.png','Alternativa vegetal a la whey.')">
+                    🛒
+                </button>
+            </div>
+        </article>
+
+        <article class="tarjeta-producto">
+            <div class="producto-click"
+                onclick="verProducto('Suplemento cafeína',50,'images/fitness/cafeina.png','Aumenta energía y enfoque.')">
+
+                <img src="images/fitness/cafeina.png" class="foto-producto">
+                <p class="nombre-producto">Suplemento cafeína</p>
+            </div>
+
+            <p class="descripcion-producto">Aumenta energía y enfoque.</p>
+            <p class="precio-producto">Q50.00</p>
+
+            <div class="botones-producto">
+                <button class="boton-carrito"
+                    onclick="agregarAlCarrito('Suplemento cafeína',50,'images/fitness/cafeina.png','Aumenta energía y enfoque.')">
+                    🛒
+                </button>
+            </div>
+        </article>
  </div>
 </article>
 
@@ -1570,6 +4254,12 @@ btnTop.addEventListener("click", function () {
             <p class="nombre-autor">Jonathan Javier Pérez Hernández</p>
             <p style="font-size: 0.8rem; color: #98FFD2; margin-top: 5px;">CEO & Director</p>
             </div>
+            <div class="columna" id="contacto">
+    <h3 class="titulo-footer">Contáctanos</h3>
+
+    <p>📞 5268-0000</p>
+    <p>✉️ HL4U@GMAIL.COM</p>
+</div>
         </div>
     </div>
 
@@ -1583,168 +4273,58 @@ btnTop.addEventListener("click", function () {
         <p class="bot">Hola 👋 ¿En qué puedo ayudarte?</p>
     </div>
 
-    <div class="chat-opciones" id="chatOpciones">
-        <button onclick="opcion('pedido')">Acerca de mi pedido</button>
-        <button onclick="opcion('problema')">Problemas con mi pedido</button>
-        <button onclick="opcion('pago')">Métodos de pago</button>
-        <button onclick="opcion('otros')">Otros</button>
+  <div class="chat-opciones" id="chatOpciones">
+
+    <button onclick="opcion('pedido')">Acerca de mi pedido</button>
+    <button onclick="opcion('rastrear')"> 📍 Rastrear mi pedido </button>
+    <button onclick="opcion('problema')">Problemas con mi pedido</button>
+    <button onclick="opcion('cancelar')">❌ Cancelar mi pedido</button>
+    <button onclick="opcion('resenas')">⭐Reseñas de usuarios</button>
+    <button onclick="opcion('pago')">Métodos de pago</button>
+    <button onclick="opcion('otros')">Otros</button>
+
+    <!-- 🔥 SIEMPRE EXISTE -->
+    <button id="resetChatBtn" onclick="nuevaConversacion()" style="display:none; margin-top:10px;">
+        🔄 Volver al inicio
+    </button>
+
+</div>
     </div>
 
 </div> <!-- 🔥 ESTE FALTABA -->
 
 </div>
+</div>
 </footer>
 
 </main>
 
+<script src="chatbot.js"></script>
 <script>
-let estado = "inicio";
 
-function toggleChat() {
-    let chat = document.getElementById("chatBox");
-    chat.classList.toggle("activo");
-}
+function verProducto(nombre, precio, imagen, descripcion) {
 
-function escribirBot(texto) {
-    let chat = document.getElementById("chatMensajes");
-    chat.innerHTML += `<p class="bot">${texto}</p>`;
-    chat.scrollTop = chat.scrollHeight;
-}
+    let producto = {
+        nombre: nombre,
+        precio: precio,
+        imagen: imagen,
+        descripcion: descripcion
+    };
 
-function limpiarOpciones() {
-    document.getElementById("chatOpciones").innerHTML = "";
-}
+    localStorage.setItem(
+        "productoActual",
+        JSON.stringify(producto)
+    );
 
-function opcion(tipo) {
-
-    limpiarOpciones();
-
-    if (tipo === "pedido") {
-        estado = "pedido";
-        escribirBot("Por favor ingresa tu número de pedido:");
-        mostrarInput();
-    }
-
-    if (tipo === "problema") {
-        estado = "problema";
-        escribirBot("Selecciona tu problema:");
-
-        document.getElementById("chatOpciones").innerHTML = `
-            <button onclick="subProblema('danado')">Pedido dañado/incompleto</button>
-            <button onclick="subProblema('cancelado')">Pedido cancelado</button>
-            <button onclick="subProblema('no_recibido')">No recibí / incorrecto</button>
-        `;
-    }
-
-    if (tipo === "pago") {
-        escribirBot("Aceptamos Visa y Mastercard 💳");
-    }
-
-    if (tipo === "otros") {
-        escribirBot("Contáctanos: 📞 5268-0000 ✉️ HL4U@GMAIL.COM");
-    }
-}
-
-function subProblema(tipo) {
-
-    limpiarOpciones();
-
-    if (tipo === "danado") {
-        estado = "danado";
-        escribirBot("Ingresa número de orden y productos faltantes:");
-        mostrarInput();
-    }
-
-    if (tipo === "cancelado") {
-        estado = "cancelado";
-        escribirBot("Ingresa tu número de orden:");
-        mostrarInput();
-    }
-
-    if (tipo === "no_recibido") {
-        escribirBot("Selecciona:");
-
-        document.getElementById("chatOpciones").innerHTML = `
-            <button onclick="subProblema('no_llego')">No recibí mi pedido</button>
-            <button onclick="subProblema('incorrecto')">Pedido incorrecto</button>
-        `;
-    }
-
-    if (tipo === "no_llego") {
-        estado = "no_llego";
-        escribirBot("Ingresa tu número de orden:");
-        mostrarInput();
-    }
-
-    if (tipo === "incorrecto") {
-        estado = "incorrecto";
-        escribirBot("Ingresa número de orden y pedido recibido:");
-        mostrarInput();
-    }
-}
-
-function mostrarInput() {
-
-    let contenedor = document.getElementById("chatOpciones");
-
-    contenedor.innerHTML = `
-        <input id="inputUser" placeholder="Escribe aquí..." />
-        <button onclick="procesar()">Enviar</button>
-    `;
-}
-
-function procesar() {
-
-    let valor = document.getElementById("inputUser").value;
-
-    if (!valor) return;
-
-    if (estado === "pedido") {
-
-        let codigoGuardado = localStorage.getItem("pedido");
-
-        if (valor === codigoGuardado) {
-
-            let estadoPedido = localStorage.getItem("estadoPedido");
-
-            if (estadoPedido === "bodega") {
-                escribirBot("Tu pedido está en bodega 📦. Tiempo estimado: 4 días 🚚");
-            } else {
-                escribirBot("Tu pedido ya fue entregado ✅");
-            }
-
-        } else {
-            escribirBot("Código no válido ❌");
-        }
-    }
-
-    if (estado === "danado") {
-        escribirBot("Reporte enviado. Nos contactaremos por correo 📧");
-    }
-
-    if (estado === "cancelado") {
-        escribirBot("Te enviaremos un correo con más información 📩");
-    }
-
-    if (estado === "no_llego") {
-        escribirBot("Reenviaremos tu pedido sin costo 🚚");
-
-        document.getElementById("chatOpciones").innerHTML = `
-            <button onclick="escribirBot('Proceso de devolución iniciado (3-5 días)')">Devolución</button>
-            <button onclick="escribirBot('Te contactaremos directamente 📞')">Hablar con agente</button>
-        `;
-        return;
-    }
-
-    if (estado === "incorrecto") {
-        escribirBot("Enviaremos el pedido correcto sin costo. Gracias 🙌");
-    }
-
-    limpiarOpciones();
+    window.location.href = "producto.html";
 }
 
 </script>
+
 <script src="barrabuscadora.js"></script>
+
+<script src="main.js"></script>
+
 
 </body>
 

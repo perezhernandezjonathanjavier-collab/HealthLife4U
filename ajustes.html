@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ajustes - HL4U</title>
+
+<link rel="stylesheet" href="ajustes.css">
+<link rel="icon" href="images/favicon.png?v=1" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+rel="stylesheet">
+</head>
+
+<body class="pagina-ajustes">
+
+<!-- FONDO -->
+
+<div class="fondo-blur"></div>
+
+<!-- CONTENEDOR -->
+
+<div class="contenedor-ajustes">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar-ajustes">
+
+        <div class="logo-ajustes">
+            HL4U
+        </div>
+
+        <button
+        class="opcion-ajustes activo"
+        onclick="mostrarSeccion('cuenta', this)">
+
+            👤 Cuenta
+
+        </button>
+
+        <button
+        class="opcion-ajustes"
+        onclick="mostrarSeccion('apariencia', this)">
+
+            🎨 Apariencia
+
+        </button>
+
+        <button
+        class="opcion-ajustes"
+        onclick="mostrarSeccion('pedidos', this)">
+
+            📦 Pedidos
+
+        </button>
+
+        <button
+        class="opcion-ajustes"
+        onclick="mostrarSeccion('pagos', this)">
+
+            💳 Métodos de pago
+
+        </button>
+
+        <button
+        class="opcion-ajustes"
+        onclick="mostrarSeccion('notificaciones', this)">
+
+            🔔 Notificaciones
+
+        </button>
+
+    </aside>
+
+    <!-- PANEL DERECHO -->
+
+    <main class="panel-ajustes">
+
+        <!-- CUENTA -->
+
+        <section
+        id="cuenta"
+        class="seccion-ajustes">
+
+            <h1 class="titulo-panel">
+                Ajustes de Cuenta
+            </h1>
+
+            <p class="descripcion-panel">
+                Administra tu perfil y configuración.
+            </p>
+
+            <section class="card-ajustes">
+
+                <h2>
+                    👤 Información Personal
+                </h2>
+
+                <div class="grupo-input">
+
+                    <label>
+                        Nombre de usuario
+                    </label>
+
+                    <input
+                    type="text"
+                    placeholder="Nuevo nombre">
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label>
+                        Correo electrónico
+                    </label>
+
+                    <input
+                    type="email"
+                    placeholder="Nuevo correo">
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label>
+                        Nueva contraseña
+                    </label>
+
+                    <input
+                    type="password"
+                    placeholder="Nueva contraseña">
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label>
+                        Dirección
+                    </label>
+
+                    <input
+                    type="text"
+                    placeholder="Ingresa tu dirección">
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label>
+                        Número telefónico
+                    </label>
+
+                    <input
+                    type="text"
+                    placeholder="Ingresa tu número">
+
+                </div>
+
+            </section>
+
+        </section>
+
+        <!-- APARIENCIA -->
+
+        <section
+        id="apariencia"
+        class="seccion-ajustes"
+        style="display:none;">
+
+            <h1 class="titulo-panel">
+                Apariencia
+            </h1>
+
+            <p class="descripcion-panel">
+                Personaliza cómo se ve HL4U.
+            </p>
+
+            <section class="card-ajustes">
+
+                <div class="grupo-input">
+
+                    <label>
+                        Tema
+                    </label>
+
+                   <select id="selector-tema">
+
+                     <option value="claro">
+                        Claro
+                     </option>
+
+                     <option value="oscuro">
+                       Oscuro
+                        </option>
+
+                        </select>
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label>
+                        Tamaño de letra
+                    </label>
+
+                  <select id="selector-tamano">
+
+                    <option value="14px">
+                      Pequeña
+                        </option>
+
+                     <option value="16px" selected>
+                        Normal
+                    </option>
+
+                    <option value="20px">
+                     Grande
+                    </option>
+
+                    </select>
+
+                </div>
+
+                <div class="grupo-input">
+
+                 <label>
+                  Fuente de letra
+                </label>
+
+             <select id="selector-fuente">
+
+              <option value="Poppins">
+            Poppins
+             </option>
+
+             <option value="Montserrat">
+            Montserrat
+            </option>
+
+            <option value="Arial">
+            Arial
+                </option>
+
+            </select>
+
+            </div>
+
+            </section>
+
+        </section>
+
+        <!-- PEDIDOS -->
+
+       <!-- PEDIDOS -->
+
+<section
+id="pedidos"
+class="seccion-ajustes"
+style="display:none;">
+
+    <h1 class="titulo-panel">
+        Pedidos
+    </h1>
+
+    <p class="descripcion-panel">
+        Consulta el estado de tus compras.
+    </p>
+
+    <!-- BOTONES -->
+
+    <div class="botones-pedidos">
+
+        <button
+        class="btn-pedido activo-pedido"
+        onclick="mostrarPanelPedido('historial-panel', this)">
+
+            📦 Historial
+
+        </button>
+
+        <button
+        class="btn-pedido"
+        onclick="mostrarPanelPedido('pendientes-panel', this)">
+
+            🚚 Pendientes
+
+        </button>
+
+        <button
+        class="btn-pedido"
+        onclick="mostrarPanelPedido('cancelados-panel', this)">
+
+            ❌ Cancelados
+
+        </button>
+
+        <button
+        class="btn-pedido"
+        onclick="mostrarPanelPedido('estado-panel', this)">
+
+            📍 Estado
+
+        </button>
+
+    </div>
+
+    <!-- CONTENIDO -->
+
+    <div class="contenido-pedidos">
+
+        <!-- HISTORIAL -->
+
+        <div
+        class="panel-pedido"
+        id="historial-panel">
+
+            <div class="pedido-card">
+
+                <h3>
+                    📦 Historial de pedidos
+                </h3>
+
+                <p>
+                    Pedido #HL4U-2041
+                </p>
+
+                <span>
+                    Entregado • 12 Marzo
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- PENDIENTES -->
+
+        <div
+        class="panel-pedido"
+        id="pendientes-panel"
+        style="display:none;">
+
+            <div class="pedido-card">
+
+                <h3>
+                    🚚 Pedidos pendientes
+                </h3>
+
+                <p>
+                    Proteína Whey Premium
+                </p>
+
+                <span>
+                    Llegará en 3 días
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- CANCELADOS -->
+
+        <div
+        class="panel-pedido"
+        id="cancelados-panel"
+        style="display:none;">
+
+            <div class="pedido-card">
+
+                <h3>
+                    ❌ Pedidos cancelados
+                </h3>
+
+                <p>
+                    Pedido #HL4U-1880
+                </p>
+
+                <span>
+                    Cancelado por usuario
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- ESTADO -->
+
+        <div
+        class="panel-pedido"
+        id="estado-panel"
+        style="display:none;">
+
+            <div class="pedido-card">
+
+                <h3>
+                    📍 Estado del pedido
+                </h3>
+
+                <p>
+                    Pedido en preparación
+                </p>
+
+                <div class="barra-envio">
+
+                    <div class="progreso-envio"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+        <!-- PAGOS -->
+
+<section
+id="pagos"
+class="seccion-ajustes"
+style="display:none;">
+
+    <h1 class="titulo-panel">
+        Métodos de Pago
+    </h1>
+
+    <p class="descripcion-panel">
+        Administra tus tarjetas y métodos.
+    </p>
+
+    <section class="card-ajustes">
+
+        <div class="tarjeta-guardada">
+
+            <div class="info-tarjeta">
+
+                <h3>
+                    💳 Tarjeta principal
+                </h3>
+
+                <p id="tarjeta-guardada-texto">
+                    **** **** **** 1234
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="acciones-pago">
+
+            <button
+            class="btn-agregar-pago"
+            onclick="window.location.href='pago.html'">
+
+                ➕ Agregar método de pago
+
+            </button>
+
+            <button
+            class="btn-borrar-pago"
+            onclick="borrarMetodoPago()">
+
+                🗑️ Borrar método de pago
+
+            </button>
+
+        </div>
+
+    </section>
+
+</section>
+        <!-- NOTIFICACIONES -->
+
+<section
+id="notificaciones"
+class="seccion-ajustes"
+style="display:none;">
+
+    <h1 class="titulo-panel">
+        Notificaciones
+    </h1>
+
+    <p class="descripcion-panel">
+        Configura alertas y promociones.
+    </p>
+
+    <section class="card-ajustes">
+
+        <!-- OPCION 1 -->
+
+        <div class="opcion-switch">
+
+            <div class="texto-switch">
+
+                <h3>
+                    🔔 Notificaciones de HL4U
+                </h3>
+
+                <p>
+                    Recibe avisos de nuestra página y aplicación.
+                </p>
+
+            </div>
+
+            <label class="switch">
+
+                <input type="checkbox" id="notif-hl4u">
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+        <!-- OPCION 2 -->
+
+        <div class="opcion-switch">
+
+            <div class="texto-switch">
+
+                <h3>
+                    📧 Promociones por Email
+                </h3>
+
+                <p>
+                    Recibe descuentos y promociones exclusivas.
+                </p>
+
+            </div>
+
+            <label class="switch">
+
+            <input
+type="checkbox"
+id="notif-email">
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+        <!-- OPCION 3 -->
+
+        <div class="opcion-switch">
+
+            <div class="texto-switch">
+
+                <h3>
+                    📱 SMS Promocionales
+                </h3>
+
+                <p>
+                    Recibe mensajes con nuevas ofertas.
+                </p>
+
+            </div>
+
+            <label class="switch">
+
+                <input type="checkbox" id="notif-sms">
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+    </section>
+
+</section>
+
+        <!-- BOTONES GENERALES -->
+
+        <section class="card-ajustes">
+
+            <button class="btn-guardar">
+                💾 Guardar cambios
+            </button>
+
+            <button class="btn-cerrar">
+                🚪 Cerrar sesión
+            </button>
+
+            <button class="btn-borrar">
+                🗑️ Borrar cuenta
+            </button>
+
+            <button
+            class="btn-volver"
+            onclick="window.location.href='index.html'">
+
+                ⬅ Volver al inicio
+
+            </button>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="ajustes.js"></script>
+
+</body>
+</html>

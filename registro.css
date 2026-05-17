@@ -7,157 +7,409 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+
+    min-height: 100vh;
 }
 
-/* Bordes oscuros */
+/* overlay oscuro */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle, rgba(0,0,0,0) 40%, rgba(0,0,0,0.6) 100%);
+    background:
+    linear-gradient(
+        rgba(0,0,0,0.55),
+        rgba(0,0,0,0.55)
+    );
+
+    z-index: -1;
 }
 
+/* =========================
+   HEADER
+========================= */
+
 .header {
-    background: rgba(0,0,0,0.85);
-    color: white;
+    background: rgba(0,0,0,0.88);
+    backdrop-filter: blur(10px);
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px;
+
+    padding: 18px 25px;
+
+    color: white;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,0.3);
 }
 
 .header h1 {
     margin: 0;
-    font-size: 1.3rem;
     flex: 1;
     text-align: center;
+
+    font-size: 1.8rem;
+    letter-spacing: 1px;
 }
 
-.header {
-    position: relative;
-    z-index: 10;
-}
+/* boton volver */
 
-button {
-      background: transparent;
-    border: 2px solid #4da6ff;
-    color: #4da6ff;
-    padding: 6px 12px;
-    border-radius: 8px;
+.header button {
+
+    background: transparent;
+    border: 2px solid #98FFD2;
+
+    color: #98FFD2;
+
+    padding: 10px 16px;
+
+    border-radius: 12px;
+
     cursor: pointer;
-}
 
-@media (max-width: 768px) {
-    .header {
-        justify-content: space-between;
-    }
+    transition: 0.3s;
 
-    .header h1 {
-        font-size: 1rem;
-    }
-
-    .btn-header {
-        font-size: 0.9rem;
-    }
-}
-
-/* Contenedor */
-.contenedor {
-    display: flex;
-    justify-content: center;
-    padding: 50px 20px;
-}
-
-/* Caja */
-.caja {
-    background: rgba(255,255,255,0.75);
-    padding: 40px;
-    width: 90%;
-    max-width: 400px;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    text-align: center;
-}
-
-/* Inputs */
-input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-}
-
-/* Error */
-.error {
-    color: red;
-    font-size: 0.8rem;
-    margin: 5px 0;
-}
-
-/* Botones */
-.botones {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-
-.btn-crear {
-    background: #98FFD2;
-    color: black; 
-    border: none;
-    padding: 12px;
-    border-radius: 10px;
-    cursor: pointer;
     font-weight: bold;
 }
 
-.btn-borrar {
-    background: red;
+.header button:hover {
+
+    background: #98FFD2;
+    color: black;
+
+    transform: translateY(-2px);
+}
+
+/* =========================
+   CONTENEDOR
+========================= */
+
+.contenedor {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: calc(100vh - 100px);
+
+    padding: 40px 20px;
+}
+
+/* =========================
+   CAJA
+========================= */
+
+.caja {
+
+    width: 100%;
+    max-width: 470px;
+
+    background: rgba(255,255,255,0.12);
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    backdrop-filter: blur(18px);
+
+    border-radius: 28px;
+
+    padding: 45px;
+
+    text-align: center;
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,0.35);
+
+    animation: aparecer 0.6s ease;
+}
+
+@keyframes aparecer {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.caja h2 {
+
     color: white;
+
+    margin-bottom: 30px;
+
+    font-size: 2rem;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+input {
+
+    width: 100%;
+
+    padding: 16px;
+
+    margin: 12px 0;
+
+    border-radius: 14px;
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    background: rgba(255,255,255,0.08);
+
+    color: white;
+
+    font-size: 1rem;
+
+    transition: 0.3s;
+
+    box-sizing: border-box;
+}
+
+input::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+
+input:focus {
+
+    outline: none;
+
+    border: 1px solid #98FFD2;
+
+    box-shadow:
+    0 0 15px rgba(152,255,210,0.35);
+
+    transform: scale(1.01);
+}
+
+/* =========================
+   ERROR
+========================= */
+
+.error {
+
+    color: #ff7b7b;
+
+    font-size: 0.9rem;
+
+    margin-top: 5px;
+}
+
+/* =========================
+   BOTONES
+========================= */
+
+.botones {
+
+    display: flex;
+
+    gap: 15px;
+
+    margin-top: 25px;
+}
+
+.btn-crear,
+.btn-borrar {
+
+    flex: 1;
+
     border: none;
-    padding: 12px;
-    border-radius: 10px;
+
+    padding: 15px;
+
+    border-radius: 14px;
+
     cursor: pointer;
+
+    font-size: 1rem;
+
+    font-weight: bold;
+
+    transition: 0.3s;
 }
 
-/* Fondo para método de pago */
-.pago-body {
-    background-image: url('images/Methodp.jpg');
+/* crear */
+
+.btn-crear {
+
+    background:
+    linear-gradient(
+        135deg,
+        #98FFD2,
+        #47d89b
+    );
+
+    color: black;
 }
 
-/* Fondo para pago realizado */
-.confirmacion-body {
-    background-image: url('images/Comfirmation.jpg');
-}
-.factura {
-    margin-top: 15px;
+.btn-crear:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+    0 10px 25px rgba(152,255,210,0.35);
 }
 
-.factura h3 {
-    color: #000000;
-    letter-spacing: 2px;
-    font-size: 1.4rem;
+/* borrar */
+
+.btn-borrar {
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff4d4d,
+        #d90000
+    );
+
+    color: white;
 }
 
-.factura {
-    font-family: monospace;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    border: 2px dashed #000;
+.btn-borrar:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+    0 10px 25px rgba(255,0,0,0.3);
 }
 
-#lista-productos div {
-    display: flex;
-    justify-content: space-between;
-    padding: 4px 0;
-    border-bottom: 1px dotted #ccc;
+.telefono-box {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    border-radius:
+        14px;
+
+    overflow:
+        hidden;
 }
-.item-factura {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 0;
-    border-bottom: 1px dashed #ccc;
-    font-size: 0.95rem;
+
+.codigo-pais {
+
+    padding:
+        14px 16px;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    color:
+        #66ffd1;
+
+    font-weight:
+        700;
 }
+
+.telefono-box input {
+
+    flex:
+        1;
+
+    border:
+        none;
+
+    background:
+        transparent;
+
+    padding:
+        14px;
+
+    color:
+        white;
+
+    outline:
+        none;
+}
+
+/* =========================
+   SELECT ZONA
+========================= */
+
+.grupo-input select {
+
+    width:
+        100%;
+
+    padding:
+        15px 18px;
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    border-radius:
+        16px;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    color:
+        white;
+
+    font-size:
+        15px;
+
+    font-family:
+        Poppins,
+        sans-serif;
+
+    outline:
+        none;
+
+    backdrop-filter:
+        blur(8px);
+
+    transition:
+        0.25s;
+
+    appearance:
+        none;
+
+    cursor:
+        pointer;
+}
+
+/* HOVER */
+
+.grupo-input select:hover {
+
+    border:
+        1px solid rgba(102,255,209,0.45);
+}
+
+/* FOCUS */
+
+.grupo-input select:focus {
+
+    border:
+        1px solid #66ffd1;
+
+    box-shadow:
+        0 0 18px rgba(102,255,209,0.25);
+}
+
+/* OPTIONS */
+
+.grupo-input select option {
+
+    background:
+        #12384c;
+
+    color:
+        white;
+}
+

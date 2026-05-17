@@ -1,112 +1,170 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Método de Pago</title>
-<link rel="stylesheet" href="registro.css">
+
+<link rel="stylesheet" href="pago.css">
+<link rel="icon" href="images/favicon.png?v=1" type="image/png">
+
 </head>
 
 <body class="pago-body">
 
 <header class="header">
-    <button class="btn-header btn-volver" onclick="volverCarrito()">← Volver</button>
+
+    <button
+        class="btn-header btn-volver"
+        onclick="volverCarrito()">
+
+        ← Volver
+
+    </button>
+
     <h1>Método de Pago</h1>
+
     <div></div>
+
 </header>
 
 <main class="contenedor">
+
 <div class="caja">
 
-<h2>Agregar Tarjeta</h2>
+    <!-- =========================
+         TARJETA VISUAL
+    ========================== -->
+    <div class="tarjeta-preview" id="tarjetaPreview">
 
-<input type="text" id="tarjeta" placeholder="Número de tarjeta" oninput="detectarTarjeta()">
+        <div class="chip">💳</div>
 
-<img id="logo-tarjeta" style="width:80px; margin:10px auto; display:block;">
+        <div class="numero" id="prevNumero">
+            #### #### #### ####
+        </div>
 
-<input type="text" placeholder="Fecha de vencimiento (MM/AA)">
-<input type="text" placeholder="Código de seguridad">
-<input type="text" placeholder="Titular">
+        <div class="fila">
 
-<div class="botones">
-    <button class="btn-crear" onclick="guardarTarjeta()">Pagar</button>
-    <button class="btn-borrar" onclick="limpiar()">Borrar</button>
-</div>
+            <div>
+                <small>Titular</small>
+                <div id="prevTitular">
+                    NOMBRE APELLIDO
+                </div>
+            </div>
+
+            <div>
+                <small>Expira</small>
+                <div id="prevFecha">
+                    MM/AA
+                </div>
+            </div>
+
+        </div>
+
+        <img
+            id="prevLogo"
+            class="logo-tarjeta-preview">
+
+    </div>
+
+    <!-- =========================
+         TITULO
+    ========================== -->
+    <h2>Agregar Tarjeta</h2>
+
+    <!-- =========================
+         NUMERO TARJETA
+    ========================== -->
+    <input
+        type="text"
+        id="tarjeta"
+        placeholder="Número de tarjeta"
+        maxlength="16"
+        oninput="validarTarjeta()">
+
+    <!-- =========================
+         LOGO ABAJO
+    ========================== -->
+    <img
+        id="logo-tarjeta"
+        style="
+            width:80px;
+            margin:10px auto;
+            display:block;
+        ">
+
+    <!-- =========================
+         FECHA
+    ========================== -->
+    <input
+        type="text"
+        id="fecha"
+        placeholder="MM/AA"
+        maxlength="5"
+        oninput="formatearFecha(this)">
+
+    <!-- =========================
+         CVC
+    ========================== -->
+    <input
+        type="text"
+        id="cvc"
+        placeholder="Código de seguridad"
+        maxlength="4">
+
+    <!-- =========================
+         TITULAR
+    ========================== -->
+    <input
+        type="text"
+        id="titular"
+        placeholder="Titular"
+        oninput="
+            this.value=this.value.toUpperCase();
+            actualizarTarjeta()
+        ">
+
+    <!-- =========================
+         BOTONES
+    ========================== -->
+    <div class="botones">
+
+        <button
+            class="btn-crear"
+            onclick="guardarTarjeta()">
+
+            Pagar
+
+        </button>
+
+        <button
+            class="btn-borrar"
+            onclick="limpiar()">
+
+            Borrar
+
+        </button>
+
+    </div>
 
 </div>
 </main>
 
-<script>
+<!-- =========================
+     JS
+========================== -->
+<script src="pago.js"></script>
 
-/* 🔙 VOLVER */
-function volverCarrito() {
-    window.location.href = "carrito.html";
-}
-
-/* 💳 DETECTAR TARJETA */
-function detectarTarjeta() {
-    let num = document.getElementById("tarjeta").value;
-    let logo = document.getElementById("logo-tarjeta");
-
-    if (num.startsWith("4")) {
-        logo.src = "images/MP/V.png";
-    } else if (num.startsWith("5")) {
-        logo.src = "images/MP/MS.png";
-    } else {
-        logo.src = "";
-    }
-}
-
-/* 🔐 CREAR PEDIDO (SOLO SI NO EXISTE) */
-function crearPedido() {
-
-    let numero = Math.floor(10000000 + Math.random() * 90000000);
-    let codigo = "HL-" + numero;
-
-    localStorage.setItem("pedido", codigo);
-}
-
-/* 💳 GUARDAR PAGO */
-function guardarTarjeta() {
-
-    let usuario = localStorage.getItem("usuario");
-
-    if (!usuario) {
-        alert("Regístrate primero");
-        return;
-    }
-
-    let num = document.getElementById("tarjeta").value;
-
-    if (!num || num.length < 4) {
-        alert("Tarjeta inválida");
-        return;
-    }
-
-    let tipo = num.startsWith("4") ? "Visa" :
-               num.startsWith("5") ? "Mastercard" : "Desconocida";
-
-    let ultimos = num.slice(-4);
-
-    localStorage.setItem("tarjeta", JSON.stringify({ tipo, ultimos }));
-
-    /* 🔥 CREAR PEDIDO */
-    crearPedido();
-
-    /* 🧾 SNAPSHOT DEL CARRITO (ESTO ES CLAVE) */
-    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-    localStorage.setItem("ultimoPedidoDetalle", JSON.stringify(carrito));
-
-    window.location.href = "carrito.html";
-}
-
-/* 🧹 LIMPIAR */
-function limpiar() {
-    document.querySelectorAll("input").forEach(i => i.value = "");
-    document.getElementById("logo-tarjeta").src = "";
-}
-
-</script>
+<!-- =========================
+     AUDIO
+========================== -->
+<audio
+    id="sound-success"
+    src="sounds/approved.mp3"
+    preload="auto">
+</audio>
 
 </body>
 </html>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - HL4U</title>
     <link rel="stylesheet" href="registro.css">
+    <link rel="icon" href="images/favicon.png?v=1" type="image/png">
 </head>
 
 <body>
@@ -16,7 +17,7 @@
     ← Volver
 </button>
 
-    <h1>Registro</h1>
+    <h1>Registrarse</h1>
 
 </header>
 <main class="contenedor">
@@ -32,6 +33,87 @@
 
         <input type="password" id="password" placeholder="Contraseña">
 
+<!-- DIRECCIÓN -->
+
+<div class="grupo-input">
+
+    <input
+    type="text"
+    id="direccion"
+    placeholder="Ej: Colonia El Naranjo 12 avenida 4-56">
+
+</div>
+
+<!-- ZONA -->
+
+<div class="grupo-input">
+
+
+    <select id="zona">
+
+        <option value="">
+            Selecciona tu zona
+        </option>
+
+        <option>Zona 1</option>
+        <option>Zona 2</option>
+        <option>Zona 3</option>
+        <option>Zona 4</option>
+        <option>Zona 5</option>
+        <option>Zona 6</option>
+        <option>Zona 7</option>
+        <option>Zona 8</option>
+        <option>Zona 9</option>
+        <option>Zona 10</option>
+        <option>Zona 11</option>
+        <option>Zona 12</option>
+        <option>Zona 13</option>
+        <option>Zona 14</option>
+        <option>Zona 15</option>
+        <option>Zona 16</option>
+        <option>Zona 17</option>
+        <option>Zona 18</option>
+        <option>Zona 19</option>
+        <option>Zona 20</option>
+        <option>Zona 21</option>
+        <option>Zona 22</option>
+        <option>Zona 23</option>
+        <option>Zona 24</option>
+        <option>Zona 25</option>
+        <option>Zona 26</option>
+        <option>Zona 27</option>
+        <option>Zona 28</option>
+        <option>Zona 29</option>
+        <option>Zona 30</option>
+
+    </select>
+
+</div>
+
+<!-- TELÉFONO -->
+
+<div class="grupo-input">
+
+   
+
+    
+    <div class="telefono-box">
+
+        <span class="codigo-pais">
+            +502
+        </span>
+
+        <input
+        type="text"
+        id="telefono"
+        maxlength="8"
+        placeholder="12345678">
+
+    </div>
+
+</div>
+
+
         <div class="botones">
             <button class="btn-crear" onclick="crearUsuario()">Crear Usuario</button>
             <button class="btn-borrar" onclick="borrarDatos()">Borrar</button>
@@ -41,40 +123,7 @@
 
 </main>
 
-<script>
-function volverInicio() {
-    window.location.href = "index.html";
-}
-
-function crearUsuario() {
-    let usuario = document.getElementById("usuario").value;
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-    let error = document.getElementById("error-email");
-
-    if (
-        !email.endsWith("@gmail.com") &&
-        !email.endsWith("@hotmail.com") &&
-        !email.endsWith("@outlook.com")
-    ) {
-        error.textContent = "Correo inválido (solo Gmail, Hotmail o Outlook)";
-        return;
-    }
-
-    error.textContent = "";
-
-    localStorage.setItem("usuario", usuario);
-
-    window.location.href = "index.html";
-}
-
-function borrarDatos() {
-    document.getElementById("usuario").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("password").value = "";
-    document.getElementById("error-email").textContent = "";
-}
-</script>
+<script src="registro.js"></script>
 
 </body>
 </html>

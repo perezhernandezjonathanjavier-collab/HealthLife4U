@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>HL4U | Producto</title>
+
+<link rel="stylesheet" href="producto.css">
+
+<link rel="icon"
+href="images/favicon.png?v=1"
+type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+rel="stylesheet">
+</head>
+
+<body class="pagina-producto">
+
+<!-- ✨ OVERLAY -->
+<div class="fondo-blur"></div>
+
+<!-- ✨ PARTICULAS -->
+<div class="particulas"></div>
+
+<!-- =========================
+     PRODUCTO
+========================= -->
+
+<section class="producto-detalle">
+
+    <!-- IZQUIERDA -->
+    <div class="imagen-area">
+
+        <!-- imagen principal -->
+        <div class="imagen-principal">
+
+            <img
+                id="imagen-producto"
+                alt="Producto"
+            >
+
+        </div>
+
+        <!-- miniaturas -->
+        <div class="miniaturas">
+
+            <img id="miniatura1"
+            class="miniatura activa">
+
+            <img id="miniatura2"
+            class="miniatura">
+
+            <img id="miniatura3"
+            class="miniatura">
+
+        </div>
+
+    </div>
+
+    <!-- DERECHA -->
+    <div class="info-producto">
+
+        <span class="badge-producto">
+            🔥 Más vendido
+        </span>
+
+        <h3 class="titulo-detalles">
+            DETALLES
+        </h3>
+
+        <h1 id="nombre-producto"></h1>
+
+        <!-- ⭐ rating -->
+        <div class="rating">
+
+            <div class="estrellas">
+                ★★★★★
+            </div>
+
+            <span>
+                4.9 • 124 reseñas
+            </span>
+
+        </div>
+
+        <!-- 💰 precio -->
+        <div class="precio-wrapper">
+
+            <span class="precio-anterior">
+                Q299
+            </span>
+
+            <h2 id="precio-producto"></h2>
+
+            <span class="descuento">
+                -20%
+            </span>
+
+        </div>
+
+        <!-- stock -->
+        <div class="stock">
+            ✅ Disponible en stock
+        </div>
+
+        <!-- descripción -->
+        <p id="descripcion-producto"></p>
+
+        <!-- info extra -->
+        <div class="info-extra">
+
+            <div class="info-card">
+                🚚 Envío gratis
+            </div>
+
+            <div class="info-card">
+                🔒 Pago seguro
+            </div>
+
+            <div class="info-card">
+                ⚡ Entrega rápida
+            </div>
+
+        </div>
+
+        <!-- beneficios -->
+        <div class="beneficios">
+
+            <div class="beneficios-titulo">
+                BENEFICIOS
+            </div>
+
+            <div class="beneficios-lista">
+
+                <p>
+                    ✔ Producto premium
+                </p>
+
+                <p>
+                    ✔ Garantía de calidad
+                </p>
+
+                <p>
+                    ✔ Compra protegida
+                </p>
+
+                <p>
+                    ✔ Soporte personalizado
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- botones -->
+        <div class="acciones-producto">
+
+            <button
+                class="btn-carrito"
+                onclick="agregarCarrito()"
+            >
+                🛒 Agregar al carrito
+            </button>
+
+            <button
+                class="btn-comprar"
+                onclick="comprarDirecto()"
+            >
+                ⚡ Comprar ahora
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- 🔙 volver -->
+<div class="volver-wrapper">
+
+    <button
+        class="btn-volver"
+        onclick="window.location.href='index.html'"
+    >
+        ⬅ Volver a la página principal
+    </button>
+
+</div>
+
+</div>
+
+    <section class="seccion-resenas">
+
+    <!-- BARRA SUPERIOR -->
+    <div class="barra-titulo-resenas">
+
+        ⭐ Reseñas y Opiniones de nuestros mejores usuarios
+
+    </div>
+
+    <p class="subtitulo-resenas">
+        Opiniones verificadas de nuestros clientes que califican en cuanto a calidad del producto, servicio al cliente, envío y más. Lee lo que otros compradores tienen que decir antes de tomar tu decisión de compra.
+    </p>
+
+    <div class="contenedor-resenas">
+
+        <!-- IZQUIERDA -->
+        <div class="lista-resenas">
+
+            <!-- RESEÑA -->
+            <div class="card-resena">
+
+                <img
+                    src="images/MiiPerfiles/Javier.png"
+                    class="avatar-resena"
+                >
+
+                <div class="contenido-resena">
+
+                    <div class="top-resena">
+
+                        <div>
+
+                            <h3>Javier</h3>
+
+                            <div class="estrellas">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+
+                        </div>
+
+                        <span class="fecha-resena">
+                            Hace 2 días
+                        </span>
+
+                    </div>
+
+                    <p>
+                        La verdad muy buenos productos,
+                        los compraria todos si pudiera, 
+                        yo los recomiendo mucho, o como sea.
+                    </p>
+
+                    <div class="likes-resena">
+                        ❤️ 24 personas encontraron útil esta reseña
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- GOJO -->
+            <div class="card-resena">
+
+                <img
+                    src="images/MiiPerfiles/Gojo.png"
+                    class="avatar-resena"
+                >
+
+                <div class="contenido-resena">
+
+                    <div class="top-resena">
+
+                        <div>
+
+                            <h3>Gojo</h3>
+
+                            <div class="estrellas">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+
+                        </div>
+
+                        <span class="fecha-resena">
+                            Hace 4 días
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Este producto me llego vacio, no se que paso pero no me llego nada,
+                        Lo volví a pedir para tenerlo al fín pero me volvió a llegar vacio,
+                        Lo voy a pedir otra vez a ver si me llega algo, actualizo abajo.
+                    </p>
+
+                    <div class="likes-resena">
+                        😂 50 personas encontraron graciosa esta reseña
+                    </div>
+
+                      <!-- El Hilo de Respuestas va debajo del div de reacciones -->
+                            <div class="hilo-respuestas">
+
+                                 <div class="respuesta-usuario">
+
+                                    <img src="images/MiiPerfiles/Gojo.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                 Gojo
+                                            </span>
+
+                                                   <p>
+                                                    Me Cancelaron el pedido. 😭
+                                                   </p>
+                                                         <div class="likes-resena">
+                                                         😂 35 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> <!-- 3er /div! (despues de cerrar likes-resena antes)-->    
+                        <!-- La Siguiente Respuesta va despues del 3er div -->    
+
+                          <div class="hilo-respuestas">
+
+                                 <div class="respuesta-usuario">
+
+                                    <img src="images/MiiPerfiles/Gojo.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                 Gojo
+                                            </span>
+
+                                                   <p>
+                                                    Dejen de reirse 😭
+                                                   </p>
+                                                         <div class="likes-resena">
+                                                         😂 21 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+                             <!-- La Siguiente Respuesta va despues del 3er div --> 
+                                                       <div class="hilo-respuestas">
+
+                                                        <div class="respuesta-usuario">
+
+                                                            <img src="images/MiiPerfiles/Sukuna.png" class="mini-avatar">
+
+                                                             <div class="respuesta-contenido">
+
+                                                                <span class="usuario-respuesta">
+                                                                 Sukuna
+                                                                </span>
+
+                                                                     <div class="respuesta-imagen">
+		                                                            <img src="images/reacciones/gifs/jujajaja.gif" alt="respuesta meme" >
+		                                                            </div>
+                                                                      <div class="likes-resena">
+                                                                         😂 41 personas encontraron graciosa esta reseña
+                                                                    </div>
+                                                              </div>
+                                                        </div>  
+                                                  </div>
+                                    <!-- Para Continuar el hilo es despues de 4 div -->  
+                                 </div>
+                           </div>
+                    <!-- Si no hay más hilo que añadir entonces despues de 2 DIV se empiezan a poner otras respuestas  --> 
+
+              <!-- MIKU -->
+            <div class="card-resena">
+
+                <img
+                    src="images/MiiPerfiles/Miku.png"
+                    class="avatar-resena"
+                >
+
+                <div class="contenido-resena">
+
+                    <div class="top-resena">
+
+                        <div>
+
+                            <h3>Miku</h3>
+
+                            <div class="estrellas">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+
+                        </div>
+
+                        <span class="fecha-resena">
+                            Hace 4 días
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Recomiendo todos los productos de esta hermosa pagina!, HL4U es la mejor pagina de todas
+                        Es increible, Todos los productos los recomiendos valen su precio y aprovechen descuentos!,
+                        le doy 5 estrellas a todo. Lindo Dia ❤️
+                    </p>
+
+                    <div class="likes-resena">
+                        ❤️ 15 personas encontraron útil esta reseña
+                    </div>
+                   <!-- El Hilo de Respuestas va debajo del div de reacciones -->
+                            <div class="hilo-respuestas">
+
+                                 <div class="respuesta-usuario">
+
+                                    <img src="images/MiiPerfiles/Teto.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                 Teto
+                                            </span>
+
+                                                   <p>
+                                                    Cuanto te pagaron por esta reseña VENDIDA 🤣
+                                                   </p>
+
+                                                    <div class="respuesta-imagen">
+		                                                <img src="images/reacciones/Risas/meme3.png" alt="respuesta meme" >
+		                                             </div>
+                                                         <div class="likes-resena">
+                                                         😂 11 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> <!-- 3er /div! (despues de cerrar likes-resena antes)-->    
+                        <!-- La Siguiente Respuesta va despues del 3er div -->    
+                           <div class="hilo-respuestas">
+
+                                 <div class="respuesta-usuario">
+
+                                    <img src="images/MiiPerfiles/Miku.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                 Miku
+                                            </span>
+
+                                                   <p>
+                                                    Quetin gordita
+                                                   </p>
+                                                    <div class="respuesta-imagen">
+		                                                <img src="images/reacciones/Risas/meme4.png" alt="respuesta meme" >
+		                                             </div>
+                                                         <div class="likes-resena">
+                                                         😂 21 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+                             <!-- La Siguiente Respuesta va despues del 3er div -->
+
+                              <div class="hilo-respuestas">
+
+                                 <div class="respuesta-usuario">
+
+                                    <img src="images/MiiPerfiles/Teto.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                 Teto
+                                            </span>
+
+                                                   <p>
+                                                    :(
+                                                   </p>
+                                                         <div class="likes-resena">
+                                                         😂 5 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> <!-- 3er /div! (despues de cerrar likes-resena antes)-->   
+                 </div>
+
+            </div>
+        <!-- Si no hay más hilo que añadir entonces despues de 2 DIV se empiezan a poner otras respuestas  --> 
+ <div class="card-resena">
+
+                <img
+                    src="images/MiiPerfiles/Marioo.png"
+                    class="avatar-resena"
+                >
+
+                <div class="contenido-resena">
+
+                    <div class="top-resena">
+
+                        <div>
+
+                            <h3>Marioo</h3>
+
+                            <div class="estrellas">
+                                ⭐
+                            </div>
+
+                        </div>
+
+                        <span class="fecha-resena">
+                            Hace 6 días
+                        </span>
+
+                    </div>
+
+                    <p>
+                        En la Sección de Bienestar y Relajación hace falta motita 🚬🚬🚬🚬🚬🚬, Mamma Mia
+                        3 Estrellas 
+                    </p>
+
+                    <div class="respuesta-imagen">
+		             <img src="images/reacciones/Risas/meme18.png" alt="respuesta meme" >
+		                 </div>
+
+                    <div class="likes-resena">
+                        🚬 18 personas encontraron útil esta reseña
+                    </div>
+
+                    <div class="hilo-respuestas">
+
+                                 <div class="respuesta-usuario">
+
+                                    <img src="images/MiiPerfiles/Luigi.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                 Luigi
+                                            </span>
+
+                                                   <p>
+                                                    No hermano eso esta mal, eso no es cool para la chaviza, si no amiguitos?
+                                                   </p>
+                                                       <div class="respuesta-imagen">
+		                                                <img src="images/reacciones/Risas/meme6.png" alt="respuesta meme" >
+		                                             </div>
+                                                         <div class="likes-resena">
+                                                         😡 35 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> <!-- 3er /div! (despues de cerrar likes-resena antes)-->    
+                        <!-- La Siguiente Respuesta va despues del 3er div --> 
+
+                          <div class="hilo-respuestas">
+
+                                 <div class="respuesta-usuario">
+
+                                    <img src="images/MiiPerfiles/HL4U.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                 HL4U | Soporte Oficial
+                                            </span>
+
+                                                   <p>
+                                                    HOLA!, Gracias por tus sugerencias, lamentablemente "Motita" es algo que no añadiremos en ningun momento de cara al futuro
+                                                    Pero sientete libre de comprar cualquier otro articulo DISPONIBLE en nuestra tienda, Saludos!
+                                                   </p>
+                                                         <div class="likes-resena">
+                                                         😡 41 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> <!-- 3er /div! (despues de cerrar likes-resena antes)-->    
+                        <!-- La Siguiente Respuesta va despues del 3er div -->    
+
+                                 <div class="hilo-respuestas">
+
+                                     <div class="respuesta-usuario">
+
+                                         <img src="images/MiiPerfiles/Toad.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                 Toad | EL GOAT 🐐
+                                            </span>
+
+                                                   <p>
+                                                    GWAAAAAAAAAAAAAAAAAAAAAAH, GWAAAAAAAAAAAAAAAAAAAAAAAAH, 
+                                                    Esto todo lo que leo
+                                                   </p>
+                                                    <div class="respuesta-imagen">
+		                                                <img src="images/reacciones/Risas/meme5.png" alt="respuesta meme" >
+		                                             </div>
+                                                         <div class="likes-resena">
+                                                         😂 21 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+                             <!-- La Siguiente Respuesta va despues del 3er div -->
+                             <div class="hilo-respuestas">
+
+                                 <div class="respuesta-usuario">
+
+                                    <img src="images/MiiPerfiles/Luigi.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                 Luigi
+                                            </span>
+
+                                                   <p>
+                                                     Sea Serio aunque con esa foto de perfil te pido mucho...
+                                                   </p>
+                                                       <div class="respuesta-imagen">
+		                                                <img src="images/MiiPerfiles/Toad.png" alt="respuesta meme" >
+		                                             </div>
+                                                         <div class="likes-resena">
+                                                         ❤️ 35 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> <!-- 3er /div! (despues de cerrar likes-resena antes)-->    
+                        <!-- La Siguiente Respuesta va despues del 3er div -->   
+                                 <div class="hilo-respuestas">
+
+                                     <div class="respuesta-usuario">
+
+                                         <img src="images/MiiPerfiles/Toad.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                 Toad | EL GOAT 🐐
+                                            </span>
+
+                                                   <p>
+                                                    Shhh calla envidiosa, aqui una reciente para alterar al ganado 
+                                                    
+                                                   </p>
+                                                    <div class="respuesta-imagen">
+		                                                <img src="images/reacciones/Risas/meme7.png" alt="respuesta meme" >
+		                                             </div>
+                                                         <div class="likes-resena">
+                                                          🔥 21 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+                             <!-- La Siguiente Respuesta va despues del 3er div -->
+                </div>
+
+            </div>
+
+              <!-- Despues de 2 div, se añade el otro comentario -->
+                <div class="card-resena">
+
+                <img
+                    src="images/MiiPerfiles/Geto.png"
+                    class="avatar-resena"
+                >
+
+                <div class="contenido-resena">
+
+                    <div class="top-resena">
+
+                        <div>
+
+                            <h3>Usuario Baneado</h3>
+
+                            <div class="estrellas">
+                                Este Usuario no puede dejar una reseña.
+                            </div>
+
+                        </div>
+
+                        <span class="fecha-resena">
+                            Hace 15 días
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Hola, Buenas Noches, Quisiera preguntar cuanto cuesta los productos para el cuidado de Piel?
+                    </p>
+
+                    <div class="respuesta-imagen">
+		            <img src="images/reacciones/Risas/meme8.png" alt="respuesta meme" >
+		            </div>
+                    <div class="likes-resena">
+                        😂 70 personas encontraron útil esta reseña
+                    </div>
+                        <!-- Siempre despues del div de reacciones va el inicio del hilo -->  
+                        <div class="hilo-respuestas">
+
+                                 <div class="respuesta-usuario">
+
+                                    <img src="images/MiiPerfiles/HL4U.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                 HL4U | Soporte Oficial
+                                            </span>
+
+                                                   <p>
+                                                    Hola "USUARIO BANEADO", Gracias por contactarnos, Los precio De los productos de la sección Cuidado de piel | Skincare 
+                                                    rondan entre los Q90 a Q250, dependiendo del producto que quieras comprar, 
+                                                    Si quieres más información sobre cada producto no dudes en contactarnos por nuestras redes sociales o por el chat de la pagina, Saludos!
+                                                   </p>
+                                                         <div class="likes-resena">
+                                                          😂 34 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> <!-- 3er /div! (despues de cerrar likes-resena antes)-->    
+                        <!-- La Siguiente Respuesta va despues del 3er div --> 
+                             <div class="hilo-respuestas">
+
+                                     <div class="respuesta-usuario">
+
+                                         <img src="images/MiiPerfiles/Geto.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                Usuario Baneado
+                                            </span>
+
+                                                   <p>
+                                                    Gracias, para saber cuanto me ahorro, linda noche! ❤️
+                                                    
+                                                   </p>
+                                                    
+                                                         <div class="likes-resena">
+                                                          😂 120 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+                             <!-- La Siguiente Respuesta va despues del 3er div -->
+                    <!-- Despues de 2 div, se añade el otro comentario -->
+                </div>
+
+            </div>
+
+              <!-- Despues de 2 div, se añade el otro comentario -->
+                <div class="card-resena">
+
+                <img
+                    src="images/MiiPerfiles/Marcita.png"
+                    class="avatar-resena"
+                >
+
+                <div class="contenido-resena">
+
+                    <div class="top-resena">
+
+                        <div>
+
+                            <h3>Marcita</h3>
+
+                            <div class="estrellas">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+
+                        </div>
+
+                        <span class="fecha-resena">
+                            Hace 21 días
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Muy lindos los productos, me encantan, la sección fitness | GYM los recomiendo mucho, tienen todo lo necesario para mantenerte en forma y suplementos extra,
+                        Echenle un ojo y tambien a la sección de SKINCARE, me encanta como me deja la piel después de usarlos, buena calidad los recomiendo mucho, saludos! ❤️
+                    </p>
+
+                    <div class="respuesta-imagen">
+		            <img src="images/reacciones/Risas/meme9.png" alt="respuesta meme" >
+		            </div>
+                    <div class="likes-resena">
+                        ❤️ 70 personas encontraron útil esta reseña
+                    </div>
+                        
+                    <div class="hilo-respuestas">
+
+                                     <div class="respuesta-usuario">
+
+                                         <img src="images/MiiPerfiles/Lemus.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                Lemusito Lindito
+                                            </span>
+
+                                                   <p>
+                                                    AY SIII, Yo igual hago lo que tu haces pero me quedan mejor a mi, amiga 🤭❤️
+                                                    
+                                                   </p>
+                                                    
+                                                         <div class="likes-resena">
+                                                          😂 20 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+                                <!-- La Siguiente Respuesta va despues del 3er div -->
+                            <div class="hilo-respuestas">
+
+                                     <div class="respuesta-usuario">
+
+                                         <img src="images/MiiPerfiles/Marcita.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                 Marcita
+                                            </span>
+
+                                                   <p>
+                                                   🤢🤮
+                                                    
+                                                   </p>
+                                                    <div class="respuesta-imagen">
+		                                                <img src="images/MiiPerfiles/Lemus.png" alt="respuesta meme">
+		                                             </div>
+                                                         <div class="likes-resena">
+                                                          😂 91 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+                             <!-- La Siguiente Respuesta va despues del 3er div -->
+                 </div>
+
+            </div>
+                 <!-- Despues de 2 div, se añade el otro comentario -->
+                <div class="card-resena">
+
+                <img
+                    src="images/MiiPerfiles/Neru.png"
+                    class="avatar-resena"
+                >
+
+                <div class="contenido-resena">
+
+                    <div class="top-resena">
+
+                        <div>
+
+                            <h3>Neru</h3>
+
+                            <div class="estrellas">
+                                ⭐
+                            </div>
+
+                        </div>
+
+                        <span class="fecha-resena">
+                            Hace 29 días
+                        </span>
+
+                    </div>
+
+                    <p>
+                       Donde se añade el producto al carrito?
+                    </p>
+
+                    <div class="likes-resena">
+                        😂 17 personas encontraron útil esta reseña
+                    </div>
+                        
+                    <div class="hilo-respuestas">
+
+                                     <div class="respuesta-usuario">
+
+                                         <img src="images/MiiPerfiles/Neru.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                Neru
+                                            </span>
+
+                                                   <p>
+                                                    Ya vi
+                                                    
+                                                   </p>
+                                                    
+                                                         <div class="likes-resena">
+                                                          😂 12 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+                                <!-- La Siguiente Respuesta va despues del 3er div -->
+                                    <div class="hilo-respuestas">
+
+                                     <div class="respuesta-usuario">
+
+                                         <img src="images/MiiPerfiles/HL4U.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                HL4U | Soporte Oficial
+                                            </span>
+
+                                                   <p>
+                                                   HOLA! Gracias por tus comentarios, el boton para añadir el carrito es el del color verde con el carrito en el centro, saludos! ❤️
+                                                    
+                                                   </p>
+                                                    <div class="respuesta-imagen">
+		                                                <img src="images/reacciones/Risas/meme10.png" alt="respuesta meme">
+		                                             </div>
+                                                         <div class="likes-resena">
+                                                           😂 7 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+                                     <!-- La Siguiente Respuesta va despues del 3er div -->
+                                    <div class="hilo-respuestas">
+
+                                     <div class="respuesta-usuario">
+
+                                         <img src="images/MiiPerfiles/Neru.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                Neru
+                                            </span>
+
+                                                   <p>
+                                                    Si, le dije que ya vi, no sabe leer o que?, esta insinuando que soy tonta o que? 🤬
+                                            
+                                                   </p>
+                
+                                                         <div class="likes-resena">
+                                                           😂 15 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+                     <!-- La Siguiente Respuesta va despues del 3er div -->
+                                    <div class="hilo-respuestas">
+
+                                     <div class="respuesta-usuario">
+
+                                         <img src="images/MiiPerfiles/HL4U.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                HL4U | Soporte Oficial
+                                            </span>
+
+                                                   <p>
+                                                   HOLA! Disculpe la confusión, no era nuestra intención, solo intentábamos ayudarte, diciendote que: 
+                                                   "el boton para añadir el carrito es el del color verde con el carrito en el centro", 
+                                                   o el que esta en el cuadro de visualizacion mas detallado, el que esta marcado en rojo o si bien comprarlo directamente 
+                                                   con la opción enmarcada con color verde, saludos! ❤️
+                                                    
+                                                   </p>
+                                                    <div class="respuesta-imagen">
+		                                                <img src="images/reacciones/Risas/meme11.png" alt="respuesta meme">
+		                                             </div>
+                                                         <div class="likes-resena">
+                                                           😂 4 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+                             <!-- La Siguiente Respuesta va despues del 3er div -->
+                                    <div class="hilo-respuestas">
+
+                                     <div class="respuesta-usuario">
+
+                                         <img src="images/MiiPerfiles/Neru.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                Neru
+                                            </span>
+
+                                                   <p>
+                                                    Una estrella por insinuar que soy tonta, no se lo perdonaré nunca, me siento ofendida, no vuelvo a comprar en esta pagina, adiós para siempre.
+                                            
+                                                   </p>
+                                                   <div class="respuesta-imagen">
+		                                                <img src="images/reacciones/Risas/meme12.png" alt="respuesta meme">
+		                                             </div>
+                
+                                                         <div class="likes-resena">
+                                                           😂 27 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+                                 <!-- La Siguiente Respuesta va despues del 3er div -->
+                                    <div class="hilo-respuestas">
+
+                                     <div class="respuesta-usuario">
+
+                                         <img src="images/MiiPerfiles/HL4U.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                HL4U | Soporte Oficial
+                                            </span>
+
+                                                   <p>
+                                                   HOLA! Muy pronto sección para cuidado OCULAR 👁️ y le recomendamos la sección de 🧠 Bienestar | Relajación, saludos! ❤️
+                                                    
+                                                   </p>
+                                                    
+                                                         <div class="likes-resena">
+                                                           😂 2 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+                         <!-- La Siguiente Respuesta va despues del 3er div -->
+                                    <div class="hilo-respuestas">
+
+                                     <div class="respuesta-usuario">
+
+                                         <img src="images/MiiPerfiles/Neru.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                Neru
+                                            </span>
+
+                                                   <div class="respuesta-imagen">
+		                                                <img src="images/reacciones/Risas/meme13.png" alt="respuesta meme">
+		                                             </div>
+                
+                                                         <div class="likes-resena">
+                                                           😂 51 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+                <!-- Despues de 2 div, se añade el otro comentario -->
+                     </div>
+               </div> 
+                    <!-- Despues de 2 div, se añade el otro comentario -->
+
+                    <div class="card-resena">
+
+                <img
+                    src="images/MiiPerfiles/Marioo.png"
+                    class="avatar-resena"
+                >
+
+                <div class="contenido-resena">
+
+                    <div class="top-resena">
+
+                        <div>
+
+                            <h3>Marioo</h3>
+
+                            <div class="estrellas">
+                                ⭐⭐⭐⭐
+                            </div>
+
+                        </div>
+
+                        <span class="fecha-resena">
+                            Hace 6 días
+                        </span>
+
+                    </div>
+
+                    <p>
+                       Motita quiere la seño pa andar relax🚬, Mamma Mia!.
+                    </p>
+
+                    <div class="likes-resena">
+                        🚬 21 personas encontraron útil esta reseña
+                    </div>
+
+                        <div class="hilo-respuestas">
+
+                                 <div class="respuesta-usuario">
+
+                                    <img src="images/MiiPerfiles/Toad.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                 Toad
+                                            </span>
+
+                                                   <p>
+                                                    Quien? 😭😭😭
+                                                   </p>
+                                                       
+                                                         <div class="likes-resena">
+                                                          😂 14 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> <!-- 3er /div! (despues de cerrar likes-resena antes)-->    
+                        <!-- La Siguiente Respuesta va despues del 3er div -->    
+                                    <div class="hilo-respuestas">
+
+                                     <div class="respuesta-usuario">
+
+                                         <img src="images/MiiPerfiles/Marioo.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                Marioo
+                                            </span>
+
+                                            
+                                                   <p>
+                                                    La pelo amarillo peleonera 
+                                                   </p>
+                
+                                                         <div class="likes-resena">
+                                                           😂 51 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+                            <!-- La Siguiente Respuesta va despues del 3er div -->
+                        <div class="hilo-respuestas">
+
+                                 <div class="respuesta-usuario">
+
+                                    <img src="images/MiiPerfiles/Toad.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                 Toad
+                                            </span>
+
+                                                   <p>
+                                                    Te preguntoooooooooo 😜😜😜😜😜😜
+                                                   </p>
+                                                       
+                                                         <div class="likes-resena">
+                                                          😂 110 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> <!-- 3er /div! (despues de cerrar likes-resena antes)-->
+             <!-- La Siguiente Respuesta va despues del 3er div -->    
+                                    <div class="hilo-respuestas">
+
+                                     <div class="respuesta-usuario">
+
+                                         <img src="images/MiiPerfiles/Marioo.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                Marioo
+                                            </span>
+
+                                            <div class="respuesta-imagen">
+		                                                <img src="images/reacciones/gifs/emojigun.gif" alt="gif respuesta">
+		                                             </div>
+                                                  
+                
+                                                         <div class="likes-resena">
+                                                           😂 151 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+            <!-- La Siguiente Respuesta va despues del 3er div -->    
+                             <div class="hilo-respuestas">
+
+                                     <div class="respuesta-usuario">
+
+                                         <img src="images/MiiPerfiles/Toad.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                Toad
+                                            </span>
+
+                                                   <div class="respuesta-imagen">
+		                                                <img src="images/reacciones/Risas/meme13.png" alt="respuesta meme">
+		                                             </div>
+                
+                                                         <div class="likes-resena">
+                                                           😂 200 personas encontraron graciosa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+            <!-- La Siguiente Respuesta va despues del 3er div -->    
+        </div>
+    </div>
+            <!-- Despues de 2 div, se añade el otro comentario -->    
+      <div class="card-resena">
+
+                <img
+                    src="images/MiiPerfiles/Sukuna.png"
+                    class="avatar-resena"
+                >
+
+                <div class="contenido-resena">
+
+                    <div class="top-resena">
+
+                        <div>
+
+                            <h3>Sukuna</h3>
+
+                            <div class="estrellas">
+                                ⭐ ⭐ ⭐ ⭐ ⭐
+                            </div>
+
+                        </div>
+
+                        <span class="fecha-resena">
+                            Hace 1 mes
+                        </span>
+
+                    </div>
+
+                    <p>
+                       Que champo me recomiendan? 
+                    </p>
+
+                         <div class="respuesta-imagen">
+		                     <img src="images/reacciones/Risas/meme14.png" alt="respuesta meme">
+		                 </div>
+
+                    <div class="likes-resena">
+                        👁️ 17 personas encontraron novedoso esta reseña
+                    </div>
+
+                     <div class="hilo-respuestas">
+
+                                     <div class="respuesta-usuario">
+
+                                         <img src="images/MiiPerfiles/Gojo.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                Gojo
+                                            </span>
+                                            <p>
+                                            Quedarte pelon
+                                              </p>
+                                                   <div class="respuesta-imagen">
+		                                                <img src="images/reacciones/Risas/meme15.png" alt="respuesta meme">
+		                                             </div>
+                
+                                                         <div class="likes-resena">
+                                                           ☁️ 24 personas encontraron humo esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+                              <div class="hilo-respuestas">
+
+                                     <div class="respuesta-usuario">
+
+                                         <img src="images/MiiPerfiles/Sukuna.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                Sukuna
+                                            </span>
+                                            <p>
+                                            Los Muertos no hablan. 
+                                              </p>
+                                            
+                                              <div class="respuesta-imagen">
+		                                                <img src="images/reacciones/Risas/meme16.png" alt="respuesta meme">
+		                                             </div>
+                
+                                                         <div class="likes-resena">
+                                                           👁️👄👁️ 34 personas encontraron sorpresa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div> 
+
+                            <div class="hilo-respuestas">
+
+                                     <div class="respuesta-usuario">
+
+                                         <img src="images/MiiPerfiles/Utahime.png" class="mini-avatar">
+        
+                                          <div class="respuesta-contenido">
+
+                                             <span class="usuario-respuesta">
+                                                Utahime
+                                            </span>
+                                            <p>
+                                           Hagan el amor no la guerra
+                                              </p>
+                                            
+                                              <div class="respuesta-imagen">
+		                                                <img src="images/reacciones/Risas/meme17.png" alt="respuesta meme">
+		                                             </div>
+                
+                                                         <div class="likes-resena">
+                                                           ❤️ 34 personas encontraron sorpresa esta reseña
+                                                         </div>
+                                            </div>
+                                    </div>
+                            </div>  
+
+
+
+
+
+
+
+
+     </div>
+ </div>
+
+        </div>    <!-- Aqui esta la barra de mierda  -->
+
+        <!-- DERECHA -->
+        <div class="panel-rating">
+
+            <h2>
+                Opiniones de clientes
+            </h2>
+
+            <div class="rating-general">
+
+                <span class="numero-rating">
+                    5.0
+                </span>
+
+                <span class="rating-stars">
+                    ⭐⭐⭐⭐⭐
+                </span>
+
+            </div>
+
+            <p class="texto-rating">
+                Basado en 221 reseñas
+            </p>
+
+            <!-- BARRAS -->
+
+            <div class="fila-rating">
+
+                <span>5 estrellas</span>
+
+                <div class="barra-progreso">
+
+                    <div class="progreso lleno"></div>
+
+                </div>
+
+                <span>100%</span>
+
+            </div>
+
+            <div class="fila-rating">
+
+                <span>4 estrellas</span>
+
+                <div class="barra-progreso"></div>
+
+                <span>0%</span>
+
+            </div>
+
+            <div class="fila-rating">
+
+                <span>3 estrellas</span>
+
+                <div class="barra-progreso"></div>
+
+                <span>0%</span>
+
+            </div>
+
+            <div class="fila-rating">
+
+                <span>2 estrellas</span>
+
+                <div class="barra-progreso"></div>
+
+                <span>0%</span>
+
+            </div>
+
+            <div class="fila-rating">
+
+                <span>1 estrella</span>
+
+                <div class="barra-progreso"></div>
+
+                <span>0%</span>
+
+            </div>
+
+            <div class="reseñas-verificadas">
+
+                ✅ Todas las reseñas son verificadas
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- JS -->
+<script src="producto.js"></script>
+
+</body>
+</html>

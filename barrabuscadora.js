@@ -1,81 +1,205 @@
+/* =========================================
+   CREAR OVERLAY
+========================================= */
+
+const overlay = document.createElement("div");
+
+overlay.className = "busqueda-overlay";
+
+document.body.appendChild(overlay);
+
+/* =========================================
+   BUSCAR PRODUCTOS
+========================================= */
+
 function buscarProductos() {
 
-    let texto = document.getElementById("buscador").value.toLowerCase().trim();
-    let productos = document.querySelectorAll(".tarjeta-producto");
-    let contenedor = document.getElementById("resultados-busqueda");
+    let texto =
+        document.getElementById("buscador")
+        .value
+        .toLowerCase()
+        .trim();
+
+    let productos =
+        document.querySelectorAll(".tarjeta-producto");
+
+    let contenedor =
+        document.getElementById("resultados-busqueda");
 
     contenedor.innerHTML = "";
 
+    /* vacío */
+
     if (texto === "") {
+
         contenedor.style.display = "none";
-        document.body.classList.remove("busqueda-activa");
+
+        overlay.classList.remove("activo");
+
         return;
     }
 
-    document.body.classList.add("busqueda-activa");
-    contenedor.style.display = "block";
+    overlay.classList.add("activo");
 
     let encontrados = 0;
 
-    productos.forEach(p => {
+    productos.forEach((p, index) => {
 
-        let nombre = p.querySelector(".nombre-producto").textContent.toLowerCase();
+        let nombreEl =
+            p.querySelector(".nombre-producto");
+
+        let descripcionEl =
+            p.querySelector(".descripcion-producto");
+
+        let imagenEl =
+            p.querySelector(".foto-producto");
+
+        if (!nombreEl) return;
+
+        let nombre =
+            nombreEl.textContent
+            .toLowerCase();
 
         if (nombre.includes(texto)) {
 
             encontrados++;
 
             contenedor.innerHTML += `
-                <div class="resultado-item" onclick="irAProducto(this)">
-                    ${p.querySelector(".nombre-producto").textContent}
+
+                <div
+                    class="resultado-item"
+                    onclick="irAProducto(${index})"
+                >
+
+                    <img
+                        src="${imagenEl?.src || ''}"
+                    >
+
+                    <div class="resultado-info">
+
+                        <h4>
+                            ${nombreEl.textContent}
+                        </h4>
+
+                        <p>
+                            ${descripcionEl?.textContent || ''}
+                        </p>
+
+                    </div>
+
                 </div>
             `;
         }
     });
 
+    contenedor.style.display = "block";
+
+    /* sin resultados */
+
     if (encontrados === 0) {
-        contenedor.innerHTML = `<div class="resultado-item">No hay resultados</div>`;
+
+        contenedor.innerHTML = `
+
+            <div class="resultado-item">
+
+                <div class="resultado-info">
+
+                    <h4>
+                        No hay resultados
+                    </h4>
+
+                </div>
+
+            </div>
+        `;
     }
 }
 
+/* =========================================
+   IR AL PRODUCTO
+========================================= */
 
-// 📍 ir al producto real
-function irAProducto(el) {
+function irAProducto(index) {
 
-    let texto = el.textContent.toLowerCase().trim();
-    let productos = document.querySelectorAll(".tarjeta-producto");
+    let productos =
+        document.querySelectorAll(".tarjeta-producto");
 
-    productos.forEach(p => {
+    let productoHTML = productos[index];
 
-        let nombre = p.querySelector(".nombre-producto").textContent.toLowerCase();
+    if (!productoHTML) return;
 
-        if (nombre === texto) {
+    let nombre =
+        productoHTML.querySelector(".nombre-producto")
+        ?.textContent || "";
 
-            p.style.visibility = "visible";
+    let descripcion =
+        productoHTML.querySelector(".descripcion-producto")
+        ?.textContent || "";
 
-            p.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
+    let precioTexto =
+        productoHTML.querySelector(".precio-producto")
+        ?.textContent || "0";
 
-            // ✨ efecto visual highlight
-            p.style.transform = "scale(1.05)";
-            p.style.boxShadow = "0 0 20px rgba(0,255,150,0.4)";
+    let imagen =
+        productoHTML.querySelector("img")
+        ?.src || "";
 
-            setTimeout(() => {
-                p.style.transform = "";
-                p.style.boxShadow = "";
-            }, 800);
-        }
-    });
+    /* limpiar precio */
 
-    // cerrar lista
-    document.getElementById("resultados-busqueda").style.display = "none";
-    document.body.classList.remove("busqueda-activa");
+    let precio = parseFloat(
+        precioTexto.replace(/[^\d.]/g, "")
+    );
 
-    // restaurar productos
-    productos.forEach(p => {
-        p.style.visibility = "visible";
-        p.style.opacity = "1";
-    });
+    /* crear producto */
+
+    let producto = {
+
+        nombre: nombre,
+
+        descripcion: descripcion,
+
+        precio: precio,
+
+        imagen: imagen
+    };
+
+    /* guardar */
+
+    localStorage.setItem(
+        "productoActual",
+        JSON.stringify(producto)
+    );
+
+    /* abrir página */
+
+    window.location.href =
+        "producto.html";
 }
+
+/* =========================================
+   CERRAR
+========================================= */
+
+function cerrarBusqueda() {
+
+    document.getElementById(
+        "resultados-busqueda"
+    ).style.display = "none";
+
+    document.getElementById(
+        "buscador"
+    ).value = "";
+
+    overlay.classList.remove(
+        "activo"
+    );
+}
+
+/* =========================================
+   CLICK OVERLAY
+========================================= */
+
+overlay.addEventListener(
+    "click",
+    cerrarBusqueda
+);

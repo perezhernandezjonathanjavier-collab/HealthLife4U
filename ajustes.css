@@ -1,0 +1,871 @@
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* =========================
+   BODY
+========================= */
+
+body.pagina-ajustes{
+
+    min-height:100vh;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        url("images/HL4Uep.jpeg");
+
+    background-size:cover;
+    background-position:center;
+
+    overflow-x:hidden;
+
+    position:relative;
+
+    color:rgb(255, 255, 255);
+}
+
+body {
+
+    font-family:
+        'Poppins',
+        sans-serif;
+}
+
+/* =========================
+   FONDO BLUR
+========================= */
+
+.fondo-blur{
+
+    position:fixed;
+
+    inset:0;
+
+    backdrop-filter:
+        blur(10px);
+
+    background:
+        rgba(0,0,0,0.45);
+
+    z-index:-1;
+}
+
+/* =========================
+   LAYOUT GENERAL
+========================= */
+
+.contenedor-ajustes{
+
+    display:flex;
+
+    min-height:100vh;
+
+    padding:30px;
+    gap:30px;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar-ajustes{
+
+    width:300px;
+
+    background:
+       rgba(27,79,105,0.88);
+
+    backdrop-filter:
+        blur(20px);
+
+    border:
+        1px solid rgba(255,255,255,0.15);
+
+    border-radius:30px;
+
+    padding:25px;
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,0.25);
+
+    height:fit-content;
+
+    position:sticky;
+    top:25px;
+}
+
+/* LOGO */
+
+.logo-ajustes{
+
+    font-size:32px;
+    font-weight:bold;
+
+    margin-bottom:35px;
+
+    text-align:center;
+
+    color:#7dffcf;
+
+    text-shadow:
+        0 0 15px rgba(125,255,207,0.5);
+}
+
+/* BOTONES */
+
+.opcion-ajustes{
+
+    width:100%;
+
+    border:none;
+
+    background:
+        transparent;
+
+    color:white;
+
+    text-align:left;
+
+    padding:18px 20px;
+
+    border-radius:18px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    margin-bottom:12px;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.opcion-ajustes:hover{
+
+    background:
+        rgba(125,255,207,0.18);
+
+    transform:
+        translateX(5px);
+
+    color:#7dffcf;
+}
+
+.opcion-ajustes.activo{
+
+    background:
+        linear-gradient(
+            135deg,
+            #7dffcf,
+            #00b894
+        );
+
+    color:#111;
+
+    box-shadow:
+        0 0 20px rgba(125,255,207,0.35);
+}
+
+/* =========================
+   PANEL DERECHO
+========================= */
+
+.panel-ajustes{
+
+    flex:1;
+
+    background:
+    rgba(27,79,105,0.88);
+
+    backdrop-filter:
+        blur(25px);
+
+    border:
+        1px solid rgba(255,255,255,0.15);
+
+    border-radius:35px;
+
+    padding:40px;
+
+    box-shadow:
+        0 10px 50px rgba(0,0,0,0.3);
+}
+
+/* TITULOS */
+
+.titulo-panel{
+
+    font-size:38px;
+
+    margin-bottom:10px;
+
+    color:#7dffcf;
+}
+
+.descripcion-panel{
+
+    opacity:0.8;
+
+    margin-bottom:40px;
+
+    font-size:16px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card-ajustes{
+
+   background:
+    rgba(10,35,50,0.55);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    border-radius:25px;
+
+    padding:30px;
+
+    margin-bottom:30px;
+}
+
+.card-ajustes h2{
+
+    margin-bottom:25px;
+
+    color:#7dffcf;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.grupo-input{
+
+    margin-bottom:22px;
+}
+
+.grupo-input label{
+
+    display:block;
+
+    margin-bottom:10px;
+
+    font-weight:600;
+}
+
+.grupo-input input,
+.grupo-input select{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:16px;
+
+  background:
+    rgba(10,35,50,0.55);
+
+    color:white;
+
+    font-size:15px;
+
+    outline:none;
+
+    transition:0.3s;
+}
+
+.grupo-input input:focus,
+.grupo-input select:focus{
+
+    border:
+        1px solid #7dffcf;
+
+    box-shadow:
+        0 0 18px rgba(125,255,207,0.25);
+}
+
+/* PLACEHOLDER */
+
+::placeholder{
+
+    color:
+        rgba(255,255,255,0.6);
+}
+
+/* =========================
+   BOTONES
+========================= */
+
+.btn-guardar,
+.btn-cerrar,
+.btn-borrar,
+.btn-secundario,
+.btn-volver{
+
+    border:none;
+
+    padding:16px 22px;
+
+    border-radius:18px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    transition:0.3s;
+
+    margin-right:15px;
+
+    margin-top:10px;
+}
+
+/* GUARDAR */
+
+.btn-guardar{
+
+    background:
+        linear-gradient(
+            135deg,
+            #7dffcf,
+            #00b894
+        );
+
+    color:#111;
+}
+
+.btn-guardar:hover{
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 8px 25px rgba(125,255,207,0.35);
+}
+
+/* CERRAR */
+
+.btn-cerrar{
+
+    background:
+        rgba(255,255,255,0.12);
+
+    color:white;
+}
+
+/* BORRAR */
+
+.btn-borrar{
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff6b6b,
+            #c0392b
+        );
+
+    color:white;
+}
+
+/* SECUNDARIOS */
+
+.btn-secundario{
+
+    background:
+        rgba(255,255,255,0.1);
+
+    color:white;
+}
+
+/* VOLVER */
+
+.btn-volver{
+
+    background:white;
+
+    color:#111;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    .contenedor-ajustes{
+
+        flex-direction:column;
+    }
+
+    .sidebar-ajustes{
+
+        width:100%;
+
+        position:relative;
+        top:0;
+    }
+
+    .panel-ajustes{
+
+        width:100%;
+    }
+
+    .titulo-panel{
+
+        font-size:28px;
+    }
+}
+
+/* =========================
+   PEDIDOS
+========================= */
+
+.contenido-pedidos {
+
+    margin-top: 30px;
+}
+
+.panel-pedido {
+
+    background:
+        rgba(0,0,0,0.18);
+
+    border-radius:
+        25px;
+
+    padding:
+        25px;
+
+    margin-top:
+        20px;
+}
+
+.pedido-card {
+
+    background:
+        rgba(255,255,255,0.08);
+
+    padding:
+        20px;
+
+    border-radius:
+        18px;
+
+    margin-top:
+        15px;
+}
+
+.barra-envio {
+
+    width:
+        100%;
+
+    height:
+        12px;
+
+    background:
+        rgba(255,255,255,0.15);
+
+    border-radius:
+        20px;
+
+    margin-top:
+        15px;
+
+    overflow:
+        hidden;
+}
+
+.progreso-envio {
+
+    width:
+        65%;
+
+    height:
+        100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #66ffd1,
+            #00c896
+        );
+
+    border-radius:
+        20px;
+}
+
+/* =========================
+   BOTONES PEDIDOS
+========================= */
+
+.botones-pedidos {
+
+    display:
+        flex;
+
+    gap:
+        15px;
+
+    flex-wrap:
+        wrap;
+
+    margin-bottom:
+        25px;
+}
+
+.btn-pedido {
+
+    border:
+        none;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    color:
+        white;
+
+    padding:
+        14px 22px;
+
+    border-radius:
+        14px;
+
+    cursor:
+        pointer;
+
+    font-size:
+        15px;
+
+    transition:
+        0.25s;
+}
+
+.btn-pedido:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        rgba(255,255,255,0.15);
+}
+
+.activo-pedido {
+
+    background:
+        linear-gradient(
+            90deg,
+            #66ffd1,
+            #00c896
+        );
+
+    color:
+        #05202c;
+
+    font-weight:
+        700;
+}
+/* =========================
+   METODOS DE PAGO
+========================= */
+
+.tarjeta-guardada {
+
+    background:
+        rgba(255,255,255,0.05);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    border-radius:
+        18px;
+
+    padding:
+        22px;
+
+    margin-bottom:
+        25px;
+}
+
+.info-tarjeta h3 {
+
+    color:
+        #ffffff;
+
+    font-size:
+        22px;
+
+    margin-bottom:
+        10px;
+}
+
+.info-tarjeta p {
+
+    color:
+        #bfe9ff;
+
+    font-size:
+        18px;
+
+    letter-spacing:
+        2px;
+}
+
+/* BOTONES */
+
+.acciones-pago {
+
+    display:
+        flex;
+
+    gap:
+        15px;
+
+    flex-wrap:
+        wrap;
+}
+
+.btn-agregar-pago {
+
+    background:
+        linear-gradient(
+            90deg,
+            #66ffd1,
+            #00c896
+        );
+
+    color:
+        #062836;
+
+    border:
+        none;
+
+    padding:
+        14px 22px;
+
+    border-radius:
+        14px;
+
+    font-weight:
+        700;
+
+    cursor:
+        pointer;
+
+    transition:
+        0.25s;
+}
+
+.btn-agregar-pago:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 0 18px rgba(102,255,209,0.4);
+}
+
+.btn-borrar-pago {
+
+    background:
+        rgba(255,80,80,0.15);
+
+    color:
+        #ffb0b0;
+
+    border:
+        1px solid rgba(255,80,80,0.3);
+
+    padding:
+        14px 22px;
+
+    border-radius:
+        14px;
+
+    font-weight:
+        700;
+
+    cursor:
+        pointer;
+
+    transition:
+        0.25s;
+}
+
+.btn-borrar-pago:hover {
+
+    background:
+        rgba(255,80,80,0.25);
+}
+/* =========================
+   SWITCHES
+========================= */
+
+.opcion-switch {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    gap:
+        20px;
+
+    padding:
+        20px 0;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.08);
+}
+
+.opcion-switch:last-child {
+
+    border-bottom:
+        none;
+}
+
+.texto-switch h3 {
+
+    color:
+        white;
+
+    font-size:
+        18px;
+
+    margin-bottom:
+        6px;
+}
+
+.texto-switch p {
+
+    color:
+        #b8d6e5;
+
+    font-size:
+        14px;
+}
+
+/* SWITCH */
+
+.switch {
+
+    position:
+        relative;
+
+    display:
+        inline-block;
+
+    width:
+        58px;
+
+    height:
+        30px;
+}
+
+.switch input {
+
+    opacity:
+        0;
+
+    width:
+        0;
+
+    height:
+        0;
+}
+
+.slider {
+
+    position:
+        absolute;
+
+    cursor:
+        pointer;
+
+    top:
+        0;
+
+    left:
+        0;
+
+    right:
+        0;
+
+    bottom:
+        0;
+
+    background:
+        rgba(255,255,255,0.15);
+
+    transition:
+        0.3s;
+
+    border-radius:
+        40px;
+}
+
+.slider::before {
+
+    position:
+        absolute;
+
+    content:
+        "";
+
+    height:
+        22px;
+
+    width:
+        22px;
+
+    left:
+        4px;
+
+    bottom:
+        4px;
+
+    background:
+        white;
+
+    transition:
+        0.3s;
+
+    border-radius:
+        50%;
+}
+
+.switch input:checked + .slider {
+
+    background:
+        linear-gradient(
+            90deg,
+            #66ffd1,
+            #00c896
+        );
+}
+
+.switch input:checked + .slider::before {
+
+    transform:
+        translateX(28px);
+}

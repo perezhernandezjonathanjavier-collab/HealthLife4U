@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Rastreo de Pedido - HL4U</title>
+
+<link rel="stylesheet" href="rastreo.css">
+
+<link rel="icon"
+href="images/favicon.png?v=1"
+type="image/png">
+
+</head>
+
+<div class="fondo-rastreo"></div>
+<body class="rastreo-body">
+
+<div class="overlay"></div>
+
+<main class="contenedor-rastreo">
+
+    <!-- HEADER -->
+
+    <div class="header-rastreo">
+
+        <h1>
+            📍 Rastreo de Pedido
+        </h1>
+
+        <p>
+            Tu pedido está en camino 🚚
+        </p>
+
+    </div>
+
+    <!-- MAPA -->
+
+    <div class="mapa-container">
+
+        <img
+        src="images/Map/cn.png"
+        class="mapa-img">
+
+        <!-- PUNTO -->
+
+        <div class="pin-repartidor"></div>
+
+        <!-- TARJETA -->
+
+       <div class="info-envio"> <!-- HEADER PREMIUM -->
+         <div class="delivery-top"> 
+            <img id="avatar-repartidor" class="avatar-driver" src=""> 
+            <div> <h3> 🚚 HL4U Delivery </h3> <span class="driver-name"> Repartidor asignado </span> 
+            </div> 
+        </div> <!-- BADGE --> 
+        <div class="badge-envio"> EN CAMINO 
+
+        </div> <!-- MENSAJES --> <p id="estado-random"> El repartidor está luchando contra el tráfico... </p> 
+        <!-- TIEMPO --> <div class="tiempo-restante"> ⏳ <span id="texto-tiempo"> Faltan 4 días </span> </div>
+          <!-- BARRA --> <div class="barra-rastreo"> <div class="progreso-rastreo" id="barra-progreso"></div> </div>
+            <!-- TIMELINE --> <div class="timeline-envio"> <div class="timeline-item activo"> 
+                ✔ Pedido confirmado </div> <div class="timeline-item activo">
+                 ✔ En preparación </div> <div class="timeline-item" id="timeline-camino"> 
+                    🚚 En camino </div> <div class="timeline-item" id="timeline-entregado"> 
+                        📦 Entregado </div> 
+                    </div> 
+                </div>
+
+    </div>
+
+    <!-- BOTON -->
+
+    <button
+    class="btn-volver"
+    onclick="window.location.href='index.html'">
+
+        ⬅ Volver al inicio
+
+    </button>
+
+</main>
+
+<script src="rastreo.js"></script>
+
+</body>
+</html>
