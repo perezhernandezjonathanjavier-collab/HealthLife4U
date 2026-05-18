@@ -152,7 +152,7 @@ function actualizarTarjeta() {
 function guardarTarjeta() {
 
     let usuario =
-        localStorage.getItem("usuario");
+        localStorage.getItem("usuarioLogueado");
 
     if (!usuario) {
         alert("Regístrate primero");
