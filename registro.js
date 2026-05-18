@@ -157,6 +157,11 @@ function crearUsuario() {
         usuario
     );
 
+     localStorage.setItem( 
+        "usuario", 
+        usuario 
+    );
+
     /* DEBUG */
 
     console.log(
