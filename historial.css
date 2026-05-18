@@ -1,6 +1,315 @@
 * {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.historial-body {
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    background:
+        #07141d;
+
+    min-height:
+        100vh;
+
+    overflow-x:
+        hidden;
+
+    color:
+        white;
+
+    position:
+        relative;
+}
+
+/* =========================
+   FONDO BLUR
+========================= */
+
+.fondo-blur {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    background:
+        linear-gradient(
+            rgba(5,10,20,0.82),
+            rgba(5,10,20,0.9)
+        ),
+        url("images/HL4Uep.png");
+
+    background-size:
+        cover;
+
+    background-position:
+        center;
+
+    filter:
+        blur(12px);
+
+    transform:
+        scale(1.1);
+
+    z-index:
+        -1;
+}
+
+/* =========================
+   CONTENEDOR
+========================= */
+
+.contenedor-historial {
+
+    width:
+        92%;
+
+    max-width:
+        1300px;
+
+    margin:
+        auto;
+
+    padding:
+        50px 0;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header-historial {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    margin-bottom:
+        45px;
+
+    gap:
+        20px;
+}
+
+.header-historial h1 {
+
+    font-size:
+        52px;
+
+    margin-bottom:
+        10px;
+}
+
+.header-historial p {
+
+    color:
+        #b9dceb;
+}
+
+/* =========================
+   BOTON
+========================= */
+
+.btn-volver {
+
+    border:
+        none;
+
+    background:
+        linear-gradient(
+            90deg,
+            #66ffd1,
+            #00c896
+        );
+
+    color:
+        #06212d;
+
+    padding:
+        15px 26px;
+
+    border-radius:
+        18px;
+
+    font-weight:
+        700;
+
+    cursor:
+        pointer;
+
+    transition:
+        0.25s;
+}
+
+.btn-volver:hover {
+
+    transform:
+        translateY(-3px);
+}
+
+/* =========================
+   GRID
+========================= */
+
+.historial-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(320px, 1fr)
+        );
+
+    gap:
+        28px;
+}
+
+/* =========================
+   TARJETA
+========================= */
+
+.tarjeta-pedido {
+
+    background:
+        rgba(8,20,30,0.82);
+
+    backdrop-filter:
+        blur(12px);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    border-radius:
+        28px;
+
+    padding:
+        28px;
+
+    box-shadow:
+        0 0 35px rgba(0,0,0,0.28);
+
+    transition:
+        0.25s;
+}
+
+.tarjeta-pedido:hover {
+
+    transform:
+        translateY(-4px);
+}
+
+.tarjeta-pedido h3 {
+
+    font-size:
+        23px;
+
+    margin-bottom:
+        18px;
+
+    color:
+        #66ffd1;
+}
+
+.info-pedido {
+
+    margin-bottom:
+        14px;
+
+    color:
+        #d9edf6;
+}
+
+.estado {
+
+    display:
+        inline-block;
+
+    margin-top:
+        10px;
+
+    padding:
+        8px 16px;
+
+    border-radius:
+        30px;
+
+    font-size:
+        14px;
+
+    font-weight:
+        700;
+}
+
+.estado-bodega {
+
+    background:
+        rgba(255,180,0,0.16);
+
+    color:
+        #ffd86a;
+}
+
+.estado-entregado {
+
+    background:
+        rgba(0,255,140,0.16);
+
+    color:
+        #70ffbe;
+}
+
+.estado-cancelado {
+
+    background:
+        rgba(255,0,80,0.16);
+
+    color:
+        #ff7ea6;
+}
+
+/* =========================
+   BOTONES PEDIDO
+========================= */
+
+.botones-pedido {
+
+    display:
+        flex;
+
+    gap:
+        12px;
+
+    margin-top:
+        25px;
+}
+
+.btn-pedido {
+
+    flex:
+        1;
+
+    border:
+        none;
+
     padding:
         13px 18px;
+
+    border-radius:
+        16px;
 
     cursor:
         pointer;
@@ -40,6 +349,10 @@
         translateY(-2px);
 }
 
+/* =========================
+   VACIO
+========================= */
+
 .vacio {
 
     text-align:
@@ -61,6 +374,10 @@
         #d5edf7;
 }
 
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 768px) {
 
     .header-historial {
@@ -75,6 +392,14 @@
     .header-historial h1 {
 
         font-size:
-            32px;
+            34px;
+    }
+
+    .botones-pedido {
+
+        flex-direction:
+            column;
     }
 }
+
+
